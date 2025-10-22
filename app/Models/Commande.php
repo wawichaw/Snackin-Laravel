@@ -1,12 +1,27 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Commande extends Model
 {
-    protected $fillable = ['utilisateur_id','biscuit_id','quantite','date_commande'];
-    protected $casts = ['date_commande' => 'date'];
-    public function utilisateur() { return $this->belongsTo(Utilisateur::class); }
-    public function biscuit() { return $this->belongsTo(Biscuit::class); }
+    use HasFactory;
+
+    protected $table = 'commandes';
+
+    protected $fillable = [
+        'taille_boite',
+        'nom_client',
+        'email_client',
+        'total_prix',
+        'details',
+        'status',
+    ];
+
+    protected $casts = [
+        'details' => 'array',
+        'total_prix' => 'decimal:2',
+    ];
 }

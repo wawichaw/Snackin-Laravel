@@ -36,7 +36,11 @@
     - current_user_id() → auth()->check()
     - is_admin() → auth()->user()->is_admin
 --}}
+@extends('layouts.base')
 
+@section('title', 'Menu des biscuits')
+
+@section('content')
 <div class="biscuits-container">
     <h1>Notre Menu de Biscuits</h1>
     
@@ -70,4 +74,4 @@
         @endforelse
     </ul>
 </div>
-
+@endsection

@@ -28,7 +28,11 @@
     - Protection CSRF ajoutée avec @csrf
     - old() pour conserver les valeurs en cas d'erreur
 --}}
+@extends('layouts.base')
 
+@section('title', 'Commander des boîtes')
+
+@section('content')
 <div class="commande-container">
     <h1>Commander des boîtes de biscuits</h1>
     
@@ -137,7 +141,7 @@
         </form>
     </div>
 </div>
-
+@endsection
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const tailleInputs = document.querySelectorAll('input[name="taille_boite"]');

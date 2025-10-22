@@ -3,28 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Saveur extends Model
 {
+    use HasFactory;
+
+    protected $table = 'saveurs';
+
     protected $fillable = [
-        'nom_saveur',
-        'description'
+        'nom_saveur', 'description',
     ];
-    
-    /**
-     * Relation avec les biscuits
-     */
+
     public function biscuits()
     {
-        return $this->hasMany(Biscuit::class);
-    }
-    
-    /**
-     * Méthode statique pour récupérer le nom par ID (comme dans votre code original)
-     */
-    public static function getNomById($id)
-    {
-        $saveur = self::find($id);
-        return $saveur ? $saveur->nom_saveur : 'Saveur inconnue';
+        return $this->hasMany(Biscuit::class, 'saveur_id');
     }
 }
