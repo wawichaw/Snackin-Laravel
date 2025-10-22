@@ -55,4 +55,6 @@ class SaveurController extends Controller
         $saveur->delete();
         return redirect()->route('saveurs.index')->with('success', 'Saveur supprimée.');
     }
+
+    
 }
