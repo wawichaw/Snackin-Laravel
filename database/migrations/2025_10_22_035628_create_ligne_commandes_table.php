@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('utilisateurs', function (Blueprint $table) {
-            $table->boolean('is_admin')->default(false);
+        Schema::create('ligne_commandes', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('utilisateurs', function (Blueprint $table) {
-            $table->dropColumn('is_admin');
-        });
+        Schema::dropIfExists('ligne_commandes');
     }
 };
