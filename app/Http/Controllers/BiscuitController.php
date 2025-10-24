@@ -24,8 +24,15 @@ class BiscuitController extends Controller
             'nom_biscuit' => 'required',
             'prix' => 'required|numeric',
             'description' => 'nullable',
-            'image' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
+
+        //téléversement image
+        if($request->hasFile('image')){
+            $imageName = time(). '.' . $request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $validated['image'] = $imageName;
+        }
 
         Biscuit::create($validated);
 
@@ -43,8 +50,24 @@ class BiscuitController extends Controller
             'nom_biscuit' => 'required',
             'prix' => 'required|numeric',
             'description' => 'nullable',
-            'image' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
+
+        //si nouvelle image
+        if($request->hasFile('image')) {
+            // supprimer ancienne image
+            if($biscuit->image && file_exists(public_path('images/'. $biscuit->image))) {
+                unlink(public_path('images/' . $biscuit->image));
+            }
+
+            //enregistrer nouvelle image
+            $imageName = time(). '.' . $request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $validated['image'] = $imageName;
+
+        }
+
+
 
         $biscuit->update($validated);
 
@@ -53,6 +76,11 @@ class BiscuitController extends Controller
 
     public function destroy(Biscuit $biscuit)
     {
+        //suppression fichier image
+        if($biscuit->image && file_exists(public_path('images/' . $biscuit->image))) {
+            unlink(public_path('images/' . $biscuit->image));
+        }
+
         $biscuit->delete();
 
         return redirect()->route('biscuits.index')->with('success', 'Biscuit supprimé!');
