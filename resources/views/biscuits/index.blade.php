@@ -14,6 +14,12 @@
     </thead>
     <tbody>
     @foreach($biscuits as $biscuit)
+    <tr>
+      <td>{{ $biscuit->id }}</td>
+      
+      <td>(if $biscuit->image)
+        <img src="{{ asset('images/'.$biscuit->image) }}" alt="{{ $biscuit->nom_biscuit }}" width="80" class="img-fluid rounded">
+      </td>
       <tr>
         <td>{{ $biscuit->id }}</td>
         <td>{{ $biscuit->nom_biscuit }}</td>
