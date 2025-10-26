@@ -1,0 +1,474 @@
+:root {
+    --pink: #fbd1dc;
+    --pink-100: #ffe9ef;
+    --cherry: #a0162b;
+    --cream: #fff7f1;
+    --ink: #2b1d1d;
+    --shadow: 0 10px 30px rgba(160, 22, 43, 0.12);
+    --radius: 18px;
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%
+}
+
+body {
+    margin: 0;
+    font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(ellipse at 20% -10%, #ffd8e4 0%, transparent 50%),
+        radial-gradient(ellipse at 100% 10%, #ffe7ee 0%, transparent 45%),
+        var(--pink);
+}
+
+.snk-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: saturate(140%) blur(8px);
+    background: color-mix(in srgb, var(--pink-100) 80%, white);
+    border-bottom: 1px solid rgba(160, 22, 43, .08);
+}
+
+.snk-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px
+}
+
+.snk-nav a {
+    color: var(--cherry);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 10px
+}
+
+.snk-nav a:hover {
+    background: var(--cream);
+    box-shadow: var(--shadow)
+}
+
+.snk-spacer {
+    flex: 1
+}
+
+.snk-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.snk-logo img {
+    height: 36px;
+    width: auto;
+    display: block
+}
+
+.snk-badge {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: var(--cream);
+    border: 1px dashed var(--cherry);
+    color: var(--cherry)
+}
+
+.hero {
+    position: relative;
+    overflow: hidden
+}
+
+.hero-inner {
+    max-width: 1100px;
+    margin: auto;
+    padding: 42px 20px;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 24px
+}
+
+.hero h1 {
+    font-size: clamp(28px, 4vw, 46px);
+    line-height: 1.05;
+    margin: 6px 0 10px;
+    color: var(--cherry)
+}
+
+.hero p {
+    margin: 0 0 18px
+}
+
+.kickers {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px
+}
+
+.kickers span {
+    background: var(--cream);
+    border: 1px solid rgba(160, 22, 43, .15);
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px
+}
+
+.cta-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, .06);
+    background: #fff;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 600
+}
+
+.btn.primary {
+    background: var(--cherry);
+    border-color: var(--cherry);
+    color: #fff
+}
+
+.btn.outline {
+    background: transparent;
+    border-color: var(--cherry);
+    color: var(--cherry)
+}
+
+.btn:hover {
+    transform: translateY(-1px)
+}
+
+small.note {
+    opacity: .75
+}
+
+.hero-card {
+    position: relative;
+    background: var(--cream);
+    border-radius: 28px;
+    padding: 18px;
+    border: 2px solid #f6d9d9;
+    box-shadow: var(--shadow)
+}
+
+.hero-card .sticker {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    background: var(--cherry);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    transform: rotate(8deg);
+    z-index: 40;
+    box-shadow: 0 6px 16px rgba(160, 22, 43, .25)
+}
+
+.hero-visual {
+    aspect-ratio: 1/1;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    background: radial-gradient(80% 80% at 50% 50%, #b01e36 0%, #7d0f21 100%)
+}
+
+.hero-visual img {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    max-width: 88%;
+    max-height: 88%;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, .25))
+}
+
+.hero-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px
+}
+
+.chip {
+    background: #fff;
+    border: 1px solid rgba(160, 22, 43, .15);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 12px
+}
+
+.marquee {
+    overflow: hidden;
+    background: var(--cream);
+    border-block: 1px dashed rgba(160, 22, 43, .2);
+    -webkit-mask: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 6%, rgba(0, 0, 0, 1) 94%, rgba(0, 0, 0, 0) 100%);
+    mask: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 6%, rgba(0, 0, 0, 1) 94%, rgba(0, 0, 0, 0) 100%);
+}
+
+.marquee .snk-container {
+    max-width: none;
+    padding: 8px 20px;
+    width: 100%
+}
+
+.marquee-track {
+    display: flex;
+    gap: 28px;
+    white-space: nowrap;
+    animation: slide 25s linear infinite
+}
+
+.marquee-item {
+    display: inline-block;
+    padding: 12px 0;
+    color: var(--cherry);
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-decoration: none;
+}
+
+.marquee-track a {
+    padding: 12px 0;
+    color: var(--cherry);
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-decoration: none
+}
+
+.marquee-track a:focus {
+    outline: 3px solid color-mix(in srgb, var(--cherry) 60%, white);
+    outline-offset: 4px;
+    border-radius: 6px
+}
+
+.marquee-track .dot {
+    opacity: .35
+}
+
+@keyframes slide {
+    to {
+        transform: translateX(-50%)
+    }
+}
+
+.marquee-track {
+    animation: slide 25s linear infinite
+}
+
+.marquee-track {
+    animation: slide 25s linear infinite
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+        animation: none
+    }
+}
+
+.section {
+    max-width: 1100px;
+    margin: 34px auto;
+    padding: 0 20px
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px
+}
+
+.card {
+    position: relative;
+    background: linear-gradient(180deg, #fff8f9 0%, #fff 100%);
+    border: 1px solid rgba(160, 22, 43, .08);
+    border-radius: 22px;
+    padding: 18px;
+    box-shadow: 0 12px 30px rgba(160, 22, 43, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform .18s ease, box-shadow .18s ease
+}
+
+.card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 18px 40px rgba(160, 22, 43, 0.12)
+}
+
+.card::before {
+    content: "🌸";
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 18px
+}
+
+.card h3 {
+    margin: 0;
+    color: var(--cherry)
+}
+
+.card p {
+    margin: 0
+}
+
+footer {
+    margin: 40px 0 24px;
+    text-align: center;
+    color: #6b5d5d
+}
+
+@media (max-width:900px) {
+    .hero-inner {
+        grid-template-columns: 1fr
+    }
+
+    .grid {
+        grid-template-columns: 1fr
+    }
+}
+
+.sprinkle {
+    position: absolute;
+    opacity: .12;
+    filter: blur(.5px);
+    animation: sway 8s ease-in-out infinite
+}
+
+@keyframes sway {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg)
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(6deg)
+    }
+}
+
+/* Grille un peu plus “magique” */
+.cute-grid{
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+@media (max-width: 900px){
+  .cute-grid{ grid-template-columns: 1fr; }
+}
+
+/* Carte sucrée */
+.card-sweet{
+  position: relative;
+  border-radius: 22px;
+  background: linear-gradient(180deg,#fff8f9 0%, #fff 100%);
+  border: 1px solid rgba(160,22,43,.08);
+  box-shadow: 0 12px 30px rgba(160,22,43,0.08);
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  isolation: isolate; /* pour les pseudo-éléments */
+}
+
+/* Liseré dégradé fin (bordure “sucre filé”) */
+.card-sweet::before{
+  content:"";
+  position:absolute; inset:-1px;
+  border-radius: 22px;
+  padding: 1px; /* épaisseur du liseré */
+  background: linear-gradient(135deg, #ffd6e5 0%, #ffe7ee 40%, #ffffff 60%, #ffd6e5 100%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events:none;
+  opacity:.6;
+}
+
+/* Reflet doux au hover */
+.card-sweet::after{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 60% at -10% 0%, rgba(255,255,255,.7), transparent 60%);
+  mix-blend-mode: lighten;
+  opacity:0; transition: opacity .18s ease;
+  pointer-events:none;
+}
+
+.card-sweet:hover{
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 18px 40px rgba(160,22,43,0.12);
+  filter: saturate(1.03);
+}
+.card-sweet:hover::after{ opacity:.6; }
+
+/* Bandeau top (badge + ruban) */
+.card-top{
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 10px 14px 0 14px;
+}
+
+.ribbon{
+  position: relative;
+  background: var(--cherry);
+  color:#fff; font-weight:700; font-size:12px;
+  padding:6px 10px; border-radius:999px;
+  box-shadow: 0 8px 16px rgba(160,22,43,.18);
+}
+
+/* Corps */
+.card-body{ padding: 14px 18px 18px; display:flex; flex-direction:column; gap:10px; }
+.card-body h3{ margin: 4px 0 0; color: var(--cherry); }
+.card-body p{ margin:0; }
+
+/* Icône ronde façon macaron */
+.card-icon{
+  width:56px; height:56px; border-radius:50%;
+  display:grid; place-items:center;
+  background: radial-gradient(100% 100% at 30% 30%, #fff 0%, #fff7f1 60%, #ffe4ea 100%);
+  border: 1px solid rgba(160,22,43,.12);
+  box-shadow: 0 8px 18px rgba(160,22,43,0.10);
+  font-size:24px;
+}
+
+/* Chip douce */
+.chip{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:6px 10px; border-radius:999px; font-size:12px;
+  border:1px solid rgba(160,22,43,.15);
+  background:#fff;
+}
+.chip-soft{
+  background: color-mix(in srgb, var(--cream) 70%, white);
+}
+
+/* CTA aligné */
+.card-cta{ margin-top: 6px; }
+
+/* Accessibilité : réduire l’animation si demandé */
+@media (prefers-reduced-motion: reduce){
+  .card-sweet,
+  .card-sweet::after{
+    transition:none;
+  }
+}
