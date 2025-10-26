@@ -26,3 +26,7 @@ Route::resource('saveurs', SaveurController::class);
 Route::get('/commandes',  [CommandeController::class, 'create'])->name('commandes.create'); // afficher formulaire
 Route::post('/commandes', [CommandeController::class, 'store'])->name('commandes.store');   // soumettre commande
 Route::get('/admin/commandes', [CommandeController::class, 'index'])->name('commandes.index'); // liste admin
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
