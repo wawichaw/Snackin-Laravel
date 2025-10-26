@@ -77,9 +77,10 @@
             <span class="marquee-item">PISTACHE</span><span class="dot">•</span>
             <span class="marquee-item">RED VELVET</span><span class="dot">•</span>
             <span class="marquee-item">NOISETTE</span><span class="dot">•</span>
-            <span class="marquee-item">FRAMBOISE</span>
+            <span class="marquee-item">FRAMBOISE</span><span class="dot">•</span> <!-- <- ajouté -->
         </div>
     </div>
+
 
 
 
