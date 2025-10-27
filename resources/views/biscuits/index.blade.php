@@ -4,12 +4,35 @@
 <link rel="stylesheet" href="{{ asset('Contenu/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('Contenu/css/landing.css') }}">
 <link rel="stylesheet" href="{{ asset('Contenu/css/biscuits.css') }}">
+<link rel="stylesheet" href="{{ asset('Contenu/css/background.css') }}">
+
+<div class="snackin-background"></div>
 
 @php
+  // Pour autoriser l'affichage admin si connecté
   $showAdmin = Auth::check() || app()->environment('local');
+
+  // Liste fermée de saveurs
+  $allowedSaveurs = ['original','chocolat','caramel','vanille','smores','oreo'];
+
+  // Map emoji par saveur
+  $emojiMap = [
+    'original'=>'🍪',
+    'chocolat'=>'🍫',
+    'caramel'=>'🍮',
+    'vanille'=>'🌼',
+    'smores'=>'🔥🍫',
+    'oreo'=>'🍪',
+  ];
+
+  // Si ta BDD utilise des IDs plutôt que des noms
+  $idToSaveur = [
+    1=>'original', 2=>'chocolat', 3=>'caramel',
+    4=>'vanille', 5=>'smores', 6=>'oreo',
+  ];
 @endphp
 
-{{-- NAV / HEADER (inchangé) --}}
+{{-- NAVIGATION / HEADER --}}
 <div class="snk-nav">
   <div class="snk-container">
     <a class="snk-logo" href="{{ route('home') }}">
@@ -39,6 +62,7 @@
   </div>
 </div>
 
+{{-- CONTENU PRINCIPAL --}}
 <div class="container">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>Nos Biscuits</h1>
@@ -47,6 +71,34 @@
     @endif
   </div>
 
+  {{-- RECHERCHE ET FILTRES --}}
+  <form method="GET" action="{{ route('biscuits.index') }}" class="search-filters">
+    <div class="search-box">
+      <input type="text" 
+             id="searchBiscuit"
+             name="search"
+             placeholder="Rechercher un biscuit..."
+             value="{{ request('search') }}"
+             autocomplete="off">
+      <div class="search-suggestions" id="searchSuggestions"></div>
+    </div>
+
+    <select name="saveur" class="filter-select" onchange="this.form.submit()">
+      <option value="">Toutes les saveurs</option>
+      @foreach($allowedSaveurs as $saveur)
+        <option value="{{ strtolower($saveur) }}" {{ request('saveur') == strtolower($saveur) ? 'selected' : '' }}>
+          {{ $emojiMap[strtolower($saveur)] }} {{ ucfirst($saveur) }}
+        </option>
+      @endforeach
+    </select>
+
+    <select name="prix" class="filter-select" onchange="this.form.submit()">
+      <option value="">Trier par prix</option>
+      <option value="asc" {{ request('prix') == 'asc' ? 'selected' : '' }}>Prix croissant 💰</option>
+      <option value="desc" {{ request('prix') == 'desc' ? 'selected' : '' }}>Prix décroissant 💰</option>
+    </select>
+  </form>
+
   @if($biscuits->isEmpty())
     <div class="alert alert-info">
       Aucun biscuit pour l'instant. Revenez bientôt — nouvelle fournée en préparation!
@@ -54,11 +106,21 @@
   @else
     <div class="biscuits-grid">
       @foreach($biscuits as $biscuit)
+        @php
+          $saveurName = $biscuit->saveur ? strtolower($biscuit->saveur->nom_saveur) : null;
+          $emoji = $emojiMap[$saveurName] ?? '🍪';
+        @endphp
+
         <div class="biscuit-card">
+          {{-- Bulle emoji qui dépasse --}}
+          <div class="flavor-emoji" title="{{ $saveurName ? ucfirst($saveurName) : 'Saveur' }}">
+            {{ $emoji }}
+          </div>
+
           {{-- Image du biscuit --}}
           <div class="biscuit-image">
-            @if ($biscuit->image)
-              <img src="{{ asset('Contenu/img/'.$biscuit->image) }}" alt="{{ $biscuit->nom_biscuit }}" class="img-fluid rounded">
+            @if(!empty($biscuit->image))
+              <img src="{{ asset('Contenu/img/'.$biscuit->image) }}" alt="{{ $biscuit->nom_biscuit ?? $biscuit->nom }}">
             @else
               <span class="no-image">Aucune image</span>
             @endif
@@ -66,8 +128,20 @@
 
           {{-- Infos du biscuit --}}
           <div class="biscuit-info">
-            <h5 class="card-title">{{ $biscuit->nom }}</h5>
-            <p class="card-text">{{ number_format($biscuit->prix, 2) }} $</p>
+            <h5 class="card-title">{{ $biscuit->nom_biscuit ?? $biscuit->nom }}</h5>
+
+            @if($saveurName)
+              <div class="saveur-chip">
+                <span class="emoji">{{ $emoji }}</span>
+                {{ ucfirst($saveurName) }}
+              </div>
+            @endif
+
+            @if(!empty($biscuit->description))
+              <p class="desc">{{ $biscuit->description }}</p>
+            @endif
+
+            <p class="card-text price">{{ number_format($biscuit->prix, 2) }} $</p>
           </div>
 
           {{-- Actions admin --}}

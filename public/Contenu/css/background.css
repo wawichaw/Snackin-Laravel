@@ -1,0 +1,24 @@
+.snackin-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: linear-gradient(45deg, #fdf2f8, #fff1f2);
+  opacity: 0.8;
+}
+
+.snackin-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(244, 114, 182, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(251, 207, 232, 0.1) 0%, transparent 50%);
+  z-index: -1;
+}

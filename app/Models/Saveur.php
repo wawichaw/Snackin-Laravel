@@ -11,5 +11,12 @@ class Saveur extends Model
     protected $fillable = [
         'nom_saveur',
         'description',
+        'emoji'
     ];
+
+    // Accessor pour simplifier l'accès au nom
+    public function getNomAttribute()
+    {
+        return $this->nom_saveur;
+    }
 }

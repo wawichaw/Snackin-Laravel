@@ -15,15 +15,56 @@ class BiscuitController extends Controller
     //Autocomplétion
 
     //détails
-    public function index()
+    public function index(Request $request)
     {
-        $biscuits = Biscuit::all();
-        return view('biscuits.index', compact('biscuits'));
+        $query = Biscuit::with('saveur');
+
+        // Recherche par nom ou description
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('nom_biscuit', 'LIKE', "%{$search}%")
+                  ->orWhere('description', 'LIKE', "%{$search}%");
+            });
+        }
+
+        // Filtre par saveur
+        if ($request->filled('saveur')) {
+            $saveur = $request->saveur;
+            $query->whereHas('saveur', function($q) use ($saveur) {
+                $q->where('nom_saveur', 'LIKE', $saveur);
+            });
+        }
+
+        // Tri par prix
+        if ($request->filled('prix')) {
+            $query->orderBy('prix', $request->prix);
+        }
+
+        $biscuits = $query->get();
+        
+        // Récupérer les saveurs autorisées depuis le modèle Saveur
+        $allowedSaveurs = \App\Models\Saveur::pluck('nom_saveur')->map(function($saveur) {
+            return strtolower($saveur);
+        })->toArray();
+        
+        // Map des emojis
+        $emojiMap = [
+            'original' => '🍪',
+            'chocolat' => '🍫',
+            'caramel' => '🍮',
+            'vanille' => '🌼',
+            'smores' => '🔥🍫',
+            'oreo' => '🍪',
+        ];
+
+        return view('biscuits.index', compact('biscuits', 'allowedSaveurs', 'emojiMap'));
     }
 
     public function create()
     {
-        return view('biscuits.create');
+        $saveurs = \App\Models\Saveur::orderBy('nom_saveur')->get();
+        return view('biscuits.create', compact('saveurs'));
     }
 
     public function store(Request $request)
@@ -33,6 +74,7 @@ class BiscuitController extends Controller
             'prix' => 'required|numeric',
             'description' => 'nullable',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'saveur_id' => 'required|exists:saveurs,id',
         ]);
 
         //téléversement image
@@ -59,6 +101,7 @@ class BiscuitController extends Controller
             'prix' => 'required|numeric',
             'description' => 'nullable',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'saveur_id' => 'required|exists:saveurs,id',
         ]);
 
         //si nouvelle image
@@ -94,22 +137,39 @@ class BiscuitController extends Controller
         return redirect()->route('biscuits.index')->with('success', 'Biscuit supprimé!');
     }
 
-     public function autocomplete(Request $request)
+     public function search(Request $request)
     {
-        $search = $request->search;
-        $biscuits = Biscuit::orderby('nom_biscuit','asc')
-                    ->select('id','nom_biscuit')
-                    ->where('nom_biscuit', 'LIKE', '%'.$search. '%')
-                    ->get();
-                    $response = array();
-                    foreach($biscuits as $biscuit){
-                        $response[] = array(
-                            'value' => $biscuit->id,
-                            'label' => $biscuit->nom_biscuit
-                        );
-                    }
-        return response()->json($response);
-    } 
+        $search = $request->get('q');
+        $biscuits = Biscuit::with('saveur')
+            ->where('nom_biscuit', 'LIKE', "%{$search}%")
+            ->orWhere('description', 'LIKE', "%{$search}%")
+            ->limit(5)
+            ->get()
+            ->map(function($biscuit) {
+                return [
+                    'id' => $biscuit->id,
+                    'nom_biscuit' => $biscuit->nom_biscuit,
+                    'nom_saveur' => $biscuit->saveur ? $biscuit->saveur->nom_saveur : null,
+                    'emoji' => $biscuit->saveur ? $this->getEmojiForSaveur($biscuit->saveur->nom_saveur) : '🍪'
+                ];
+            });
+        
+        return response()->json($biscuits);
+    }
+
+    private function getEmojiForSaveur($saveur)
+    {
+        $emojiMap = [
+            'original' => '🍪',
+            'chocolat' => '🍫',
+            'caramel' => '🍮',
+            'vanille' => '🌼',
+            'smores' => '🔥🍫',
+            'oreo' => '🍪',
+        ];
+
+        return $emojiMap[strtolower($saveur)] ?? '🍪';
+    }
 
     //détails biscuit
     public function details($id)

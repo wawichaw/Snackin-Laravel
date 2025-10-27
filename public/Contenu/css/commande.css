@@ -1,0 +1,159 @@
+:root{
+  --ink:#2a1620;
+  --ink-soft:#694256;
+  --ring:#f7c6de;
+  --cta:#ec4899;
+  --cta-dark:#db2777;
+  --ok:#16a34a;
+  --warn:#eab308;
+  --danger:#dc2626;
+}
+
+/* ---------- HERO ---------- */
+.commande-hero{
+  position: relative;
+  padding: 28px 0 10px;
+  background: linear-gradient(180deg, #fff1f7 0%, #ffe6ee 100%);
+  overflow: hidden;
+}
+.commande-hero .hero-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:14px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+.commande-hero .hero-grid img{
+  width:100%; height:180px; object-fit:cover;
+  border-radius:18px; border:1px solid var(--ring);
+  box-shadow: 0 8px 20px rgba(236,72,153,.12);
+}
+
+/* Petits bonshommes sourire rouges qui flottent */
+.smile{
+  position:absolute;
+  font-size:28px;
+  color:#e11d48; /* rouge rosé */
+  opacity:.35;
+  animation: floaty 9s ease-in-out infinite;
+  filter: drop-shadow(0 4px 8px rgba(225,29,72,.15));
+  user-select:none;
+}
+.s1{ top:14%; left:6%;  animation-delay: 0s; }
+.s2{ top:8%;  right:10%; animation-delay: 1.5s; transform: scale(1.2); }
+.s3{ bottom:6%; left:12%; animation-delay: 3s; transform: scale(0.9) rotate(-12deg); }
+
+@keyframes floaty{
+  0%   { transform: translateY(0) rotate(0deg); }
+  50%  { transform: translateY(-12px) rotate(6deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* ---------- CONTAINER ---------- */
+.commande-container{
+  max-width: 1040px;
+  margin: 24px auto 40px;
+}
+.commande-container h1{
+  text-align:center; font-weight:800; color:var(--cta-dark);
+}
+
+/* ---------- FORM ---------- */
+.commande-form{
+  background:#fff;
+  border:1px solid var(--ring);
+  border-radius:22px;
+  padding:22px 20px;
+  box-shadow: 0 10px 26px rgba(236,72,153,.12);
+}
+
+.form-section{ margin-bottom:28px; }
+.form-section h2{
+  font-weight:800; color:var(--ink);
+  margin-bottom:10px;
+}
+.info-text{ color:var(--ink-soft); }
+
+/* Cartes tailles de boîte */
+.boite-options{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap:14px;
+}
+.boite-option{ display:block; }
+.boite-option input{ position:absolute; opacity:0; pointer-events:none; }
+.boite-card{
+  border:1px solid var(--ring);
+  border-radius:18px; padding:16px 14px;
+  background:#fff;
+  text-align:center;
+  transition: all .2s ease;
+  box-shadow: 0 8px 18px rgba(236,72,153,.10);
+}
+.boite-card .boite-icon{ font-size:26px; margin-bottom:6px; }
+.boite-option input:checked + .boite-card{
+  border-color: var(--cta);
+  box-shadow: 0 12px 26px rgba(236,72,153,.18);
+  transform: translateY(-2px);
+}
+.boite-card .prix{
+  display:inline-block; margin-top:6px;
+  font-weight:800; color:var(--cta-dark);
+  background: #ffe4f0; border:1px solid var(--ring);
+  padding:4px 10px; border-radius:999px;
+}
+
+/* Grille saveurs */
+.saveurs-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px,1fr));
+  gap:14px;
+}
+.saveur-card{
+  border:1px solid var(--ring);
+  border-radius:16px; padding:12px 12px 14px;
+  background:#fff;
+  box-shadow: 0 8px 18px rgba(236,72,153,.08);
+  display:flex; flex-direction:column; gap:10px;
+}
+.saveur-top{
+  display:flex; align-items:center; justify-content:space-between;
+}
+.saveur-top h4{ margin:0; font-weight:800; color:var(--ink); }
+.prix-biscuit{ font-weight:800; color:var(--cta-dark); }
+
+.quantite-control label{ font-weight:600; color:var(--ink-soft); }
+.qty-row{ display:flex; align-items:center; gap:8px; }
+.qty-btn{
+  width:34px; height:34px; border-radius:999px; border:1px solid var(--ring);
+  background:#fff; font-weight:900; line-height:0;
+  box-shadow: 0 6px 14px rgba(236,72,153,.10);
+}
+.qty-btn:hover{ background:#fff0f6; border-color:var(--cta); }
+.quantite-input{
+  width:72px; text-align:center; border:1px solid var(--ring);
+  border-radius:10px; padding:8px;
+}
+
+/* Total */
+.total-info{
+  text-align:center; margin-top:6px; font-weight:700;
+}
+.total-info #total-selectionne{ font-weight:900; }
+
+/* Infos client */
+.form-row{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
+.form-row label{ display:flex; flex-direction:column; gap:6px; font-weight:600; color:var(--ink); }
+.form-row input{
+  border:1px solid var(--ring); border-radius:12px; padding:10px 12px;
+}
+
+/* CTA */
+.form-actions{ text-align:center; }
+.btn-large{
+  border-radius:999px; padding:12px 26px; font-weight:800; font-size:1.05rem;
+  background:var(--cta); border:none; color:#fff;
+  box-shadow: 0 10px 26px rgba(236,72,153,.20);
+}
+.btn-large:hover{ background:var(--cta-dark); transform: translateY(-1px); }

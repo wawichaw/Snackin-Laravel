@@ -4,7 +4,6 @@
 
 <link rel="stylesheet" href="{{ asset('Contenu/css/biscuit-edit.css') }}">
 
-{{-- NAV / HEADER — identique à accueil/index --}}
 <div class="snk-nav">
   <div class="snk-container">
     <a class="snk-logo" href="{{ route('home') }}">
@@ -65,17 +64,13 @@
   </div>
 
   {{-- SAVEUR (liste déroulante) --}}
-  @php
-    $saveurs = ['original','chocolat','caramel','vanille','smores','oreo'];
-    $currentSaveur = old('saveur', $biscuit->saveur ?? '');
-  @endphp
   <div class="mb-3">
     <label class="form-label">Saveur</label>
-    <select name="saveur" class="form-control" required>
-      <option value="" disabled {{ $currentSaveur==='' ? 'selected' : '' }}>Choisir une saveur…</option>
-      @foreach($saveurs as $sv)
-        <option value="{{ $sv }}" {{ $currentSaveur === $sv ? 'selected' : '' }}>
-          {{ ucfirst($sv) }}
+    <select name="saveur_id" class="form-control" required>
+      <option value="" disabled {{ !old('saveur_id', $biscuit->saveur_id) ? 'selected' : '' }}>Choisir une saveur…</option>
+      @foreach(App\Models\Saveur::all() as $saveur)
+        <option value="{{ $saveur->id }}" {{ old('saveur_id', $biscuit->saveur_id) == $saveur->id ? 'selected' : '' }}>
+          {{ $saveur->emoji }} {{ $saveur->nom }}
         </option>
       @endforeach
     </select>

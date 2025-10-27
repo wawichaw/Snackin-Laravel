@@ -15,28 +15,34 @@ class SaveurSeeder extends Seeder
     {
         $saveurs = [
             [
+                'nom_saveur' => 'Original',
+                'description' => 'Le goût classique et authentique',
+                'emoji' => '🍪'
+            ],
+            [
                 'nom_saveur' => 'Chocolat',
-                'description' => 'Saveur chocolatée intense'
-            ],
-            [
-                'nom_saveur' => 'Vanille',
-                'description' => 'Saveur vanille naturelle'
-            ],
-            [
-                'nom_saveur' => 'Fruit',
-                'description' => 'Saveur fruitée fraîche'
-            ],
-            [
-                'nom_saveur' => 'Citron',
-                'description' => 'Saveur citronnée acidulée'
+                'description' => 'Saveur chocolatée intense',
+                'emoji' => '🍫'
             ],
             [
                 'nom_saveur' => 'Caramel',
-                'description' => 'Saveur caramel onctueuse'
+                'description' => 'Saveur caramel onctueuse',
+                'emoji' => '🍮'
             ],
             [
-                'nom_saveur' => 'Noix de Coco',
-                'description' => 'Saveur noix de coco exotique'
+                'nom_saveur' => 'Vanille',
+                'description' => 'Saveur vanille naturelle',
+                'emoji' => '🌼'
+            ],
+            [
+                'nom_saveur' => "S'mores",
+                'description' => 'Goût de guimauve grillée et chocolat',
+                'emoji' => '🔥🍫'
+            ],
+            [
+                'nom_saveur' => 'Oreo',
+                'description' => 'Saveur biscuit et crème',
+                'emoji' => '🍪'
             ]
         ];
 

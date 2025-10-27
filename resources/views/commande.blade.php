@@ -1,211 +1,263 @@
-{{--
-============================================================================
-PAGE DE COMMANDE DE BOÎTES DE BISCUITS
-============================================================================
-
-Cette page permet aux clients de commander des boîtes de biscuits personnalisées.
-
-FONCTIONNALITÉS :
-- Sélection de la taille de boîte (4, 6, ou 12 biscuits)
-- Choix des saveurs et quantités pour chaque biscuit
-- Validation JavaScript en temps réel
-- Formulaire avec informations client
-- Protection CSRF Laravel
-
-VARIABLES PASSÉES PAR LE CONTRÔLEUR :
-- $biscuits : Collection de tous les biscuits disponibles
-- $message_succes : Message de succès après commande (via session)
-- $errors : Erreurs de validation (via session)
-
-ROUTES UTILISÉES :
-- POST /commandes : Soumission du formulaire (CommandeController@store)
-
-CONVERSION DEPUIS PHP VERS BLADE :
-- htmlspecialchars() → {{ }} (automatique)
--
-<?php echo ?> → {{ }}
--
-<?php if ?> → @if
--
-<?php foreach ?> → @foreach
-- Protection CSRF ajoutée avec @csrf
-- old() pour conserver les valeurs en cas d'erreur
---}}
-@extends('layouts.base')
-
+@extends('layouts.app')
 @section('title', 'Commander des boîtes')
 
 @section('content')
-    <div class="commande-container">
-        <h1>Commander des boîtes de biscuits</h1>
+<link rel="stylesheet" href="{{ asset('Contenu/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('Contenu/css/landing.css') }}">
+<link rel="stylesheet" href="{{ asset('Contenu/css/commande.css') }}">
+{{-- NAV / HEADER — identique à accueil/index --}}
+<div class="snk-nav">
+  <div class="snk-container">
+    <a class="snk-logo" href="{{ route('home') }}">
+      <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="Snackin logo" style="width:36px;height:36px;object-fit:contain">
+      <strong>Snackin'</strong>
+    </a>
+    <span class="snk-badge">Fait à Montréal</span>
 
-        @if (session('message_succes'))
-            <div class="alert alert-success">
-                {{ session('message_succes') }}
-            </div>
-        @endif
+    <div class="snk-spacer"></div>
+    <a href="{{ route('home') }}">Accueil</a>
+    <a href="{{ route('biscuits.index') }}">Biscuits</a>
+    <a href="{{ route('commandes.create') }}" aria-current="page">Commander</a>
+    <a href="{{ route('saveurs.index') }}">Saveurs</a>
+    <a href="{{ route('about') }}">À propos</a>
 
-        @if (!empty($errors))
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    <div class="snk-spacer"></div>
+    @auth
+      <span style="color:#694256; margin-right:12px;">Bonjour, {{ Auth::user()->name }}</span>
+      <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+        @csrf
+        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="color:#694256; text-decoration:none;">Se déconnecter</a>
+      </form>
+    @else
+      <a href="{{ route('login') }}" style="margin-right:10px;">Se connecter</a>
+      @if (Route::has('register')) <a href="{{ route('register') }}">S’inscrire</a> @endif
+    @endauth
+  </div>
+</div>
 
-        <div class="commande-form">
-            <form method="post" action="{{ route('commandes.store') }}">
-                @csrf
-                <div class="form-section">
-                    <h2>Choisissez la taille de votre boîte</h2>
-                    <div class="boite-options">
-                        <label class="boite-option">
-                            <input type="radio" name="taille_boite" value="4" required>
-                            <div class="boite-card">
-                                <div class="boite-icon">Boîte</div>
-                                <h3>Boîte de 4</h3>
-                                <p>Parfait pour une dégustation</p>
-                                <span class="prix">15$</span>
-                            </div>
-                        </label>
+{{-- HERO avec tes photos + bonshommes sourire rouges qui flottent --}}
+<section class="commande-hero">
+  <div class="hero-grid">
+    <img src="{{ asset('Contenu/img/commande-1.png') }}" alt="Boîte de biscuits 1">
+    <img src="{{ asset('Contenu/img/commande-2.png') }}" alt="Boîte de biscuits 2">
+    <img src="{{ asset('Contenu/img/commande-3.png') }}" alt="Boîte de biscuits 3">
+    <img src="{{ asset('Contenu/img/commande-4.png') }}" alt="Préparation de biscuits">
+  </div>
 
-                        <label class="boite-option">
-                            <input type="radio" name="taille_boite" value="6" required>
-                            <div class="boite-card">
-                                <div class="boite-icon">Boîte</div>
-                                <h3>Boîte de 6</h3>
-                                <p>Idéal pour partager</p>
-                                <span class="prix">20$</span>
-                            </div>
-                        </label>
+  <!-- Smiles flottants -->
+  <div class="smile s1">😊</div>
+  <div class="smile s2">😊</div>
+  <div class="smile s3">😊</div>
+</section>
 
-                        <label class="boite-option">
-                            <input type="radio" name="taille_boite" value="12" required>
-                            <div class="boite-card">
-                                <div class="boite-icon">Boîte</div>
-                                <h3>Boîte de 12</h3>
-                                <p>Pour les gourmands</p>
-                                <span class="prix">35$</span>
-                            </div>
-                        </label>
-                    </div>
-                </div>
+<div class="commande-container container">
+  <h1>Commander des boîtes de biscuits</h1>
 
-                <div class="form-section">
-                    <h2>Choisissez vos saveurs et quantités</h2>
-                    <p class="info-text">Sélectionnez les saveurs et indiquez la quantité pour chaque biscuit (total doit
-                        correspondre à la taille de boîte choisie)</p>
-                    <div class="saveurs-grid">
-                        @foreach ($biscuits as $biscuit)
-                            <div class="saveur-item">
-                                <div class="saveur-card">
-                                    <h4>{{ $biscuit->nom_biscuit }}</h4>
-                                    <p class="prix-biscuit">{{ $biscuit->prix }}$</p>
-                                    <div class="quantite-control">
-                                        <label>Quantité :</label>
-                                        <input type="number" name="quantites[{{ $biscuit->id }}]" min="0" max="12" value="0"
-                                            class="quantite-input" data-biscuit-id="{{ $biscuit->id }}"
-                                            data-biscuit-nom="{{ $biscuit->nom_biscuit }}">
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="total-info">
-                        <p>Total sélectionné : <span id="total-selectionne">0</span> / <span id="taille-max">0</span>
-                            biscuits</p>
-                    </div>
-                </div>
+  @if (session('message_succes'))
+    <div class="alert alert-success">{{ session('message_succes') }}</div>
+  @endif
 
-                <div class="form-section">
-                    <h2>Vos informations</h2>
-                    <div class="form-row">
-                        <label>
-                            Nom complet :
-                            <input type="text" name="nom_client" required value="{{ old('nom_client') }}">
-                        </label>
-
-                        <label>
-                            Email :
-                            <input type="email" name="email_client" required value="{{ old('email_client') }}">
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-success btn-large">
-                        Passer la commande
-                    </button>
-                </div>
-            </form>
-        </div>
+  @if ($errors->any())
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+        @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+      </ul>
     </div>
+  @endif
+
+  <div class="commande-form">
+    <form method="POST" action="{{ route('commandes.store') }}">
+      @csrf
+
+      {{-- TAILLE DE BOÎTE --}}
+      <div class="form-section">
+        <h2>Choisissez la taille de votre boîte</h2>
+        <div class="boite-options">
+          <label class="boite-option">
+            <input type="radio" name="taille_boite" value="4" required>
+            <div class="boite-card">
+              <div class="boite-icon">🧁</div>
+              <h3>Boîte de 4</h3>
+              <p>Parfait pour une dégustation</p>
+              <span class="prix">15 $</span>
+            </div>
+          </label>
+
+          <label class="boite-option">
+            <input type="radio" name="taille_boite" value="6" required>
+            <div class="boite-card">
+              <div class="boite-icon">🍪</div>
+              <h3>Boîte de 6</h3>
+              <p>Idéal pour partager</p>
+              <span class="prix">20 $</span>
+            </div>
+          </label>
+
+          <label class="boite-option">
+            <input type="radio" name="taille_boite" value="12" required>
+            <div class="boite-card">
+              <div class="boite-icon">🎁</div>
+              <h3>Boîte de 12</h3>
+              <p>Pour les gourmands</p>
+              <span class="prix">35 $</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      {{-- SAVEURS + QUANTITÉS --}}
+      <div class="form-section">
+        <h2>Choisissez vos saveurs et quantités</h2>
+        <p class="info-text">
+          Sélectionnez les saveurs et indiquez la quantité pour chaque biscuit.
+          Le total doit correspondre à la taille de boîte choisie.
+        </p>
+
+        <div class="saveurs-grid">
+          @foreach ($biscuits as $biscuit)
+            <div class="saveur-item">
+              <div class="saveur-card">
+                <div class="saveur-top">
+                  <h4>{{ $biscuit->nom_biscuit ?? $biscuit->nom }}</h4>
+                  <span class="prix-biscuit">{{ number_format($biscuit->prix, 2) }} $</span>
+                </div>
+                <div class="quantite-control">
+                  <label>Quantité</label>
+                  <div class="qty-row">
+                    <button type="button" class="qty-btn minus" aria-label="Retirer 1">−</button>
+                    <input
+                      type="number"
+                      name="quantites[{{ $biscuit->id }}]"
+                      min="0" max="12" value="0"
+                      class="quantite-input"
+                      data-biscuit-id="{{ $biscuit->id }}"
+                      data-biscuit-nom="{{ $biscuit->nom_biscuit ?? $biscuit->nom }}"
+                    >
+                    <button type="button" class="qty-btn plus" aria-label="Ajouter 1">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endforeach
+        </div>
+
+        <div class="total-info">
+          <p>Total sélectionné :
+            <span id="total-selectionne">0</span> /
+            <span id="taille-max">0</span> biscuits
+          </p>
+        </div>
+      </div>
+
+      {{-- INFOS CLIENT --}}
+      <div class="form-section">
+        <h2>Vos informations</h2>
+        <div class="form-row">
+          <label>
+            Nom complet
+            <input type="text" name="nom_client" required value="{{ old('nom_client') }}">
+          </label>
+
+          <label>
+            Email
+            <input type="email" name="email_client" required value="{{ old('email_client') }}">
+          </label>
+        </div>
+      </div>
+
+      {{-- CTA --}}
+      <div class="form-actions">
+        <button type="submit" class="btn btn-success btn-large">
+          Passer la commande
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
 @endsection
+
+{{-- JS de validation & interactions --}}
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const tailleInputs = document.querySelectorAll('input[name="taille_boite"]');
-        const quantiteInputs = document.querySelectorAll('.quantite-input');
-        const totalSpan = document.getElementById('total-selectionne');
-        const tailleMaxSpan = document.getElementById('taille-max');
+document.addEventListener('DOMContentLoaded', function () {
+  const tailleInputs  = document.querySelectorAll('input[name="taille_boite"]');
+  const quantiteInputs = document.querySelectorAll('.quantite-input');
+  const totalSpan     = document.getElementById('total-selectionne');
+  const tailleMaxSpan = document.getElementById('taille-max');
 
-        // Fonction pour mettre à jour le total
-        function updateTotal() {
-            let total = 0;
-            quantiteInputs.forEach(input => {
-                total += parseInt(input.value) || 0;
-            });
-            totalSpan.textContent = total;
+  function getTailleMax() {
+    const checked = document.querySelector('input[name="taille_boite"]:checked');
+    return checked ? parseInt(checked.value) : 0;
+  }
 
-            // Vérifier si le total correspond à la taille de boîte
-            const tailleBoite = document.querySelector('input[name="taille_boite"]:checked');
-            if (tailleBoite) {
-                const tailleMax = parseInt(tailleBoite.value);
-                tailleMaxSpan.textContent = tailleMax;
+  function updateTotal() {
+    let total = 0;
+    quantiteInputs.forEach(input => total += parseInt(input.value) || 0);
+    totalSpan.textContent = total;
 
-                if (total === tailleMax) {
-                    totalSpan.style.color = 'var(--success-color)';
-                } else if (total > tailleMax) {
-                    totalSpan.style.color = 'var(--danger-color)';
-                } else {
-                    totalSpan.style.color = 'var(--warning-color)';
-                }
-            }
-        }
+    const max = getTailleMax();
+    tailleMaxSpan.textContent = max;
 
-        // Écouter les changements de taille de boîte
-        tailleInputs.forEach(input => {
-            input.addEventListener('change', function () {
-                const tailleMax = parseInt(this.value);
-                tailleMaxSpan.textContent = tailleMax;
+    if (!max) { totalSpan.style.color = ''; return; }
 
-                // Réinitialiser les quantités
-                quantiteInputs.forEach(quantiteInput => {
-                    quantiteInput.value = 0;
-                    quantiteInput.max = tailleMax;
-                });
+    if (total === max) {
+      totalSpan.style.color = 'var(--ok)';
+    } else if (total > max) {
+      totalSpan.style.color = 'var(--danger)';
+    } else {
+      totalSpan.style.color = 'var(--warn)';
+    }
+  }
 
-                updateTotal();
-            });
-        });
-
-        // Écouter les changements de quantité
-        quantiteInputs.forEach(input => {
-            input.addEventListener('input', function () {
-                const tailleBoite = document.querySelector('input[name="taille_boite"]:checked');
-                if (tailleBoite) {
-                    const tailleMax = parseInt(tailleBoite.value);
-                    const currentTotal = Array.from(quantiteInputs).reduce((sum, inp) => sum + (parseInt(inp.value) || 0), 0);
-
-                    // Limiter la quantité si le total dépasse la taille de boîte
-                    if (currentTotal > tailleMax) {
-                        const difference = currentTotal - tailleMax;
-                        this.value = Math.max(0, parseInt(this.value) - difference);
-                    }
-                }
-                updateTotal();
-            });
-        });
+  // Radio taille : reset quantités + maj limites
+  tailleInputs.forEach(input => {
+    input.addEventListener('change', () => {
+      const max = getTailleMax();
+      quantiteInputs.forEach(q => { q.value = 0; q.max = max; });
+      updateTotal();
     });
+  });
+
+  // + / - boutons
+  document.querySelectorAll('.qty-btn.plus').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = btn.parentElement.querySelector('.quantite-input');
+      const max = getTailleMax();
+      const total = [...quantiteInputs].reduce((s,i)=>s+(parseInt(i.value)||0),0);
+      if (max && total < max) input.value = Math.min(max, (parseInt(input.value)||0) + 1);
+      updateTotal();
+    });
+  });
+
+  document.querySelectorAll('.qty-btn.minus').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = btn.parentElement.querySelector('.quantite-input');
+      input.value = Math.max(0, (parseInt(input.value)||0) - 1);
+      updateTotal();
+    });
+  });
+
+  // Input direct
+  quantiteInputs.forEach(input => {
+    input.addEventListener('input', () => {
+      const max = getTailleMax();
+      if (max) {
+        // borne locale
+        input.value = Math.max(0, Math.min(max, parseInt(input.value)||0));
+        // borne globale
+        const total = [...quantiteInputs].reduce((s,i)=>s+(parseInt(i.value)||0),0);
+        if (total > max) {
+          const diff = total - max;
+          input.value = Math.max(0, (parseInt(input.value)||0) - diff);
+        }
+      } else {
+        input.value = Math.max(0, parseInt(input.value)||0);
+      }
+      updateTotal();
+    });
+  });
+
+  updateTotal();
+});
 </script>
