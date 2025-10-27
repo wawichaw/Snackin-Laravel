@@ -31,7 +31,7 @@
         <div class="snk-container">
             <a class="snk-logo" href="{{ route('home') }}">
                 <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="Snackin logo">
-                <strong>Snackin’</strong>
+                <strong>Snackin'</strong>
             </a>
             <span class="snk-badge">Fait à Montréal</span>
             <div class="snk-spacer"></div>
@@ -39,6 +39,21 @@
             <a href="{{ route('commandes.create') }}">Commander</a>
             <a href="{{ route('saveurs.index') }}">Saveurs</a>
             <a href="{{ route('about') }}">À propos</a>
+            
+            {{-- Options d'authentification --}}
+            <div class="snk-spacer"></div>
+            @auth
+                <span style="color: #fff; margin-right: 15px;">Bonjour, {{ Auth::user()->name }}</span>
+                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                    @csrf
+                    <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="color: #fff; text-decoration: none;">Se déconnecter</a>
+                </form>
+            @else
+                <a href="{{ route('login') }}" style="margin-right: 10px;">Se connecter</a>
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}">S'inscrire</a>
+                @endif
+            @endauth
         </div>
     </div>
 

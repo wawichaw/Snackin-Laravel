@@ -2,6 +2,7 @@
    Créé automatiquement pour éviter les 404 et restaurer le style.
    Si tu veux fusionner/retirer ce fichier plus tard, dis-le. */
 @import url("./landing.css");
+@import url("./biscuits.css");
 
 /* petits resets locaux */
 *{box-sizing:border-box}

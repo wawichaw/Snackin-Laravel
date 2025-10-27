@@ -13,6 +13,13 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
+     * Constantes pour les rôles utilisateurs
+     * Utilisés dans les autres classes et les vues
+     */
+    const USER_ROLE = 'USER';
+    const ADMIN_ROLE = 'ADMIN';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
@@ -22,6 +29,7 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
+        'role', // Ajout du champ role pour l'assignement de masse
     ];
 
     /**
