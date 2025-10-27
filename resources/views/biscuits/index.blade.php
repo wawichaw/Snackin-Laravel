@@ -16,23 +16,24 @@
     @foreach($biscuits as $biscuit)
     <tr>
       <td>{{ $biscuit->id }}</td>
-      
-      <td>(if $biscuit->image)
-        <img src="{{ asset('images/'.$biscuit->image) }}" alt="{{ $biscuit->nom_biscuit }}" width="80" class="img-fluid rounded">
+      <td>
+        @if(!empty($biscuit->image))
+          <img src="{{ asset('images/'.$biscuit->image) }}" alt="{{ $biscuit->nom_biscuit }}" width="80" class="img-fluid rounded">
+        @else
+          <span style="opacity:.6;font-size:.9rem">(pas d'image)</span>
+        @endif
       </td>
-      <tr>
-        <td>{{ $biscuit->id }}</td>
-        <td>{{ $biscuit->nom_biscuit }}</td>
-        <td>{{ number_format((float)$biscuit->prix, 2) }} $</td>
-        <td class="text-truncate" style="max-width: 420px;">{{ $biscuit->description }}</td>
-        <td class="text-end">
-          <a class="btn btn-sm btn-outline-secondary" href="{{ route('biscuits.edit', $biscuit) }}">Modifier</a>
-          <form action="{{ route('biscuits.destroy', $biscuit) }}" method="POST" class="d-inline" onsubmit="return confirm('Supprimer ce biscuit ?')">
-            @csrf @method('DELETE')
-            <button class="btn btn-sm btn-outline-danger">Supprimer</button>
-          </form>
-        </td>
-      </tr>
+      <td>{{ $biscuit->nom_biscuit }}</td>
+      <td>{{ number_format((float)$biscuit->prix, 2) }} $</td>
+      <td class="text-truncate" style="max-width: 420px;">{{ $biscuit->description }}</td>
+      <td class="text-end">
+        <a class="btn btn-sm btn-outline-secondary" href="{{ route('biscuits.edit', $biscuit) }}">Modifier</a>
+        <form action="{{ route('biscuits.destroy', $biscuit) }}" method="POST" class="d-inline" onsubmit="return confirm('Supprimer ce biscuit ?')">
+          @csrf @method('DELETE')
+          <button class="btn btn-sm btn-outline-danger">Supprimer</button>
+        </form>
+      </td>
+    </tr>
     @endforeach
     </tbody>
   </table>

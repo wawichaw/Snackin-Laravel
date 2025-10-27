@@ -1,0 +1,9 @@
+/* Fallback global stylesheet — importe les styles de landing.css
+   Créé automatiquement pour éviter les 404 et restaurer le style.
+   Si tu veux fusionner/retirer ce fichier plus tard, dis-le. */
+@import url("./landing.css");
+
+/* petits resets locaux */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0}

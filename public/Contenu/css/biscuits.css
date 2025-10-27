@@ -1,0 +1,214 @@
+/* ============================================================================
+   Snackin’ — Page Biscuits (cute au max)
+   Palette, formes et effets inspirés du welcome.blade.css
+   ========================================================================== */
+:root{
+  --pink:#fbd1dc;
+  --pink-100:#ffe9ef;
+  --cherry:#a0162b;
+  --cream:#fff7f1;
+  --ink:#2b1d1d;
+  --shadow: 0 10px 30px rgba(160,22,43,0.12);
+  --radius: 18px;
+}
+
+.biscuits-container{
+  max-width:1100px;
+  margin:34px auto 44px;
+  padding:0 20px 30px;
+  color:var(--ink);
+}
+
+/* ---------- HERO ---------- */
+.biscuits-hero{
+  position:relative;
+  background:linear-gradient(135deg, color-mix(in srgb, var(--cream) 92%, white) 0%, #fff 100%);
+  border:1px dashed rgba(160,22,43,.25);
+  border-radius:calc(var(--radius) + 6px);
+  box-shadow:var(--shadow);
+  padding:22px 20px;
+  text-align:center;
+  overflow:hidden;
+}
+.biscuits-hero::after{
+  content:"";
+  position:absolute; inset:-20%;
+  background:
+    radial-gradient(180px 180px at 15% 10%, rgba(255,230,238,.45), transparent 60%),
+    radial-gradient(160px 160px at 85% 25%, rgba(255,228,240,.40), transparent 60%);
+  pointer-events:none;
+}
+.biscuits-hero .badge{
+  display:inline-block;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.06em;
+  padding:6px 10px;
+  border-radius:999px;
+  margin-bottom:8px;
+  background:var(--cream);
+  color:var(--cherry);
+  border:1px dashed var(--cherry);
+}
+.biscuits-hero h1{
+  margin:4px 0 6px;
+  color:var(--cherry);
+  font-size:clamp(26px,4vw,38px);
+  line-height:1.08;
+}
+.biscuits-hero .subtitle{
+  margin:0;
+  opacity:.85;
+}
+.biscuits-hero .count{
+  margin:10px 0 0;
+  font-weight:600;
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  background:#fff;
+  border:1px solid rgba(160,22,43,.12);
+  box-shadow:var(--shadow);
+}
+
+/* ---------- ALERTES ---------- */
+.alert{
+  margin:16px 0;
+  padding:12px 14px;
+  border-radius:14px;
+  border:1px solid transparent;
+  background:#fff;
+  box-shadow:0 8px 22px rgba(160,22,43,.08);
+}
+.alert-success{
+  border-color:#cde7d8;
+  background:#effaf3;
+  color:#245d38;
+}
+.alert-danger{
+  border-color:#f4c9d1;
+  background:#fff1f4;
+  color:#7d0f21;
+}
+
+/* ---------- GRILLE ---------- */
+.biscuits-list{
+  list-style:none;
+  padding:0;
+  margin:18px 0 0;
+  display:grid;
+  gap:16px;
+  grid-template-columns:repeat(1,minmax(0,1fr));
+}
+@media (min-width:720px){
+  .biscuits-list{grid-template-columns:repeat(2,1fr);}
+}
+@media (min-width:1024px){
+  .biscuits-list{grid-template-columns:repeat(3,1fr);}
+}
+
+/* ---------- CARTE MACARON ---------- */
+.biscuit-item{
+  position:relative;
+  background:linear-gradient(180deg,#fff8f9 0%, #fff 100%);
+  border:1px solid rgba(160,22,43,.10);
+  border-radius:22px;
+  padding:14px 16px 16px;
+  box-shadow:0 12px 30px rgba(160,22,43,0.08);
+  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  overflow:hidden;
+  isolation:isolate;
+}
+.biscuit-item::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:22px;
+  padding:1px;
+  background:linear-gradient(135deg,#ffd6e5 0%, #ffe7ee 45%, #ffffff 60%, #ffd6e5 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+  opacity:.65;
+}
+.biscuit-item::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(120% 60% at -10% 0%, rgba(255,255,255,.7), transparent 60%);
+  mix-blend-mode:lighten;
+  opacity:0;
+  transition:opacity .18s ease;
+  pointer-events:none;
+}
+.biscuit-item:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 40px rgba(160,22,43,0.12);
+  filter:saturate(1.03);
+}
+.biscuit-item:hover::after{opacity:.55;}
+
+/* ---------- INFO LIGNE ---------- */
+.biscuit-info{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px 12px;
+  align-items:center;
+}
+.biscuit-info strong{
+  color:var(--cherry);
+  letter-spacing:.01em;
+  position:relative;
+  padding-left:26px;
+}
+.biscuit-info strong::before{
+  content:"🍪";
+  position:absolute;
+  left:0;
+  top:2px;
+  font-size:18px;
+  filter:saturate(1.05);
+}
+
+/* Prix en pilule */
+.price{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  font-weight:700;
+  background:#fff;
+  border:1px solid rgba(160,22,43,.12);
+  box-shadow:var(--shadow);
+  color:var(--ink);
+}
+
+/* Saveur en chip */
+.saveur{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin-left:6px;
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:12px;
+  background:color-mix(in srgb, var(--cream) 80%, white);
+  border:1px solid rgba(160,22,43,.14);
+  color:color-mix(in srgb, var(--cherry) 75%, black);
+}
+
+/* Aucun biscuit */
+.biscuits-list>li:only-child{
+  grid-column:1/-1;
+  text-align:center;
+  opacity:.75;
+  background:#fff;
+  border:1px dashed rgba(160,22,43,.2);
+  border-radius:16px;
+  padding:18px;
+}
+
+/* Accessibilité */
+@media (prefers-reduced-motion: reduce){
+  .biscuit-item,.biscuit-item::after{transition:none;}
+}
