@@ -258,3 +258,10 @@
 .btn.btn-sm.btn-outline-danger:hover{
   background:#fff5f5; border-color:#fda4a4;
 }
+
+/* Nav greeting standardisé */
+.snk-greeting{
+  color: var(--ink-soft);
+  margin-right: 12px;
+  font-weight: 600;
+}

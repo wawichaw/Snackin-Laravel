@@ -21,10 +21,10 @@
 
     <div class="snk-spacer"></div>
     @auth
-      <span style="color:#694256; margin-right:12px;">Bonjour, {{ Auth::user()->name }}</span>
+      <span class="snk-greeting">Bonjour, {{ Auth::user()->name }}</span>
       <form method="POST" action="{{ route('logout') }}" style="display:inline;">
         @csrf
-        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="color:#694256; text-decoration:none;">Se déconnecter</a>
+        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">Se déconnecter</a>
       </form>
     @else
       <a href="{{ route('login') }}" style="margin-right:10px;">Se connecter</a>
@@ -74,7 +74,7 @@
       <option value="" disabled {{ !old('saveur_id') ? 'selected' : '' }}>Choisir une saveur…</option>
       @foreach($saveurs as $saveur)
         <option value="{{ $saveur->id }}" {{ old('saveur_id') == $saveur->id ? 'selected' : '' }}>
-          {{ ucfirst($saveur->nom_saveur) }}
+          {{ ($saveur->emoji ?? '🍪') . ' ' . ucfirst($saveur->nom_saveur) }}
         </option>
       @endforeach
     </select>

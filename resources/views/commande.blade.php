@@ -18,15 +18,23 @@
     <a href="{{ route('home') }}">Accueil</a>
     <a href="{{ route('biscuits.index') }}">Biscuits</a>
     <a href="{{ route('commandes.create') }}" aria-current="page">Commander</a>
-    <a href="{{ route('saveurs.index') }}">Saveurs</a>
+    @auth
+      @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
+        <a href="{{ route('saveurs.index') }}">Saveurs</a>
+      @endif
+    @endauth
     <a href="{{ route('about') }}">À propos</a>
 
     <div class="snk-spacer"></div>
     @auth
-      <span style="color:#694256; margin-right:12px;">Bonjour, {{ Auth::user()->name }}</span>
+      @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
+        <span class="snk-greeting" style="color: #000; font-weight: bold; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">Bonjour Admin, {{ Auth::user()->name }}</span>
+      @else
+        <span class="snk-greeting" style="color: #000; font-weight: bold; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">Bonjour, {{ Auth::user()->name }}</span>
+      @endif
       <form method="POST" action="{{ route('logout') }}" style="display:inline;">
         @csrf
-        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="color:#694256; text-decoration:none;">Se déconnecter</a>
+        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">Se déconnecter</a>
       </form>
     @else
       <a href="{{ route('login') }}" style="margin-right:10px;">Se connecter</a>
@@ -55,6 +63,9 @@
 
   @if (session('message_succes'))
     <div class="alert alert-success">{{ session('message_succes') }}</div>
+  @endif
+  @if (session('ok'))
+    <div class="alert alert-success">Votre commande a été enregistrée. Merci !</div>
   @endif
 
   @if ($errors->any())
@@ -148,6 +159,9 @@
             <span id="total-selectionne">0</span> /
             <span id="taille-max">0</span> biscuits
           </p>
+          <p style="font-size: 18px; font-weight: bold; color: #2a1620; margin-top: 10px;">
+            Prix total : <span id="prix-total">0$</span>
+          </p>
         </div>
       </div>
 
@@ -185,6 +199,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const quantiteInputs = document.querySelectorAll('.quantite-input');
   const totalSpan     = document.getElementById('total-selectionne');
   const tailleMaxSpan = document.getElementById('taille-max');
+  const prixTotalSpan = document.getElementById('prix-total');
+
+  // Prix par taille de boîte
+  const prixParTaille = {
+    '4': 15.00,
+    '6': 20.00,
+    '12': 35.00
+  };
 
   function getTailleMax() {
     const checked = document.querySelector('input[name="taille_boite"]:checked');
@@ -199,7 +221,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const max = getTailleMax();
     tailleMaxSpan.textContent = max;
 
-    if (!max) { totalSpan.style.color = ''; return; }
+    // Mettre à jour le prix total
+    const tailleBoite = document.querySelector('input[name="taille_boite"]:checked');
+    if (tailleBoite && prixParTaille[tailleBoite.value]) {
+      prixTotalSpan.textContent = prixParTaille[tailleBoite.value] + '$';
+    } else {
+      prixTotalSpan.textContent = '0$';
+    }
+
+    if (!max) { 
+      totalSpan.style.color = ''; 
+      return; 
+    }
 
     if (total === max) {
       totalSpan.style.color = 'var(--ok)';

@@ -1,0 +1,386 @@
+/* ===== SAVEURS CSS MAXIMUM CUTE ===== */
+:root {
+  --saveur-primary: #ec4899;
+  --saveur-secondary: #db2777;
+  --saveur-accent: #f7c6de;
+  --saveur-bg: #fff1f7;
+  --saveur-text: #2a1620;
+  --saveur-muted: #694256;
+  --saveur-success: #10b981;
+  --saveur-warning: #f59e0b;
+  --saveur-danger: #ef4444;
+}
+
+/* Page principale des saveurs */
+.saveurs-page {
+  background: linear-gradient(135deg, #fff1f7 0%, #ffe6ee 50%, #fce7f3 100%);
+  min-height: 100vh;
+  position: relative;
+}
+
+.saveurs-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="20" fill="%23f7c6de" opacity="0.3">🍪</text></svg>') repeat;
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.saveurs-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Header des saveurs */
+.saveur-header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 40px 20px;
+}
+
+.saveur-title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 900;
+  color: var(--saveur-text);
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(236, 72, 153, 0.1);
+}
+
+.saveur-subtitle {
+  font-size: 18px;
+  color: var(--saveur-muted);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Grille des saveurs */
+.saveurs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+/* Carte de saveur */
+.saveur-card {
+  background: white;
+  border-radius: 25px;
+  padding: 30px;
+  box-shadow: 0 10px 40px rgba(236, 72, 153, 0.15);
+  border: 3px solid var(--saveur-accent);
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+}
+
+.saveur-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(236, 72, 153, 0.05), transparent);
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+  opacity: 0;
+}
+
+.saveur-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(236, 72, 153, 0.25);
+  border-color: var(--saveur-primary);
+}
+
+.saveur-card:hover::before {
+  opacity: 1;
+  animation: shimmer 1.5s ease-in-out;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.saveur-emoji {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 20px;
+  display: block;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+.saveur-name {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--saveur-text);
+  text-align: center;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.saveur-name::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--saveur-primary), var(--saveur-secondary));
+  border-radius: 2px;
+}
+
+.saveur-description {
+  color: var(--saveur-muted);
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 16px;
+}
+
+.saveur-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Boutons de saveur */
+.btn-saveur {
+  padding: 12px 24px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-saveur-primary {
+  background: linear-gradient(135deg, var(--saveur-primary) 0%, var(--saveur-secondary) 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+}
+
+.btn-saveur-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+}
+
+.btn-saveur-secondary {
+  background: white;
+  color: var(--saveur-primary);
+  border-color: var(--saveur-primary);
+}
+
+.btn-saveur-secondary:hover {
+  background: var(--saveur-primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-saveur-danger {
+  background: var(--saveur-danger);
+  color: white;
+}
+
+.btn-saveur-danger:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}
+
+/* Formulaire de saveur */
+.saveur-form-container {
+  background: white;
+  border-radius: 25px;
+  padding: 40px;
+  box-shadow: 0 15px 50px rgba(236, 72, 153, 0.2);
+  border: 3px solid var(--saveur-accent);
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.saveur-form-container::before {
+  content: '✨';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  opacity: 0.3;
+}
+
+.form-group-saveur {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.form-group-saveur label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: var(--saveur-text);
+  font-size: 16px;
+}
+
+.form-group-saveur input,
+.form-group-saveur textarea,
+.form-group-saveur select {
+  width: 100%;
+  padding: 15px 20px;
+  border: 3px solid var(--saveur-accent);
+  border-radius: 15px;
+  font-size: 16px;
+  background: #fff;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group-saveur input:focus,
+.form-group-saveur textarea:focus,
+.form-group-saveur select:focus {
+  outline: none;
+  border-color: var(--saveur-primary);
+  box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.1);
+  transform: translateY(-2px);
+}
+
+.form-group-saveur textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Page de détail de saveur */
+.saveur-detail {
+  background: white;
+  border-radius: 25px;
+  padding: 40px;
+  box-shadow: 0 15px 50px rgba(236, 72, 153, 0.2);
+  border: 3px solid var(--saveur-accent);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.saveur-detail-emoji {
+  font-size: 80px;
+  margin-bottom: 30px;
+  display: block;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.saveur-detail-name {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--saveur-text);
+  margin-bottom: 20px;
+}
+
+.saveur-detail-description {
+  font-size: 18px;
+  color: var(--saveur-muted);
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* Messages de succès/erreur */
+.alert-saveur {
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.alert-saveur-success {
+  background: #d1fae5;
+  color: #065f46;
+  border: 2px solid #10b981;
+}
+
+.alert-saveur-danger {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 2px solid #ef4444;
+}
+
+/* Actions de page */
+.page-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .saveurs-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .saveur-card {
+    padding: 20px;
+  }
+  
+  .saveur-form-container {
+    padding: 30px 20px;
+    margin: 0 20px;
+  }
+  
+  .saveur-actions {
+    flex-direction: column;
+  }
+  
+  .btn-saveur {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Animation d'entrée */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.saveur-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.saveur-card:nth-child(1) { animation-delay: 0.1s; }
+.saveur-card:nth-child(2) { animation-delay: 0.2s; }
+.saveur-card:nth-child(3) { animation-delay: 0.3s; }
+.saveur-card:nth-child(4) { animation-delay: 0.4s; }
+.saveur-card:nth-child(5) { animation-delay: 0.5s; }
+.saveur-card:nth-child(6) { animation-delay: 0.6s; }

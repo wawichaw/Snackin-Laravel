@@ -12,16 +12,22 @@ class Commande extends Model
     protected $table = 'commandes';
 
     protected $fillable = [
+        'utilisateur_id',
         'taille_boite',
         'nom_client',
         'email_client',
         'total_prix',
         'details',
         'status',
+        // Backwards-compatible fields used by the frontend ordering form
+        'client_nom',
+        'client_email',
+        'details_json',
     ];
 
     protected $casts = [
         'details' => 'array',
+        'details_json' => 'array',
         'total_prix' => 'decimal:2',
     ];
 }

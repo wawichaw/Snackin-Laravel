@@ -16,10 +16,33 @@ class Commentaire extends Model
         'utilisateur_id',
         'texte',
         'note',
+        'nom_visiteur',
+        'email_visiteur',
+        'modere',
+    ];
+
+    protected $casts = [
+        'modere' => 'boolean',
     ];
 
     public function biscuit()
     {
         return $this->belongsTo(Biscuit::class);
+    }
+
+    public function utilisateur()
+    {
+        return $this->belongsTo(User::class, 'utilisateur_id');
+    }
+
+    /**
+     * Obtenir le nom d'affichage du commentateur
+     */
+    public function getNomAfficheAttribute()
+    {
+        if ($this->utilisateur_id) {
+            return $this->utilisateur->name ?? 'Utilisateur supprimé';
+        }
+        return $this->nom_visiteur ?? 'Anonyme';
     }
 }

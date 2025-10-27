@@ -1,0 +1,284 @@
+/* ===== COMMENTAIRES CUTE CSS ===== */
+:root {
+  --comment-bg: #fff8fc;
+  --comment-border: #f7c6de;
+  --comment-shadow: rgba(236, 72, 153, 0.1);
+  --comment-accent: #ec4899;
+  --comment-text: #2a1620;
+  --comment-muted: #694256;
+}
+
+/* Page publique des commentaires */
+.commentaires-page {
+  background: linear-gradient(135deg, #fff1f7 0%, #ffe6ee 100%);
+  min-height: 100vh;
+}
+
+.comment-form-cute {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 32px rgba(236, 72, 153, 0.15);
+  border: 2px solid var(--comment-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.comment-form-cute::before {
+  content: '💬';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  opacity: 0.3;
+}
+
+.form-group-cute {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.form-group-cute label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: var(--comment-text);
+  font-size: 16px;
+}
+
+.form-group-cute input,
+.form-group-cute select,
+.form-group-cute textarea {
+  width: 100%;
+  padding: 15px 20px;
+  border: 2px solid var(--comment-border);
+  border-radius: 15px;
+  font-size: 16px;
+  background: #fff;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group-cute input:focus,
+.form-group-cute select:focus,
+.form-group-cute textarea:focus {
+  outline: none;
+  border-color: var(--comment-accent);
+  box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+  transform: translateY(-2px);
+}
+
+.btn-cute {
+  background: linear-gradient(135deg, var(--comment-accent) 0%, #db2777 100%);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 25px;
+  border: none;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+}
+
+.btn-cute:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+}
+
+/* Commentaires individuels */
+.comment-card-cute {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(236, 72, 153, 0.1);
+  border: 2px solid var(--comment-border);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.comment-card-cute:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(236, 72, 153, 0.2);
+}
+
+.comment-header-cute {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.comment-author-cute {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.author-avatar-cute {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, var(--comment-accent) 0%, #db2777 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.author-info-cute h3 {
+  color: var(--comment-text);
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.author-info-cute p {
+  color: var(--comment-muted);
+  margin: 5px 0 0 0;
+  font-size: 14px;
+}
+
+.comment-rating-cute {
+  color: #ffc107;
+  font-size: 20px;
+  display: flex;
+  gap: 2px;
+}
+
+.comment-content-cute {
+  color: var(--comment-text);
+  line-height: 1.6;
+  font-size: 16px;
+  margin: 0;
+}
+
+.comment-meta-cute {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--comment-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-date-cute {
+  color: var(--comment-muted);
+  font-size: 14px;
+}
+
+.comment-biscuit-cute {
+  background: var(--comment-border);
+  color: var(--comment-text);
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Page admin des commentaires */
+.admin-comment-table {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(236, 72, 153, 0.15);
+  border: 2px solid var(--comment-border);
+}
+
+.admin-comment-table th {
+  background: linear-gradient(135deg, var(--comment-accent) 0%, #db2777 100%);
+  color: white;
+  padding: 20px 15px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.admin-comment-table td {
+  padding: 20px 15px;
+  border-bottom: 1px solid var(--comment-border);
+  vertical-align: top;
+}
+
+.admin-comment-table tr:hover {
+  background: #fff8fc;
+}
+
+.status-badge-cute {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-approved-cute {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-pending-cute {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.action-btn-cute {
+  padding: 8px 16px;
+  border-radius: 15px;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 2px;
+}
+
+.btn-approve-cute {
+  background: #28a745;
+  color: white;
+}
+
+.btn-reject-cute {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-delete-cute {
+  background: #6c757d;
+  color: white;
+}
+
+.action-btn-cute:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .comment-form-cute {
+    padding: 20px;
+    margin: 0 10px;
+  }
+  
+  .comment-card-cute {
+    padding: 20px;
+    margin: 0 10px 20px 10px;
+  }
+  
+  .comment-header-cute {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .admin-comment-table {
+    font-size: 14px;
+  }
+  
+  .admin-comment-table th,
+  .admin-comment-table td {
+    padding: 15px 10px;
+  }
+}

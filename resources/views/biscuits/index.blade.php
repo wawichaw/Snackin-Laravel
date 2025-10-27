@@ -9,8 +9,8 @@
 <div class="snackin-background"></div>
 
 @php
-  // Pour autoriser l'affichage admin si connecté
-  $showAdmin = Auth::check() || app()->environment('local');
+  // Montrer les contrôles d'administration uniquement pour les admins
+  $showAdmin = Auth::check() && ( (isset(Auth::user()->is_admin) && Auth::user()->is_admin) || (isset(Auth::user()->role) && strtoupper(Auth::user()->role) === 'ADMIN') );
 
   // Liste fermée de saveurs
   $allowedSaveurs = ['original','chocolat','caramel','vanille','smores','oreo'];
@@ -44,16 +44,25 @@
     <div class="snk-spacer"></div>
     <a href="{{ route('home') }}">Accueil</a>
     <a href="{{ route('biscuits.index') }}" aria-current="page">Biscuits</a>
-    <a href="{{ route('commandes.create') }}">Commander</a>
-    <a href="{{ route('saveurs.index') }}">Saveurs</a>
+
+    @auth
+      @if(Auth::user()->is_admin || (isset(Auth::user()->role) && strtoupper(Auth::user()->role) === 'ADMIN'))
+        <a href="{{ route('saveurs.index') }}">Saveurs</a>
+        <a href="{{ route('commandes.index') }}">Commandes (admin)</a>
+      @else
+        <a href="{{ route('commandes.create') }}">Commander</a>
+        <a href="{{ route('mes.commandes') }}">Mes commandes</a>
+      @endif
+    @endauth
+
     <a href="{{ route('about') }}">À propos</a>
 
     <div class="snk-spacer"></div>
     @auth
-      <span style="color:#694256; margin-right:12px;">Bonjour, {{ Auth::user()->name }}</span>
+      <span class="snk-greeting">Bonjour, {{ Auth::user()->name }}</span>
       <form method="POST" action="{{ route('logout') }}" style="display:inline;">
         @csrf
-        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="color:#694256; text-decoration:none;">Se déconnecter</a>
+        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">Se déconnecter</a>
       </form>
     @else
       <a href="{{ route('login') }}" style="margin-right:10px;">Se connecter</a>

@@ -36,17 +36,30 @@
             <span class="snk-badge">Fait à Montréal</span>
             <div class="snk-spacer"></div>
             <a href="{{ route('biscuits.index') }}">Biscuits</a>
-            <a href="{{ route('commandes.create') }}">Commander</a>
-            <a href="{{ route('saveurs.index') }}">Saveurs</a>
+            @auth
+                @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
+                    <a href="{{ route('commandes.index') }}">Gestion de commandes</a>
+                    <a href="{{ route('saveurs.index') }}">Saveurs</a>
+                @else
+                    <a href="{{ route('commandes.create') }}">Commander</a>
+                @endif
+            @else
+                <a href="{{ route('commandes.create') }}">Commander</a>
+            @endauth
+            <a href="{{ route('commentaires.public') }}">Commentaires</a>
             <a href="{{ route('about') }}">À propos</a>
             
             {{-- Options d'authentification --}}
             <div class="snk-spacer"></div>
             @auth
-                <span style="color: #fff; margin-right: 15px;">Bonjour, {{ Auth::user()->name }}</span>
+                @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
+                    <span style="color: #000; font-weight: bold; margin-right: 15px; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">Bonjour Admin, {{ Auth::user()->name }}</span>
+                @else
+                    <span style="color: #000; font-weight: bold; margin-right: 15px; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">Bonjour, {{ Auth::user()->name }}</span>
+                @endif
                 <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                     @csrf
-                    <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="color: #fff; text-decoration: none;">Se déconnecter</a>
+                    <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="margin-left: 10px;">Se déconnecter</a>
                 </form>
             @else
                 <a href="{{ route('login') }}" style="margin-right: 10px;">Se connecter</a>
@@ -71,7 +84,11 @@
                 <div class="cta-row">
                     <a class="btn primary" href="{{ route('commandes.create') }}">Commander maintenant</a>
                     <a class="btn" href="{{ route('biscuits.index') }}">Parcourir les biscuits</a>
-                    <a class="btn outline" href="{{ route('saveurs.index') }}">Voir les saveurs</a>
+                    @auth
+                        @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
+                            <a class="btn outline" href="{{ route('saveurs.index') }}">Voir les saveurs</a>
+                        @endif
+                    @endauth
                 </div>
             </div>
 
@@ -112,10 +129,19 @@
                 <p><a class="btn" href="{{ route('biscuits.index') }}">Voir les biscuits</a></p>
             </div>
             <div class="card">
-                <h3>Saveurs du moment</h3>
-                <p>Ajoute/édite les saveurs (admin) ou inspire-toi pour ta commande.</p>
-                <p><a class="btn outline" href="{{ route('saveurs.index') }}">Saveurs</a></p>
+                <h3>Partager son avis</h3>
+                <p>Découvrez ce que pensent nos clients et partagez votre expérience.</p>
+                <p><a class="btn outline" href="{{ route('commentaires.public') }}">Voir les commentaires</a></p>
             </div>
+            @auth
+                @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
+                    <div class="card">
+                        <h3>Saveurs du moment</h3>
+                        <p>Ajoute/édite les saveurs (admin) ou inspire-toi pour ta commande.</p>
+                        <p><a class="btn outline" href="{{ route('saveurs.index') }}">Saveurs</a></p>
+                    </div>
+                @endif
+            @endauth
         </div>
     </section>
 

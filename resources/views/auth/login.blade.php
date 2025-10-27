@@ -3,8 +3,35 @@
 @section('title', 'Connexion')
 
 @section('content')
-<div style="max-width: 500px; margin: 50px auto; padding: 20px;">
-    <h2 style="text-align: center; margin-bottom: 30px;">Se connecter</h2>
+<link rel="stylesheet" href="{{ asset('Contenu/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('Contenu/css/landing.css') }}">
+
+<div class="snk-nav">
+  <div class="snk-container">
+    <a class="snk-logo" href="{{ route('home') }}">
+      <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="Snackin logo" style="width:36px;height:36px;object-fit:contain">
+      <strong>Snackin'</strong>
+    </a>
+    <span class="snk-badge">Fait à Montréal</span>
+
+    <div class="snk-spacer"></div>
+    <a href="{{ route('home') }}">Accueil</a>
+    <a href="{{ route('biscuits.index') }}">Biscuits</a>
+    <a href="{{ route('commandes.create') }}">Commander</a>
+    <a href="{{ route('commentaires.public') }}">Commentaires</a>
+    <a href="{{ route('about') }}">À propos</a>
+
+    <div class="snk-spacer"></div>
+    <a href="{{ route('login') }}" aria-current="page">Se connecter</a>
+    @if (Route::has('register')) 
+      <a href="{{ route('register') }}">S'inscrire</a> 
+    @endif
+  </div>
+</div>
+
+<div style="background: linear-gradient(135deg, #fff1f7 0%, #ffe6ee 100%); min-height: calc(100vh - 80px); padding: 40px 0;">
+  <div style="max-width: 500px; margin: 0 auto; padding: 40px; background: white; border-radius: 20px; box-shadow: 0 8px 32px rgba(236, 72, 153, 0.15); border: 2px solid #f7c6de;">
+    <h2 style="text-align: center; margin-bottom: 30px; color: #2a1620; font-size: 28px; font-weight: 800;">🔐 Se connecter</h2>
 
     @if ($errors->any())
         <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
@@ -45,8 +72,8 @@
         </div>
 
         <div style="text-align: center;">
-            <button type="submit" style="background: #9b182b; color: white; padding: 12px 40px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
-                Se connecter
+            <button type="submit" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); color: white; padding: 15px 40px; border: none; border-radius: 25px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); transition: all 0.3s ease;">
+                ✨ Se connecter
             </button>
             
             @if (Route::has('password.request'))
@@ -64,5 +91,6 @@
             </div>
         </div>
     </form>
+  </div>
 </div>
 @endsection

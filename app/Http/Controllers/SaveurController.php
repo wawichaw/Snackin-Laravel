@@ -4,9 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Saveur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SaveurController extends Controller
 {
+    public function __construct()
+    {
+        // Restreindre toutes les méthodes aux administrateurs uniquement
+        $this->middleware(function ($request, $next) {
+            if (!Auth::check() || (!Auth::user()->is_admin && Auth::user()->role !== 'ADMIN')) {
+                abort(403, 'Accès refusé. Cette page est réservée aux administrateurs.');
+            }
+            return $next($request);
+        });
+    }
+
     public function index()
     {
         $saveurs = Saveur::orderBy('nom_saveur')->get();
@@ -23,10 +35,11 @@ class SaveurController extends Controller
         $data = $request->validate([
             'nom_saveur' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'emoji' => 'nullable|string|max:10',
         ]);
 
         Saveur::create($data);
-        return redirect()->route('saveurs.index')->with('success', 'Saveur ajoutée.');
+        return redirect()->route('saveurs.index')->with('success', 'Saveur créée avec succès !');
     }
 
     public function show(Saveur $saveur)
@@ -44,10 +57,11 @@ class SaveurController extends Controller
         $data = $request->validate([
             'nom_saveur' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'emoji' => 'nullable|string|max:10',
         ]);
 
         $saveur->update($data);
-        return redirect()->route('saveurs.index')->with('success', 'Saveur modifiée.');
+        return redirect()->route('saveurs.index')->with('success', 'Saveur modifiée avec succès !');
     }
 
     public function destroy(Saveur $saveur)

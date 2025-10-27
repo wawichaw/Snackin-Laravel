@@ -27,10 +27,36 @@ class CommentaireController extends Controller
             'utilisateur_id' => 'nullable|integer',
             'texte'          => 'required|string',
             'note'           => 'nullable|integer|min:1|max:5',
+            'nom_visiteur'   => 'nullable|string|max:255', // Pour les utilisateurs non connectés
+            'email_visiteur' => 'nullable|email|max:255', // Pour les utilisateurs non connectés
         ]);
 
+        // Si l'utilisateur n'est pas connecté, utiliser les champs visiteur
+        if (!auth()->check()) {
+            $data['utilisateur_id'] = null;
+            $data['nom_visiteur'] = $request->input('nom_visiteur');
+            $data['email_visiteur'] = $request->input('email_visiteur');
+        } else {
+            $data['utilisateur_id'] = auth()->id();
+            $data['nom_visiteur'] = null;
+            $data['email_visiteur'] = null;
+        }
+
         Commentaire::create($data);
-        return redirect()->route('commentaires.index')->with('success', 'Commentaire ajouté.');
+        return redirect()->route('commentaires.public')->with('success', 'Commentaire ajouté avec succès !');
+    }
+
+    /**
+     * Page publique pour voir et ajouter des commentaires
+     */
+    public function public()
+    {
+        $commentaires = Commentaire::with('biscuit')
+            ->orderByDesc('created_at')
+            ->paginate(10);
+        $biscuits = Biscuit::orderBy('nom_biscuit')->get();
+        
+        return view('commentaires.public', compact('commentaires', 'biscuits'));
     }
 
     public function show(Commentaire $commentaire)
@@ -62,5 +88,94 @@ class CommentaireController extends Controller
     {
         $commentaire->delete();
         return redirect()->route('commentaires.index')->with('success', 'Commentaire supprimé.');
+    }
+
+    /**
+     * Page admin pour gérer tous les commentaires
+     */
+    public function admin()
+    {
+        // Restreindre l'accès aux administrateurs
+        if (!auth()->check() || (!auth()->user()->is_admin && auth()->user()->role !== 'ADMIN')) {
+            abort(403, 'Accès refusé. Cette page est réservée aux administrateurs.');
+        }
+
+        $commentaires = Commentaire::with(['biscuit', 'utilisateur'])
+            ->orderByDesc('created_at')
+            ->paginate(20);
+        
+        return view('commentaires.admin', compact('commentaires'));
+    }
+
+    /**
+     * Modérer un commentaire (approuver/rejeter)
+     */
+    public function moderate(Request $request, Commentaire $commentaire)
+    {
+        if (!auth()->check() || (!auth()->user()->is_admin && auth()->user()->role !== 'ADMIN')) {
+            abort(403, 'Accès refusé.');
+        }
+
+        $request->validate([
+            'action' => 'required|in:approve,reject'
+        ]);
+
+        if ($request->action === 'approve') {
+            $commentaire->update(['modere' => true]);
+            $message = 'Commentaire approuvé.';
+        } else {
+            $commentaire->update(['modere' => false]);
+            $message = 'Commentaire rejeté.';
+        }
+
+        return redirect()->route('commentaires.admin')->with('success', $message);
+    }
+
+    /**
+     * Afficher un commentaire spécifique (admin)
+     */
+    public function showAdmin(Commentaire $commentaire)
+    {
+        if (!auth()->check() || (!auth()->user()->is_admin && auth()->user()->role !== 'ADMIN')) {
+            abort(403, 'Accès refusé. Cette page est réservée aux administrateurs.');
+        }
+
+        $commentaire->load(['biscuit', 'utilisateur']);
+        return view('commentaires.show-admin', compact('commentaire'));
+    }
+
+    /**
+     * Éditer un commentaire (admin)
+     */
+    public function editAdmin(Commentaire $commentaire)
+    {
+        if (!auth()->check() || (!auth()->user()->is_admin && auth()->user()->role !== 'ADMIN')) {
+            abort(403, 'Accès refusé. Cette page est réservée aux administrateurs.');
+        }
+
+        $biscuits = Biscuit::orderBy('nom_biscuit')->get();
+        return view('commentaires.edit-admin', compact('commentaire', 'biscuits'));
+    }
+
+    /**
+     * Mettre à jour un commentaire (admin)
+     */
+    public function updateAdmin(Request $request, Commentaire $commentaire)
+    {
+        if (!auth()->check() || (!auth()->user()->is_admin && auth()->user()->role !== 'ADMIN')) {
+            abort(403, 'Accès refusé. Cette page est réservée aux administrateurs.');
+        }
+
+        $data = $request->validate([
+            'biscuit_id'     => 'required|exists:biscuits,id',
+            'texte'          => 'required|string',
+            'note'           => 'nullable|integer|min:1|max:5',
+            'nom_visiteur'   => 'nullable|string|max:255',
+            'email_visiteur' => 'nullable|email|max:255',
+            'modere'         => 'boolean',
+        ]);
+
+        $commentaire->update($data);
+        return redirect()->route('commentaires.admin')->with('success', 'Commentaire mis à jour avec succès.');
     }
 }

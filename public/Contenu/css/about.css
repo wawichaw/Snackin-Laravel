@@ -1,0 +1,144 @@
+:root{
+  --ink:#2a1620;
+  --ink-soft:#694256;
+  --ring:#f7c6de;
+  --cta:#ec4899;
+  --cta-dark:#db2777;
+  --bg1:#fff1f7;
+  --bg2:#ffe6ee;
+}
+
+/* --- Base locale (on ne touche pas au <body>) --- */
+.about-page{
+  background: linear-gradient(180deg, #fff1f7 0%, #ffe6ee 100%);
+  color: var(--ink);
+  font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Utilitaires de centrage robustes (même si Bootstrap est présent) */
+.about-container,
+.about-section > .container,
+.about-section.container,
+.container.about-section{
+  width: 100%;
+  max-width: 1080px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.about-section{
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin: 40px 0;
+}
+.about-section h2{
+  text-align: center;
+  color: var(--ink);
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+/* ---------------- HERO ---------------- */
+.about-hero{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 680px) 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 12px 20px;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #ffd0df 0, transparent 70%),
+    radial-gradient(1200px 600px at 90% -10%, #ffc7da 0, transparent 70%),
+    linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+  border-bottom: 1px solid var(--ring);
+}
+.about-hero__art{ display:flex; justify-content:center; }
+.about-hero__art img{
+  width: 100%; max-width: 340px; height: 260px; object-fit: cover;
+  border-radius: 22px; border: 1px solid var(--ring);
+  box-shadow: 0 12px 28px rgba(236,72,153,.18);
+  background:#fff;
+}
+.about-hero__center{ text-align:center; padding: 8px 10px; }
+.about-hero__center h1{ font-size: clamp(28px, 5vw, 46px); font-weight: 900; color: var(--ink); }
+.about-hero__center h1 span{ color: var(--cta-dark); }
+.about-hero .subtitle{ color: var(--ink-soft); max-width: 680px; margin: 6px auto 0; }
+.mini-badge{
+  display:inline-block; margin-bottom:8px;
+  border: 1px solid var(--ring); background:#fff; color:var(--ink-soft);
+  padding: 4px 10px; border-radius: 999px; font-weight: 700; font-size:.92rem;
+  box-shadow: 0 8px 18px rgba(236,72,153,.1);
+}
+
+/* ---------------- VALEURS ---------------- */
+.cards{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap:14px;
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-items: stretch;
+}
+.card{
+  background:#fff; border:1px solid var(--ring); border-radius:18px;
+  padding:16px 14px; text-align:center;
+  box-shadow: 0 10px 22px rgba(236,72,153,.12);
+}
+.card .ic{ font-size:26px; margin-bottom:6px; }
+.card h3{ margin:4px 0 6px; font-weight:800; color:var(--ink); }
+.card p{ color:var(--ink-soft); }
+
+/* ---------------- ÉQUIPE ---------------- */
+.team-centered{
+  display:flex; flex-wrap:wrap; gap:40px;
+  justify-content:center; align-items:center;
+  width: 100%; max-width: 900px;
+  margin-left: auto; margin-right: auto;
+}
+.teammate{ display:flex; flex-direction:column; align-items:center; text-align:center; }
+.avatar{
+  width:100px; height:100px; margin:0 auto 10px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:999px; border:2px solid var(--ring); background:#ffeaf2;
+  font-weight:900; color:var(--cta-dark); font-size:34px;
+  box-shadow: 0 6px 16px rgba(236,72,153,.2);
+}
+.teammate h3{
+  margin:0; font-weight:800; color:var(--ink);
+  background:#fff; border:1px solid var(--ring);
+  border-radius:999px; padding:6px 14px;
+  box-shadow: 0 6px 12px rgba(236,72,153,.08);
+}
+
+/* ---------------- CONTACT ---------------- */
+.about-contact .contact-card{
+  text-align:center; background:#fff; border:1px solid var(--ring); border-radius:20px;
+  padding:18px 16px; box-shadow: 0 10px 22px rgba(236,72,153,.12);
+  width: 100%; max-width: 900px;
+  margin-left: auto; margin-right: auto;
+}
+.about-contact .btn{
+  display:inline-block; margin-top:8px; color:#fff; background:var(--cta);
+  padding:10px 18px; border-radius:999px; font-weight:800;
+  border:none; text-decoration:none;
+  box-shadow: 0 10px 22px rgba(236,72,153,.22);
+}
+.about-contact .btn:hover{ background:var(--cta-dark); transform: translateY(-1px); }
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 880px){
+  .about-hero{
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .about-hero__art{ order:2; }
+  .about-hero__art.right{ order:3; }
+  .about-hero__center{ order:1; }
+  .about-hero__art img{ height:220px; }
+}
