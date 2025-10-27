@@ -1,0 +1,130 @@
+/* =======================================================
+   SNACKIN' - Page Modifier Biscuit
+   Fond rouge pastel avec biscuits translucides
+======================================================= */
+
+:root {
+  --ink: #2a1620;
+  --ink-soft: #694256;
+  --cta: #ec4899;
+  --cta-dark: #db2777;
+  --ring: #f7c6de;
+  --radius-lg: 20px;
+}
+
+/* ---------- FOND ---------- */
+html, body {
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  color: var(--ink);
+  position: relative;
+  overflow-x: hidden;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 240, 245, 0.8)),
+    url("../img/background-snackin.jpg") center/cover no-repeat fixed;
+}
+
+/* texture biscuits en transparence */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("../img/pattern-biscuit.png") repeat;
+  opacity: 0.12;
+  background-size: 110px;
+  animation: biscuitsMove 40s linear infinite;
+  z-index: -1;
+}
+
+/* effet d’animation subtile sur le motif */
+@keyframes biscuitsMove {
+  from { background-position: 0 0; }
+  to { background-position: 400px 250px; }
+}
+
+/* ---------- FORMULAIRE ---------- */
+.biscuit-edit-card {
+  max-width: 820px;
+  margin: 60px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--ring);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 20px rgba(236,72,153,.12);
+  backdrop-filter: blur(6px);
+  transition: all .3s ease;
+}
+
+h1.mb-3 {
+  text-align: center;
+  color: var(--cta-dark);
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  margin-top: 20px;
+}
+
+/* champs */
+.form-label {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.form-control {
+  border-radius: 12px;
+  border: 1px solid var(--ring);
+  background: #fff;
+  color: var(--ink);
+  padding: 10px 12px;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: var(--cta);
+  box-shadow: 0 0 0 4px rgba(236,72,153,.15);
+}
+
+textarea.form-control {
+  min-height: 110px;
+  resize: vertical;
+}
+
+/* ---------- BOUTONS ---------- */
+.btn {
+  border-radius: 999px;
+  font-weight: 700;
+  padding: 12px 22px;
+  font-size: 1rem;
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+
+.btn-primary {
+  background: var(--cta);
+  color: #fff;
+  border: none;
+  box-shadow: 0 8px 20px rgba(236,72,153,.18);
+}
+
+.btn-primary:hover {
+  background: var(--cta-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(236,72,153,.28);
+}
+
+.btn-outline-secondary {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--ring);
+}
+
+.btn-outline-secondary:hover {
+  background: rgba(236,72,153,.08);
+  border-color: var(--cta);
+  transform: translateY(-1px);
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  text-align: center;
+  color: var(--ink-soft);
+  margin: 40px 0 10px;
+}

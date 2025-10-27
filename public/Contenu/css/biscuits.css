@@ -1,7 +1,7 @@
 /* =======================================================
-   SNACKIN — BISCUITS (simple, coloré, sans images)
-   S'applique au Blade que tu as envoyé (nav incluse).
-   Zéro CSS inline dans le Blade, tout est ici.
+   SNACKIN — PAGE BISCUITS
+   Simple, colorée, affichage en cartes avec image.
+   Compatible avec le Blade index actuel.
 ======================================================= */
 
 /* -------- Palette & base -------- */
@@ -28,7 +28,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* -------- Navbar existante (on garde ta structure) -------- */
+/* -------- Navbar -------- */
 .snk-nav{
   position: sticky; top: 0; z-index: 40;
   background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.75));
@@ -78,7 +78,7 @@ h1{
   color: var(--ink);
 }
 
-/* Bouton “+ Ajouter” (admin) */
+/* -------- Bouton “+ Ajouter” -------- */
 .btn.btn-primary{
   background: var(--cta);
   border: 1px solid var(--ring);
@@ -99,16 +99,17 @@ h1{
   color: var(--ink-soft);
   border-radius: 16px;
   padding: 18px 16px;
+  text-align: center;
 }
 
-/* -------- Grid biscuits (cartes sans images) -------- */
+/* -------- Grid biscuits -------- */
 .biscuits-grid{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 18px;
 }
 
-/* Carte simple et colorée */
+/* -------- Carte biscuit -------- */
 .biscuit-card{
   position: relative;
   background: var(--card);
@@ -125,18 +126,43 @@ h1{
   box-shadow: var(--shadow-hover);
 }
 
-/* Motif discret pour donner de la vie (pas d’images, juste un dégradé léger) */
-.biscuit-card::after{
-  content:"";
-  position:absolute; inset: auto -10% -10% auto;
-  width: 120px; height: 120px; opacity:.06;
-  background: radial-gradient(60px 60px at 30% 30%, #ec4899 0 40%, transparent 42%),
-              radial-gradient(60px 60px at 70% 60%, #a7f3d0 0 40%, transparent 42%);
-  filter: blur(1px);
-  transform: rotate(18deg);
+/* -------- Image du biscuit -------- */
+.biscuit-image {
+  width: 100%;
+  height: 160px;
+  background: #fff6fa;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 10px;
+  border: 1px solid var(--ring);
 }
 
-/* Titre + prix */
+.biscuit-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .3s ease;
+}
+
+.biscuit-card:hover .biscuit-image img {
+  transform: scale(1.05);
+}
+
+.no-image {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* -------- Infos sous l'image -------- */
+.biscuit-info {
+  text-align: center;
+}
+
 .biscuit-card .card-title{
   display:inline-block;
   font-weight:900; letter-spacing:.2px;
@@ -152,10 +178,11 @@ h1{
   border: 1px solid var(--ring);
 }
 
-/* Actions admin */
+/* -------- Actions admin -------- */
 .card-actions{
   margin-top: 12px;
   display:flex; align-items:center; gap:8px;
+  justify-content: center;
 }
 
 /* Boutons outline */
@@ -195,4 +222,5 @@ footer{
   .snk-container{ gap:10px; }
   .snk-badge{ display:none; }
   .container{ margin-top:18px; }
+  .biscuit-image{ height: 130px; }
 }

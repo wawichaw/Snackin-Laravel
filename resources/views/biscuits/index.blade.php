@@ -9,7 +9,7 @@
   $showAdmin = Auth::check() || app()->environment('local');
 @endphp
 
-{{-- NAV / HEADER : on garde exactement ta structure --}}
+{{-- NAV / HEADER (inchangé) --}}
 <div class="snk-nav">
   <div class="snk-container">
     <a class="snk-logo" href="{{ route('home') }}">
@@ -55,9 +55,22 @@
     <div class="biscuits-grid">
       @foreach($biscuits as $biscuit)
         <div class="biscuit-card">
-          <h5 class="card-title">{{ $biscuit->nom }}</h5>
-          <p class="card-text">{{ number_format($biscuit->prix, 2) }} $</p>
+          {{-- Image du biscuit --}}
+          <div class="biscuit-image">
+            @if ($biscuit->image)
+              <img src="{{ asset('Contenu/img/'.$biscuit->image) }}" alt="{{ $biscuit->nom_biscuit }}" class="img-fluid rounded">
+            @else
+              <span class="no-image">Aucune image</span>
+            @endif
+          </div>
 
+          {{-- Infos du biscuit --}}
+          <div class="biscuit-info">
+            <h5 class="card-title">{{ $biscuit->nom }}</h5>
+            <p class="card-text">{{ number_format($biscuit->prix, 2) }} $</p>
+          </div>
+
+          {{-- Actions admin --}}
           @if($showAdmin)
             <div class="card-actions">
               <a href="{{ route('biscuits.edit', $biscuit) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
