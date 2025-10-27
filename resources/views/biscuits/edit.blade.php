@@ -22,10 +22,18 @@
     <textarea name="description" class="form-control" rows="3">{{ old('description', $biscuit->description) }}</textarea>
   </div>
   <div class="mb-3">
-    <label class="form-label">Image (URL)</label>
-    <input type="text" name="image" class="form-control" value="{{ old('image', $biscuit->image) }}">
-  </div>
-  <div class="d-flex gap-2">
+    <label class="form-label">Image actuelle</label>
+    @if( $biscuit->image )
+    <img src="{{ asset('Contenu/img'.$biscuit->image) }}" alt="{{ $biscuit->nom_biscuit }}" width="120" class="img-fluid rounded mb-2"><
+    @else
+    <p class="text-muted">Aucune image</p>
+    @endif
+</div>
+  <div class="mb-3">
+    <label class="form-label">Nouvelle image</label>
+    <input type="file" name="image" class="form-control">
+</div>
+      <div class="d-flex gap-2">
     <button class="btn btn-primary">Mettre à jour</button>
     <a class="btn btn-outline-secondary" href="{{ route('biscuits.index') }}">Annuler</a>
   </div>

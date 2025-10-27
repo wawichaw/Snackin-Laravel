@@ -30,7 +30,7 @@ class BiscuitController extends Controller
         //téléversement image
         if($request->hasFile('image')){
             $imageName = time(). '.' . $request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
+            $request->image->move(public_path('Contenu/img'), $imageName);
             $validated['image'] = $imageName;
         }
 
@@ -56,13 +56,13 @@ class BiscuitController extends Controller
         //si nouvelle image
         if($request->hasFile('image')) {
             // supprimer ancienne image
-            if($biscuit->image && file_exists(public_path('images/'. $biscuit->image))) {
-                unlink(public_path('images/' . $biscuit->image));
+            if($biscuit->image && file_exists(public_path('Contenu/img/'. $biscuit->image))) {
+                unlink(public_path('Contenu/img/' . $biscuit->image));
             }
 
             //enregistrer nouvelle image
             $imageName = time(). '.' . $request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
+            $request->image->move(public_path('Contenu/img'), $imageName);
             $validated['image'] = $imageName;
 
         }
@@ -77,8 +77,8 @@ class BiscuitController extends Controller
     public function destroy(Biscuit $biscuit)
     {
         //suppression fichier image
-        if($biscuit->image && file_exists(public_path('images/' . $biscuit->image))) {
-            unlink(public_path('images/' . $biscuit->image));
+        if($biscuit->image && file_exists(public_path('Contenu/img' . $biscuit->image))) {
+            unlink(public_path('Contenu/img' . $biscuit->image));
         }
 
         $biscuit->delete();

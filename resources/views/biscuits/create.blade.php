@@ -23,7 +23,7 @@
   </div>
   <div class="mb-3">
     <label class="form-label">Image (URL)</label>
-    <input type="text" name="image" class="form-control" value="{{ old('image') }}">
+    <input type="text" name="image" class="form-control">
   </div>
   <div class="d-flex gap-2">
     <button class="btn btn-primary">Enregistrer</button>

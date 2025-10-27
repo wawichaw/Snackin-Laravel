@@ -17,8 +17,12 @@
     <tr>
       <td>{{ $biscuit->id }}</td>
       
-      <td>(if $biscuit->image)
-        <img src="{{ asset('images/'.$biscuit->image) }}" alt="{{ $biscuit->nom_biscuit }}" width="80" class="img-fluid rounded">
+      <td>
+        @if ($biscuit->image)
+        <img src="{{ asset('Contenu/img'.$biscuit->image) }}" alt="{{ $biscuit->nom_biscuit }}" width="80" class="img-fluid rounded">
+        @else
+        <span class="text-muted">Aucune image</span>
+        @endif
       </td>
       <tr>
         <td>{{ $biscuit->id }}</td>
