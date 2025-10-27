@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Biscuit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+
+
 
 class BiscuitController extends Controller
 {
+    //Autocomplétion
+
+    //détails
     public function index()
     {
         $biscuits = Biscuit::all();
@@ -85,4 +93,33 @@ class BiscuitController extends Controller
 
         return redirect()->route('biscuits.index')->with('success', 'Biscuit supprimé!');
     }
+
+     public function autocomplete(Request $request)
+    {
+        $search = $request->search;
+        $biscuits = Biscuit::orderby('nom_biscuit','asc')
+                    ->select('id','nom_biscuit')
+                    ->where('nom_biscuit', 'LIKE', '%'.$search. '%')
+                    ->get();
+                    $response = array();
+                    foreach($biscuits as $biscuit){
+                        $response[] = array(
+                            'value' => $biscuit->id,
+                            'label' => $biscuit->nom_biscuit
+                        );
+                    }
+        return response()->json($response);
+    } 
+
+    //détails biscuit
+    public function details($id)
+    {
+        $biscuit = DB::table('biscuits')
+        ->join('saveurs', 'biscuits.saveur_id', '=', 'saveurs.id')
+        ->select('biscuits.*', 'saveurs.nom_saveur')
+        ->where('id', $id)->first();
+        -first();
+        return view('biscuits.details', compact('biscuit'));
+    }
+
 }

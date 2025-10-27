@@ -18,6 +18,8 @@ Route::get('/biscuit', [BiscuitController::class, 'index'])->name('biscuit.index
 Route::get('/biscuits/{biscuit}/commentaires',        [CommentaireController::class, 'index'])->name('biscuits.commentaires.index');
 Route::get('/biscuits/{biscuit}/commentaires/create', [CommentaireController::class, 'create'])->name('biscuits.commentaires.create');
 Route::post('/biscuits/{biscuit}/commentaires',       [CommentaireController::class, 'store'])->name('biscuits.commentaires.store');
+Route::get('/recherche-biscuits', [BiscuitController::class, 'search'])->name('biscuits.search');
+Route::get('/biscuits/{id}', [BiscuitController::class, 'details'])->name('biscuits.details');
 
 // Saveurs (CRUD)
 Route::resource('saveurs', SaveurController::class);
