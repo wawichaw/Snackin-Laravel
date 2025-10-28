@@ -15,10 +15,23 @@ class Localization
      */
     public function handle(Request $request, Closure $next)
     {
+        $sessionLocale = session('locale');
+        $currentLocale = app()->getLocale();
+        
+        // Debug
+        \Log::info('🔧 Localization Middleware', [
+            'session_locale' => $sessionLocale,
+            'current_app_locale' => $currentLocale,
+            'url' => $request->url(),
+        ]);
         
         if (session()->has('locale')) {
-            App::setLocale(session()->get('locale'));
+            $newLocale = session()->get('locale');
+            App::setLocale($newLocale);
+            
+            \Log::info('🔧 Locale set to: ' . $newLocale);
         }
+        
         return $next($request);
     }
 }

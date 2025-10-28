@@ -21,6 +21,12 @@
         <p><strong>Config App Locale:</strong> {{ config('app.locale') }}</p>
         <p><strong>Session Driver:</strong> {{ config('session.driver') }}</p>
         <p><strong>Session ID:</strong> {{ session()->getId() }}</p>
+        <hr>
+        <h4>🧪 Test Traduction:</h4>
+        <p><strong>"Fait à Montréal":</strong> {{ __('Fait à Montréal') }}</p>
+        <p><strong>"Commander":</strong> {{ __('Commander') }}</p>
+        <p><strong>"Croquants dehors, fondants dedans.":</strong> {{ __('Croquants dehors, fondants dedans.') }}</p>
+        <p><strong>"Nos biscuits":</strong> {{ __('Nos biscuits') }}</p>
     </div>
     
     <div class="debug-card">
