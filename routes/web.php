@@ -5,6 +5,8 @@ use App\Http\Controllers\BiscuitController;
 use App\Http\Controllers\CommandeController;     
 use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\SaveurController;
+use App\Http\Controllers\LocalizationController;
+
 
 // Pages simples
 Route::view('/', 'welcome')->name('home');
@@ -63,6 +65,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-use App\Http\Controllers\LocalizationController;
-
-Route::get('/lang/{locale}', [LocalizationController::class, 'index']);
+Route::get('/lang/{locale}', [LocalizationController::class, 'index'])->name('lang.switch');
