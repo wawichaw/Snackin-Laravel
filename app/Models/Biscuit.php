@@ -23,4 +23,12 @@ class Biscuit extends Model
     {
         return $this->belongsTo(Saveur::class, 'saveur_id');
     }
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory()
+    {
+        return \Database\Factories\BiscuitFactory::new();
+    }
 }

@@ -30,4 +30,12 @@ class Commande extends Model
         'details_json' => 'array',
         'total_prix' => 'decimal:2',
     ];
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory()
+    {
+        return \Database\Factories\CommandeFactory::new();
+    }
 }
