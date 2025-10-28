@@ -43,6 +43,18 @@
                         </div>
                     </li>
                 @endguest
+                <li class="nav-item dropdown">
+                    <a id="langDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       {{ strtoupper(session('locale', config('app.locale'))) }}
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
+                        <a class="dropdown-item {{ session('locale') == 'fr' ? 'active' : '' }}" href="{{ route('lang.switch', ['locale' => 'fr']) }}">FR</a>
+                        <a class="dropdown-item {{ session('locale') == 'en' ? 'active' : '' }}" href="{{ route('lang.switch', ['locale' => 'en']) }}">EN</a>
+                        <a class="dropdown-item {{ session('locale') == 'es' ? 'active' : '' }}" href="{{ route('lang.switch', ['locale' => 'es']) }}">ES</a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
