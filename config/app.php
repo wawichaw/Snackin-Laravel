@@ -14,6 +14,10 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'local' => 'fr',
+    'fallback_local' => 'en',
+
+    'key' => env('APP_KEY'),
 
     /*
     |--------------------------------------------------------------------------

@@ -62,3 +62,7 @@ Route::middleware('auth')->group(function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+use App\Http\Controllers\LocalizationController;
+
+Route::get('/lang/{locale}', [LocalizationController::class, 'index']);
