@@ -33,47 +33,48 @@
                 <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="Snackin logo">
                 <strong>Snackin'</strong>
             </a>
-            <span class="snk-badge">Fait à Montréal</span>
+            <span class="snk-badge">{{ __('Fait à Montréal') }}</span>
             <div class="snk-spacer"></div>
-            <a href="{{ route('biscuits.index') }}">Biscuits</a>
+            <a href="{{ route('biscuits.index') }}">{{ __('Nos biscuits') }}</a>
             @auth
                 @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
-                    <a href="{{ route('commandes.index') }}">Gestion de commandes</a>
-                    <a href="{{ route('saveurs.index') }}">Saveurs</a>
+                    <a href="{{ route('commandes.index') }}">{{ __('Commandes (admin)') }}</a>
+                    <a href="{{ route('saveurs.index') }}">{{ __('Saveurs') }}</a>
                 @else
-                    <a href="{{ route('commandes.create') }}">Commander</a>
-                    <a href="{{ route('mes.commandes') }}">Mes commandes</a>
+                    <a href="{{ route('commandes.create') }}">{{ __('Commander') }}</a>
+                    <a href="{{ route('mes.commandes') }}">{{ __('Mes commandes') }}</a>
                 @endif
             @else
-                <a href="{{ route('commandes.create') }}">Commander</a>
+                <a href="{{ route('commandes.create') }}">{{ __('Commander') }}</a>
             @endauth
             @auth
                 @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
-                    <a href="{{ route('commentaires.admin') }}">Gestion commentaires</a>
+                    <a href="{{ route('commentaires.admin') }}">{{ __('Voir les commentaires') }}</a>
                 @else
-                    <a href="{{ route('commentaires.public') }}">Commentaires</a>
+                    <a href="{{ route('commentaires.public') }}">{{ __('Voir les commentaires') }}</a>
                 @endif
             @else
-                <a href="{{ route('commentaires.public') }}">Commentaires</a>
+                <a href="{{ route('commentaires.public') }}">{{ __('Voir les commentaires') }}</a>
             @endauth
-            <a href="{{ route('about') }}">À propos</a>
+            <a href="{{ route('about') }}">{{ __('À propos') }}</a>
+            
             
             {{-- Options d'authentification --}}
             <div class="snk-spacer"></div>
             @auth
                 @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
-                    <span style="color: #000; font-weight: bold; margin-right: 15px; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">Bonjour Admin, {{ Auth::user()->name }}</span>
+                    <span style="color: #000; font-weight: bold; margin-right: 15px; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">{{ __('Bonjour, :name', ['name' => 'Admin ' . Auth::user()->name]) }}</span>
                 @else
-                    <span style="color: #000; font-weight: bold; margin-right: 15px; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">Bonjour, {{ Auth::user()->name }}</span>
+                    <span style="color: #000; font-weight: bold; margin-right: 15px; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">{{ __('Bonjour, :name', ['name' => Auth::user()->name]) }}</span>
                 @endif
                 <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                     @csrf
-                    <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="margin-left: 10px;">Se déconnecter</a>
+                    <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="margin-left: 10px;">{{ __('Se déconnecter') }}</a>
                 </form>
             @else
-                <a href="{{ route('login') }}" style="margin-right: 10px;">Se connecter</a>
+                <a href="{{ route('login') }}" style="margin-right: 10px;">{{ __('Se connecter') }}</a>
                 @if (Route::has('register'))
-                    <a href="{{ route('register') }}">S'inscrire</a>
+                    <a href="{{ route('register') }}">{{ __('S\'inscrire') }}</a>
                 @endif
             @endauth
         </div>
@@ -87,15 +88,15 @@
                     <span>🧁 Fait maison</span>
                     <span>🌸 Très cute</span>
                 </div>
-                <h1>Croquants dehors, fondants dedans.<br>Les biscuits qui rendent <em>tout</em> le monde heureux.</h1>
-                <p>Gérez vos biscuits, découvrez les saveurs et passez vos commandes en 2 clics.</p>
+                <h1>{{ __('Croquants dehors, fondants dedans.') }}<br>{{ __('Les biscuits qui rendent tout le monde heureux.') }}</h1>
+                <p>{{ __('Gérez vos biscuits, découvrez les saveurs et passez vos commandes en 2 clics.') }}</p>
 
                 <div class="cta-row">
-                    <a class="btn primary" href="{{ route('commandes.create') }}">Commander maintenant</a>
-                    <a class="btn" href="{{ route('biscuits.index') }}">Parcourir les biscuits</a>
+                    <a class="btn primary" href="{{ route('commandes.create') }}">{{ __('Commander') }}</a>
+                    <a class="btn" href="{{ route('biscuits.index') }}">{{ __('Découvrez notre sélection') }}</a>
                     @auth
                         @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
-                            <a class="btn outline" href="{{ route('saveurs.index') }}">Voir les saveurs</a>
+                            <a class="btn outline" href="{{ route('saveurs.index') }}">{{ __('Saveurs') }}</a>
                         @endif
                     @endauth
                 </div>
@@ -140,7 +141,7 @@
             <div class="card">
                 <h3>Partager son avis</h3>
                 <p>Découvrez ce que pensent nos clients et partagez votre expérience.</p>
-                <p><a class="btn outline" href="{{ route('commentaires.public') }}">Voir les commentaires</a></p>
+                <p><a class="btn outline" href="{{ route('commentaires.public') }}">{{ __('Voir les commentaires') }}</a></p>
             </div>
             @auth
                 @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
@@ -155,7 +156,7 @@
     </section>
 
     <footer>
-        <small>© {{ date('Y') }} Snackin — Fait avec Laravel & beaucoup d’amour.</small>
+        <small>{{ __('© :year Snackin — Fait avec Laravel & beaucoup d\'amour.', ['year' => date('Y')]) }}</small>
     </footer>
 
     <script>
@@ -173,6 +174,10 @@
         })();
     </script>
 
+    <!-- Sélecteur de langue en haut -->
+    <div style="position: fixed; top: 10px; right: 20px; z-index: 1000;">
+        @include('components.language-switcher')
+    </div>
 </body>
 
 </html>

@@ -21,6 +21,7 @@
     <a href="{{ route('commentaires.public') }}">Commentaires</a>
     <a href="{{ route('about') }}">À propos</a>
 
+
     <div class="snk-spacer"></div>
     <a href="{{ route('login') }}" aria-current="page">Se connecter</a>
     @if (Route::has('register')) 

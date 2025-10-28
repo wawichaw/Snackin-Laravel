@@ -74,3 +74,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/lang/{locale}', [LocalizationController::class, 'index'])->name('lang.switch');
+Route::get('/debug-lang', function () {
+    return view('debug-lang');
+})->name('debug.lang');

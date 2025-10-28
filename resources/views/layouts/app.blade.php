@@ -17,5 +17,10 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Sélecteur de langue en haut -->
+    <div style="position: fixed; top: 10px; right: 20px; z-index: 1000;">
+        @include('components.language-switcher')
+    </div>
 </body>
 </html>
