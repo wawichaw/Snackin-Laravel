@@ -139,10 +139,17 @@ class BiscuitController extends Controller
 
      public function search(Request $request)
     {
-        $search = $request->get('q');
+        $search = $request->get('q', '');
+        
+        if (empty($search)) {
+            return response()->json([]);
+        }
+        
         $biscuits = Biscuit::with('saveur')
-            ->where('nom_biscuit', 'LIKE', "%{$search}%")
-            ->orWhere('description', 'LIKE', "%{$search}%")
+            ->where(function($q) use ($search) {
+                $q->where('nom_biscuit', 'LIKE', "%{$search}%")
+                  ->orWhere('description', 'LIKE', "%{$search}%");
+            })
             ->limit(5)
             ->get()
             ->map(function($biscuit) {
@@ -154,7 +161,7 @@ class BiscuitController extends Controller
                 ];
             });
         
-        return response()->json($biscuits);
+        return response()->json($biscuits, 200, [], JSON_UNESCAPED_UNICODE);
     }
 
     private function getEmojiForSaveur($saveur)
@@ -177,8 +184,7 @@ class BiscuitController extends Controller
         $biscuit = DB::table('biscuits')
         ->join('saveurs', 'biscuits.saveur_id', '=', 'saveurs.id')
         ->select('biscuits.*', 'saveurs.nom_saveur')
-        ->where('id', $id)->first();
-        -first();
+        ->where('biscuits.id', $id)->first();
         return view('biscuits.details', compact('biscuit'));
     }
 

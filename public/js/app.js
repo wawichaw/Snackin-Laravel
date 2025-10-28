@@ -1,0 +1,2 @@
+// JavaScript pour l'application
+

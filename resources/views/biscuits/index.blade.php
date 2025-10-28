@@ -88,7 +88,8 @@
              name="search"
              placeholder="Rechercher un biscuit..."
              value="{{ request('search') }}"
-             autocomplete="off">
+             autocomplete="off"
+             data-search-url="{{ route('biscuits.search') }}">
       <div class="search-suggestions" id="searchSuggestions"></div>
     </div>
 
@@ -173,4 +174,67 @@
 <footer>
   <small>© {{ date('Y') }} Snackin — Fait avec Laravel & beaucoup d’amour.</small>
 </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchBiscuit');
+    const suggestions = document.getElementById('searchSuggestions');
+    
+    if (!searchInput || !suggestions) {
+        return;
+    }
+    
+    let searchTimeout;
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        const query = this.value.trim();
+
+        if (query.length < 2) {
+            suggestions.classList.remove('visible');
+            return;
+        }
+
+        searchTimeout = setTimeout(() => {
+            const searchUrl = searchInput.getAttribute('data-search-url');
+            
+            fetch(`${searchUrl}?q=${encodeURIComponent(query)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        suggestions.innerHTML = data.map(item => `
+                            <div class="suggestion-item" data-id="${item.id}">
+                                <span class="emoji">${item.emoji}</span>
+                                <div class="details">
+                                    <div class="name">${item.nom_biscuit}</div>
+                                    <div class="saveur">${item.nom_saveur}</div>
+                                </div>
+                            </div>
+                        `).join('');
+                        suggestions.classList.add('visible');
+                    } else {
+                        suggestions.innerHTML = '<div class="suggestion-item" style="color: var(--ink-soft);">Aucun résultat trouvé</div>';
+                        suggestions.classList.add('visible');
+                    }
+                })
+                .catch(error => {
+                    suggestions.classList.remove('visible');
+                });
+        }, 300);
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
+            suggestions.classList.remove('visible');
+        }
+    });
+
+    suggestions.addEventListener('click', function(e) {
+        const item = e.target.closest('.suggestion-item');
+        if (item) {
+            searchInput.value = item.querySelector('.name').textContent.trim();
+            searchInput.closest('form').submit();
+        }
+    });
+});
+</script>
 @endsection

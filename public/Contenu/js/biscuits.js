@@ -15,19 +15,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         searchTimeout = setTimeout(() => {
-            fetch(`/biscuits/search?q=${encodeURIComponent(query)}`)
+            const searchUrl = searchInput.getAttribute('data-search-url');
+            fetch(`${searchUrl}?q=${encodeURIComponent(query)}`)
                 .then(res => res.json())
                 .then(data => {
-                    suggestions.innerHTML = data.map(item => `
-                        <div class="suggestion-item" data-id="${item.id}">
-                            <span class="emoji">${item.emoji}</span>
-                            <div class="details">
-                                <div class="name">${item.nom_biscuit}</div>
-                                <div class="saveur">${item.nom_saveur}</div>
+                    if (data.length > 0) {
+                        suggestions.innerHTML = data.map(item => `
+                            <div class="suggestion-item" data-id="${item.id}">
+                                <span class="emoji">${item.emoji}</span>
+                                <div class="details">
+                                    <div class="name">${item.nom_biscuit}</div>
+                                    <div class="saveur">${item.nom_saveur}</div>
+                                </div>
                             </div>
-                        </div>
-                    `).join('');
-                    suggestions.classList.add('visible');
+                        `).join('');
+                        suggestions.classList.add('visible');
+                    } else {
+                        suggestions.innerHTML = '<div class="suggestion-item" style="color: var(--ink-soft);">Aucun résultat trouvé</div>';
+                        suggestions.classList.add('visible');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur de recherche:', error);
+                    suggestions.classList.remove('visible');
                 });
         }, 300);
     });

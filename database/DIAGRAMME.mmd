@@ -1,0 +1,73 @@
+erDiagram
+    USERS ||--o{ COMMANDES : "passe"
+    USERS ||--o{ COMMENTAIRES : "laisse"
+    SAVEURS ||--o{ BISCUITS : "a"
+    COMMANDES ||--o{ LIGNE_COMMANDES : "contient"
+    BISCUITS ||--o{ LIGNE_COMMANDES : "dans"
+    
+    USERS {
+        int id PK
+        string name
+        string email
+        string password
+        bool is_admin
+        string role
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    SAVEURS {
+        int id PK
+        string nom_saveur
+        text description
+        string emoji
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    BISCUITS {
+        int id PK
+        string nom_biscuit
+        decimal prix
+        text description
+        string image
+        int saveur_id FK
+        timestamp created_at
+        timestamp updated_at
+        timestamp deleted_at
+    }
+    
+    COMMANDES {
+        int id PK
+        int utilisateur_id FK
+        string client_nom
+        string client_email
+        text details_json
+        string status
+        decimal total_prix
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    COMMENTAIRES {
+        int id PK
+        int utilisateur_id FK
+        string nom_visitor
+        string email_visitor
+        text message
+        int note
+        bool approuve
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    LIGNE_COMMANDES {
+        int id PK
+        int commande_id FK
+        int biscuit_id FK
+        int quantite
+        decimal prix_unitaire
+        timestamp created_at
+        timestamp updated_at
+    }
+

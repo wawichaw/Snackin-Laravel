@@ -90,6 +90,60 @@
   </div>
 </section>
 
+{{-- INFOS PROJET --}}
+<section class="about-section about-project container">
+  <div class="project-info-box">
+    <h2>📚 Informations du Projet</h2>
+    
+    <div class="project-details">
+      <div class="detail-item">
+        <strong>Cours:</strong> 420-5H6 MO Applications Web transactionnelles
+      </div>
+      <div class="detail-item">
+        <strong>Période:</strong> Automne 2025
+      </div>
+      <div class="detail-item">
+        <strong>Institution:</strong> Collège Montmorency
+      </div>
+    </div>
+
+    <div class="project-section">
+      <h3>🔍 Étapes d'utilisation de l'application</h3>
+      <ol class="usage-steps">
+        <li><strong>Authentification:</strong> Connectez-vous avec les identifiants (email: <code>admin@snackin.com</code>, mdp: <code>password</code>) ou créez un compte.</li>
+        <li><strong>Parcourir les biscuits:</strong> Consultez le catalogue dans la section "Biscuits" avec filtres par saveur et recherche.</li>
+        <li><strong>Passer une commande:</strong> Cliquez sur "Commander" et remplissez le formulaire (choix de taille, sélection des biscuits).</li>
+        <li><strong>Gestion (Admin):</strong> Les administrateurs peuvent gérer les commandes, les saveurs, et modérer les commentaires.</li>
+        <li><strong>Commentaires:</strong> Laissez des avis sur les produits (visibles après modération admin).</li>
+      </ol>
+      <p class="note"><em>Résultats attendus:</em> L'application permet la navigation, l'authentification, la commande de produits, et la gestion administrative complète. Toutes les fonctionnalités CRUD sont opérationnelles.</p>
+    </div>
+
+    <div class="project-section">
+      <h3>🗄️ Diagramme de la base de données</h3>
+      <div class="diagram-container">
+        <img src="{{ asset('Contenu/img/diagram_bd.PNG') }}" alt="Diagramme de la base de données" style="max-width: 100%; border-radius: 8px;">
+      </div>
+      <p class="diagram-note">Structure actuelle de la base de données avec les relations entre les tables (Users, Saveurs, Biscuits, Commandes, Commentaires, Ligne_Commandes).</p>
+    </div>
+
+    <div class="project-section">
+      <h3>🔗 Inspirations</h3>
+      <ul class="inspirations-list">
+        <li>
+          <a href="https://www.instagram.com/snackin.mtl/" target="_blank">Page instagram de Snackin'</a> - Inspiration pour le design 
+        </li>
+        <li>
+          <a href="https://www.homersmtl.ca/fr" target="_blank">Homer's Montreal</a> - Référence pour l'interface e-commerce
+        </li>
+        <li>
+          <a href="https://laravel.com/docs" target="_blank">Documentation Laravel</a> - Framework utilisé
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 {{-- ÉQUIPE --}}
 <section class="about-section about-team container">
   <h2>Notre équipe</h2>

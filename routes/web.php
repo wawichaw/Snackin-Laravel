@@ -11,6 +11,8 @@ use App\Http\Controllers\LocalizationController;
 // Pages simples
 Route::view('/', 'welcome')->name('home');
 Route::view('/about', 'about')->name('about');    
+// Route pour l'autocomplétion de la recherche (DOIT être AVANT resource)
+Route::get('/biscuits/search', [BiscuitController::class, 'search'])->name('biscuits.search');
 // Biscuits (CRUD)
 Route::resource('biscuits', BiscuitController::class);
 // Alias /biscuit -> index (si tu veux garder l’ancien lien)
@@ -42,8 +44,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/commentaires/{commentaire}/moderate', [CommentaireController::class, 'moderate'])->name('commentaires.moderate');
     Route::delete('/admin/commentaires/{commentaire}', [CommentaireController::class, 'destroy'])->name('commentaires.destroy-admin');
 });
-// Route pour l'autocomplétion de la recherche
-Route::get('/biscuits/search', [BiscuitController::class, 'search'])->name('biscuits.search');
 
 // Saveurs (CRUD) - Accès restreint aux administrateurs
 Route::middleware('auth')->group(function () {

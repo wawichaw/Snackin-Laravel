@@ -1,0 +1,74 @@
+// Diagramme de la Base de Données - Snackin Laravel
+
+// Table USERS - Utilisateurs du site
+Table users {
+  id integer [primary key]
+  name varchar
+  email varchar [unique]
+  password varchar
+  is_admin boolean
+  role varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Table SAVEURS - Saveurs des biscuits
+Table saveurs {
+  id integer [primary key]
+  nom_saveur varchar
+  description text
+  emoji varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Table BISCUITS - Produits à vendre
+Table biscuits {
+  id integer [primary key]
+  nom_biscuit varchar
+  prix decimal
+  description text
+  image varchar
+  saveur_id integer [ref: > saveurs.id]
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+}
+
+// Table COMMANDES - Commandes clients
+Table commandes {
+  id integer [primary key]
+  utilisateur_id integer [ref: > users.id]
+  client_nom varchar
+  client_email varchar
+  details_json text
+  status varchar
+  total_prix decimal
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Table COMMENTAIRES - Commentaires clients
+Table commentaires {
+  id integer [primary key]
+  utilisateur_id integer [ref: > users.id]
+  nom_visitor varchar
+  email_visitor varchar
+  message text
+  note integer
+  approuve boolean
+  created_at timestamp
+  updated_at timestamp
+}
+
+// Table LIGNE_COMMANDES - Détails des commandes
+Table ligne_commandes {
+  id integer [primary key]
+  commande_id integer [ref: > commandes.id]
+  biscuit_id integer [ref: > biscuits.id]
+  quantite integer
+  prix_unitaire decimal
+  created_at timestamp
+  updated_at timestamp
+}
+
