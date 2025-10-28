@@ -39,7 +39,7 @@
       <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="Snackin logo" style="width:36px;height:36px;object-fit:contain">
       <strong>Snackin'</strong>
     </a>
-    <span class="snk-badge">Fait à Montréal</span>
+    <span class="snk-badge">{{ __('Fait à Montréal') }}</span>
 
     <div class="snk-spacer"></div>
     <a href="{{ route('home') }}">Accueil</a>
@@ -56,6 +56,8 @@
     @endauth
 
     <a href="{{ route('about') }}">À propos</a>
+
+    @include('components.language-switcher-nav')
 
     <div class="snk-spacer"></div>
     @auth

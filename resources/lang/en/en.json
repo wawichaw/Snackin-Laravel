@@ -27,5 +27,16 @@
     "Modifier": "Edit",
     "Supprimer": "Delete",
     "Supprimer ce biscuit ?": "Delete this cookie?",
-    "© :year Snackin — Fait avec Laravel & beaucoup d’amour.": "© :year Snackin — Made with Laravel & lots of love."
+    "© :year Snackin — Fait avec Laravel & beaucoup d'amour.": "© :year Snackin — Made with Laravel & lots of love.",
+    "Bienvenue chez Snackin'": "Welcome to Snackin'",
+    "Les meilleurs biscuits artisanaux de Montréal": "The best artisanal cookies from Montreal",
+    "Découvrez notre sélection": "Discover our selection",
+    "Voir les commentaires": "View comments",
+    "Créé avec amour à Montréal": "Made with love in Montreal",
+    "Des biscuits authentiques": "Authentic cookies",
+    "Fait à la main": "Handmade",
+    "Ingrédients de qualité": "Quality ingredients",
+    "Vérifiez votre adresse email": "Verify your email address",
+    "Un nouveau lien de vérification a été envoyé": "A fresh verification link has been sent to your email address",
+    "Renvoyer l'email de vérification": "Resend verification email"
 }

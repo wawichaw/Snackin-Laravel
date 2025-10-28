@@ -21,6 +21,8 @@
     <a href="{{ route('commentaires.public') }}">Commentaires</a>
     <a href="{{ route('about') }}">À propos</a>
 
+    @include('components.language-switcher-nav')
+
     <div class="snk-spacer"></div>
     <a href="{{ route('login') }}">Se connecter</a>
     <a href="{{ route('register') }}" aria-current="page">S'inscrire</a>

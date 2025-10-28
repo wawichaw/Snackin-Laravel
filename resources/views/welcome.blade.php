@@ -33,9 +33,9 @@
                 <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="Snackin logo">
                 <strong>Snackin'</strong>
             </a>
-            <span class="snk-badge">Fait à Montréal</span>
+            <span class="snk-badge">{{ __('Fait à Montréal') }}</span>
             <div class="snk-spacer"></div>
-            <a href="{{ route('biscuits.index') }}">Biscuits</a>
+            <a href="{{ route('biscuits.index') }}">{{ __('Nos biscuits') }}</a>
             @auth
                 @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
                     <a href="{{ route('commandes.index') }}">Gestion de commandes</a>
@@ -57,6 +57,8 @@
                 <a href="{{ route('commentaires.public') }}">Commentaires</a>
             @endauth
             <a href="{{ route('about') }}">À propos</a>
+            
+            @include('components.language-switcher-nav')
             
             {{-- Options d'authentification --}}
             <div class="snk-spacer"></div>
@@ -140,7 +142,7 @@
             <div class="card">
                 <h3>Partager son avis</h3>
                 <p>Découvrez ce que pensent nos clients et partagez votre expérience.</p>
-                <p><a class="btn outline" href="{{ route('commentaires.public') }}">Voir les commentaires</a></p>
+                <p><a class="btn outline" href="{{ route('commentaires.public') }}">{{ __('Voir les commentaires') }}</a></p>
             </div>
             @auth
                 @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
