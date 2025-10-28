@@ -41,7 +41,6 @@
     @endauth
     <a href="{{ route('about') }}">À propos</a>
 
-    @include('components.language-switcher-nav')
 
     <div class="snk-spacer"></div>
     @auth
