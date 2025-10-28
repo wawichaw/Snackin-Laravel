@@ -37,7 +37,7 @@
   <div class="commentaires-content">
     <div class="container" style="max-width: 800px; margin: 0 auto; padding: 40px 20px;">
       <div class="comment-form-cute">
-        <h2 style="color: #2a1620; margin-bottom: 25px; font-size: 28px; font-weight: 800;">👁️ Détail du Commentaire</h2>
+        <h2 style="color: #2a1620; margin-bottom: 25px; font-size: 28px; font-weight: 800;">📄 Détail du Commentaire</h2>
         
         <div class="comment-card-cute" style="margin-bottom: 0;">
           <div class="comment-header-cute">

@@ -61,7 +61,7 @@
               <p class="saveur-description">{{ $saveur->description ?? 'Aucune description disponible.' }}</p>
               <div class="saveur-actions">
                 <a href="{{ route('saveurs.show', $saveur) }}" class="btn-saveur btn-saveur-secondary">
-                  👁️ Voir
+                  📄 Voir
                 </a>
                 <a href="{{ route('saveurs.edit', $saveur) }}" class="btn-saveur btn-saveur-secondary">
                   ✏️ Modifier
