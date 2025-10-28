@@ -95,6 +95,12 @@
           @endif
 
           <div class="form-group-cute">
+            <label for="auteur_affiche">👤 Nom affiché</label>
+            <input type="text" id="auteur_affiche" name="auteur_affiche" value="{{ old('auteur_affiche', $commentaire->auteur_affiche) }}" placeholder="Nom à afficher pour ce commentaire">
+            <small style="color: #6c757d; font-size: 0.9em;">Le nom qui apparaîtra publiquement pour ce commentaire</small>
+          </div>
+
+          <div class="form-group-cute">
             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
               <input type="checkbox" name="modere" value="1" {{ old('modere', $commentaire->modere) ? 'checked' : '' }}>
               <span>✅ Commentaire approuvé (visible publiquement)</span>
@@ -106,7 +112,7 @@
               ✨ Mettre à jour
             </button>
             <a href="{{ route('commentaires.show-admin', $commentaire) }}" class="btn-saveur btn-saveur-secondary">
-              👁️ Voir le détail
+              📄 Voir le détail
             </a>
             <a href="{{ route('commentaires.admin') }}" class="btn-saveur btn-saveur-secondary">
               ↩️ Retour à la liste

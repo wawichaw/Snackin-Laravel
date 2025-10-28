@@ -14,7 +14,9 @@ class Commentaire extends Model
     protected $fillable = [
         'biscuit_id',
         'utilisateur_id',
-        'texte',
+        'contenu',
+        'texte',  // Ajouté pour permettre l'utilisation du mutateur
+        'auteur_affiche',
         'note',
         'nom_visiteur',
         'email_visiteur',
@@ -40,9 +42,33 @@ class Commentaire extends Model
      */
     public function getNomAfficheAttribute()
     {
+        // Si auteur_affiche est défini, l'utiliser en priorité
+        if (!empty($this->attributes['auteur_affiche'])) {
+            return $this->attributes['auteur_affiche'];
+        }
+
+        // Sinon, logique de fallback
         if ($this->utilisateur_id) {
             return $this->utilisateur->name ?? 'Utilisateur supprimé';
         }
         return $this->nom_visiteur ?? 'Anonyme';
+    }
+
+    /**
+     * Accessor for legacy 'texte' attribute used in views and forms.
+     * Maps to the database column 'contenu'.
+     */
+    public function getTexteAttribute()
+    {
+        return $this->attributes['contenu'] ?? null;
+    }
+
+    /**
+     * Mutator for legacy 'texte' attribute used by controllers/forms.
+     * Writes into the database column 'contenu'.
+     */
+    public function setTexteAttribute($value)
+    {
+        $this->attributes['contenu'] = $value;
     }
 }

@@ -20,6 +20,14 @@ Route::get('/biscuit', [BiscuitController::class, 'index'])->name('biscuit.index
 Route::get('/commentaires', [CommentaireController::class, 'public'])->name('commentaires.public');
 Route::post('/commentaires', [CommentaireController::class, 'store'])->name('commentaires.store');
 
+// Routes CRUD standard pour commentaires (pour compatibilité) - avec préfixe pour éviter conflits
+Route::get('/commentaires-crud', [CommentaireController::class, 'index'])->name('commentaires.index');
+Route::get('/commentaires-crud/create', [CommentaireController::class, 'create'])->name('commentaires.create');
+Route::get('/commentaires-crud/{commentaire}', [CommentaireController::class, 'show'])->name('commentaires.show');
+Route::get('/commentaires-crud/{commentaire}/edit', [CommentaireController::class, 'edit'])->name('commentaires.edit');
+Route::put('/commentaires-crud/{commentaire}', [CommentaireController::class, 'update'])->name('commentaires.update');
+Route::delete('/commentaires-crud/{commentaire}', [CommentaireController::class, 'destroy'])->name('commentaires.destroy');
+
 // Commentaires imbriqués sous un biscuit (admin)
 Route::get('/biscuits/{biscuit}/commentaires',        [CommentaireController::class, 'index'])->name('biscuits.commentaires.index');
 Route::get('/biscuits/{biscuit}/commentaires/create', [CommentaireController::class, 'create'])->name('biscuits.commentaires.create');

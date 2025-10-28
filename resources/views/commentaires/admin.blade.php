@@ -51,14 +51,14 @@
         <table style="width: 100%; border-collapse: collapse;">
           <thead>
             <tr>
-              <th>#</th>
-              <th>Auteur</th>
-              <th>Biscuit</th>
-              <th>Commentaire</th>
-              <th>Note</th>
-              <th>Statut</th>
-              <th>Date</th>
-              <th>Actions</th>
+              <th style="width: 5%;">#</th>
+              <th style="width: 12%;">Auteur</th>
+              <th style="width: 12%;">Biscuit</th>
+              <th style="width: 22%;">Commentaire</th>
+              <th style="width: 15%;">Note</th>
+              <th style="width: 15%;">Statut</th>
+              <th style="width: 10%;">Date</th>
+              <th style="width: 9%;">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -101,7 +101,7 @@
                 <td>
                   <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                     <a href="{{ route('commentaires.show-admin', $commentaire) }}" class="action-btn-cute btn-approve-cute">
-                      👁️ Voir
+                      📄 Voir
                     </a>
                     <a href="{{ route('commentaires.edit-admin', $commentaire) }}" class="action-btn-cute btn-approve-cute">
                       ✏️ Éditer
@@ -125,7 +125,7 @@
                       </form>
                     @endif
                     
-                    <form method="POST" action="{{ route('commentaires.destroy', $commentaire) }}" style="display: inline;" 
+                    <form method="POST" action="{{ route('commentaires.destroy-admin', $commentaire) }}" style="display: inline;" 
                           onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')">
                       @csrf
                       @method('DELETE')

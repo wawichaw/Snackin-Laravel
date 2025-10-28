@@ -29,6 +29,8 @@ class CommentaireController extends Controller
             'note'           => 'nullable|integer|min:1|max:5',
             'nom_visiteur'   => 'nullable|string|max:255', // Pour les utilisateurs non connectés
             'email_visiteur' => 'nullable|email|max:255', // Pour les utilisateurs non connectés
+            'auteur_affiche' => 'nullable|string|max:150',
+            'modere'         => 'nullable|boolean',
         ]);
 
         // Si l'utilisateur n'est pas connecté, utiliser les champs visiteur
@@ -42,6 +44,17 @@ class CommentaireController extends Controller
             $data['email_visiteur'] = null;
         }
 
+        // Gérer le champ modere (par défaut true pour nouveaux commentaires pour affichage immédiat)
+        $data['modere'] = $request->has('modere') ? (bool) $request->modere : true;
+
+        // Déterminer l'auteur à afficher
+        if (!auth()->check()) {
+            $data['auteur_affiche'] = $data['nom_visiteur'] ?? 'Anonyme';
+        } else {
+            $data['auteur_affiche'] = auth()->user()->name;
+        }
+
+        // Le mapping texte->contenu se fait automatiquement via le mutateur setTexteAttribute
         Commentaire::create($data);
         return redirect()->route('commentaires.public')->with('success', 'Commentaire ajouté avec succès !');
     }
@@ -52,6 +65,7 @@ class CommentaireController extends Controller
     public function public()
     {
         $commentaires = Commentaire::with('biscuit')
+            ->where('modere', true)  // N'afficher que les commentaires approuvés
             ->orderByDesc('created_at')
             ->paginate(10);
         $biscuits = Biscuit::orderBy('nom_biscuit')->get();
@@ -78,8 +92,10 @@ class CommentaireController extends Controller
             'utilisateur_id' => 'nullable|integer',
             'texte'          => 'required|string',
             'note'           => 'nullable|integer|min:1|max:5',
+            'auteur_affiche' => 'nullable|string|max:150',
         ]);
 
+        // Le mapping texte->contenu se fait automatiquement via le mutateur setTexteAttribute
         $commentaire->update($data);
         return redirect()->route('commentaires.index')->with('success', 'Commentaire modifié.');
     }
@@ -124,8 +140,9 @@ class CommentaireController extends Controller
             $commentaire->update(['modere' => true]);
             $message = 'Commentaire approuvé.';
         } else {
-            $commentaire->update(['modere' => false]);
-            $message = 'Commentaire rejeté.';
+            // Rejeter = supprimer directement le commentaire
+            $commentaire->delete();
+            $message = 'Commentaire rejeté et supprimé.';
         }
 
         return redirect()->route('commentaires.admin')->with('success', $message);
@@ -172,9 +189,14 @@ class CommentaireController extends Controller
             'note'           => 'nullable|integer|min:1|max:5',
             'nom_visiteur'   => 'nullable|string|max:255',
             'email_visiteur' => 'nullable|email|max:255',
-            'modere'         => 'boolean',
+            'auteur_affiche' => 'nullable|string|max:150',
+            'modere'         => 'nullable|boolean',
         ]);
 
+        // Gérer le champ modere correctement pour les checkboxes
+        $data['modere'] = $request->has('modere') ? (bool) $request->modere : false;
+
+        // Le mapping texte->contenu se fait automatiquement via le mutateur setTexteAttribute
         $commentaire->update($data);
         return redirect()->route('commentaires.admin')->with('success', 'Commentaire mis à jour avec succès.');
     }

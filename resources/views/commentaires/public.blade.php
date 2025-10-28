@@ -25,11 +25,20 @@
         <a href="{{ route('saveurs.index') }}">Saveurs</a>
       @else
         <a href="{{ route('commandes.create') }}">Commander</a>
+        <a href="{{ route('mes.commandes') }}">Mes commandes</a>
       @endif
     @else
       <a href="{{ route('commandes.create') }}">Commander</a>
     @endauth
-    <a href="{{ route('commentaires.public') }}" aria-current="page">Commentaires</a>
+    @auth
+      @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
+        <a href="{{ route('commentaires.admin') }}">Gestion commentaires</a>
+      @else
+        <a href="{{ route('commentaires.public') }}" aria-current="page">Commentaires</a>
+      @endif
+    @else
+      <a href="{{ route('commentaires.public') }}" aria-current="page">Commentaires</a>
+    @endauth
     <a href="{{ route('about') }}">À propos</a>
 
     <div class="snk-spacer"></div>
