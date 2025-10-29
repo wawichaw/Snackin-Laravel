@@ -81,7 +81,7 @@
 
   <!-- Formulaire d'ajout de commentaire -->
   <div class="comment-form-cute">
-    <h2 style="color: #2a1620; margin-bottom: 25px; font-size: 28px; font-weight: 800;">💬 {{ __('Ajouter un commentaire') }}</h2>
+    <h2 style="color: #2a1620; margin-bottom: 25px; font-size: 28px; font-weight: 800;"> {{ __('💬 Ajouter un commentaire') }}</h2>
     
     <form method="POST" action="{{ route('commentaires.store') }}">
       @csrf
@@ -127,7 +127,7 @@
       </div>
 
       <button type="submit" class="btn-cute">
-        ✨ {{ __('Publier le commentaire') }}
+         {{ __('✨ Publier le commentaire') }}
       </button>
     </form>
   </div>

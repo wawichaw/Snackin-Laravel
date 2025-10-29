@@ -27,7 +27,7 @@
         <a href="{{ route('commandes.create') }}">{{ __('Commander') }}</a>
       @endif
     @else
-      <a href="{{ route('commandes.create') }}">Commander</a>
+      <a href="{{ route('commandes.create') }}">{{ __('Commander') }}</a>
     @endauth
     <a href="{{ route('about') }}" aria-current="page">{{ __('À propos') }}</a>
 
@@ -41,11 +41,11 @@
       @endif
       <form method="POST" action="{{ route('logout') }}" style="display:inline;">
         @csrf
-        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="margin-left: 10px;">Se déconnecter</a>
+        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="margin-left: 10px;">{{ __('Se déconnecter') }}</a>
       </form>
     @else
-      <a href="{{ route('login') }}" style="margin-right:10px;">Se connecter</a>
-      @if (Route::has('register')) <a href="{{ route('register') }}">S’inscrire</a> @endif
+      <a href="{{ route('login') }}" style="margin-right:10px;">{{ __('Se connecter') }}</a>
+      @if (Route::has('register')) <a href="{{ route('register') }}">{{ __('S\'inscrire') }}</a> @endif
     @endauth
   </div>
 </div>
@@ -53,7 +53,7 @@
 {{-- HERO --}}
 <section class="about-hero">
   <div class="about-hero__art left">
-    <img src="{{ asset('Contenu/img/cookie-smile.jpg') }}" alt="Cookie sourire Snackin">
+    <img src="{{ asset('Contenu/img/cookie-smile.jpg') }}" alt="{{ __('Cookie sourire Snackin') }}">
   </div>
 
   <div class="about-hero__center">
@@ -65,7 +65,7 @@
   </div>
 
   <div class="about-hero__art right">
-    <img src="{{ asset('Contenu/img/stack-cookies.png') }}" alt="Pile de cookies Snackin">
+    <img src="{{ asset('Contenu/img/stack-cookies.png') }}" alt="{{ __('Pile de cookies Snackin') }}">
   </div>
 </section>
 
@@ -147,7 +147,7 @@
 
 {{-- ÉQUIPE --}}
 <section class="about-section about-team container">
-  <h2>Notre équipe</h2>
+  <h2>{{ __('Notre équipe') }}</h2>
   <div class="team-centered">
     <div class="teammate">
       <div class="avatar">G</div>
@@ -166,10 +166,10 @@
 
 {{-- CONTACT --}}
 <section class="about-section about-contact container">
-  <h2>Contact</h2>
+  <h2>{{ __('Contact') }}</h2>
   <div class="contact-card">
-    <p>Une idée de saveur, une commande spéciale ou un événement ?</p>
-    <a class="btn" href="{{ route('commandes.create') }}">Commander une boîte</a>
+    <p>{{ __('Une idée de saveur, une commande spéciale ou un événement ?') }}</p>
+    <a class="btn" href="{{ route('commandes.create') }}">{{ __('Commander une boîte') }}</a>
   </div>
 </section>
 @endsection

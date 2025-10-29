@@ -366,5 +366,22 @@
     "Framboise": "Raspberry",
     "Citron": "Lemon",
     "Caramel": "Caramel",
-    "Noix de Coco": "Coconut"
+    "Noix de Coco": "Coconut",
+    "Avant de continuer, veuillez vérifier votre email en cliquant sur le lien de vérification que nous vous avons envoyé.": "Before continuing, please verify your email by clicking on the verification link we have sent you.",
+    "Si vous ne voyez pas l'email dans votre boîte de réception, vérifiez également votre dossier de courrier indésirable (spam)." : "If you do not see the email in your inbox, please also check your spam folder.",
+    "Vous n'avez pas reçu l'email ?" : "Didn't receive the email?",
+    "🔄 Renvoyer l'email de vérification" : "🔄 Resend verification email",
+    "Bienvenue chez Snackin' ! 🍪" : "Welcome to Snackin' 🍪! ",
+    "Connectez-vous avec les identifiants (email: admin@snackin.com, mdp: password)": "Log in using the credentials (email: admin@snackin.com, password: password)",
+    "ou créez un compte.": "or create an account.",
+    "Cliquez sur \"Commander\" et remplissez le formulaire (choix de taille, sélection des biscuits).": "Click on \"Order\" and fill out the form (choose size, select cookies).",
+    "Les administrateurs peuvent gérer les commandes, les saveurs, et modérer les commentaires.": "Administrators can manage orders, flavors, and moderate comments.",
+    "Laissez des avis sur les produits (visibles après modération admin).": "Leave reviews on products (visible after admin moderation).",
+    "L'application permet la navigation, l'authentification, la commande de produits, et la gestion administrative complète. Toutes les fonctionnalités CRUD sont opérationnelles.": "The application allows navigation, authentication, product ordering, and complete administrative management. All CRUD features are functional.",
+    "🗄️ Diagramme de la base de données": "🗄️ Database diagram",
+    "- Inspiration pour le design": "- Design inspiration",
+    "- Référence pour l'interface e-commerce": "- Reference for the e-commerce interface",
+    "- Framework utilisé": "- Framework used"
+
+
 }

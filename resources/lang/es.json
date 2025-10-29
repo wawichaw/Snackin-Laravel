@@ -366,5 +366,23 @@
     "Framboise": "Frambuesa",
     "Citron": "Limón",
     "Caramel": "Caramelo",
-    "Noix de Coco": "Coco"
+    "Noix de Coco": "Coco",
+    "Avant de continuer, veuillez vérifier votre email en cliquant sur le lien de vérification que nous vous avons envoyé.": "Antes de continuar, por favor verifica tu correo electrónico haciendo clic en el enlace de verificación que te hemos enviado.",
+    "Si vous ne voyez pas l'email dans votre boîte de réception, vérifiez également votre dossier de courrier indésirable (spam).": "Si no ves el correo en tu bandeja de entrada, por favor revisa también tu carpeta de correo no deseado (spam).",
+    "Vous n'avez pas reçu l'email ?": "¿No has recibido el correo?",
+    "🔄 Renvoyer l'email de vérification" : "🔄 Reenviar el correo de verificación",
+    "Bienvenue chez Snackin' ! 🍪" : "Bienvenido a Snackin'! 🍪",
+     "Connectez-vous avec les identifiants (email: admin@snackin.com, mdp: password)": "Inicia sesión con las credenciales (correo: admin@snackin.com, contraseña: password)",
+    "ou créez un compte.": "o crea una cuenta.",
+    "Cliquez sur \"Commander\" et remplissez le formulaire (choix de taille, sélection des biscuits).": "Haz clic en \"Ordenar\" y completa el formulario (elige el tamaño, selecciona las galletas).",
+    "Les administrateurs peuvent gérer les commandes, les saveurs, et modérer les commentaires.": "Los administradores pueden gestionar los pedidos, los sabores y moderar los comentarios.",
+    "Laissez des avis sur les produits (visibles après modération admin).": "Deja reseñas sobre los productos (visibles después de la moderación del administrador).",
+    "L'application permet la navigation, l'authentification, la commande de produits, et la gestion administrative complète. Toutes les fonctionnalités CRUD sont opérationnelles.": "La aplicación permite la navegación, la autenticación, los pedidos de productos y la gestión administrativa completa. Todas las funciones CRUD están operativas.",
+    "🗄️ Diagramme de la base de données": "🗄️ Diagrama de la base de datos",
+    "- Inspiration pour le design": "- Inspiración para el diseño",
+    "- Référence pour l'interface e-commerce": "- Referencia para la interfaz de comercio electrónico",
+    "- Framework utilisé": "- Framework utilizado"
+
+
+    
 }
