@@ -70,7 +70,7 @@
       <option value="" disabled {{ !old('saveur_id', $biscuit->saveur_id) ? 'selected' : '' }}>{{ __('Choisir une saveur…') }}</option>
       @foreach(App\Models\Saveur::all() as $saveur)
         <option value="{{ $saveur->id }}" {{ old('saveur_id', $biscuit->saveur_id) == $saveur->id ? 'selected' : '' }}>
-          {{ ($saveur->emoji ?? '🍪') . ' ' . ucfirst($saveur->nom_saveur) }}
+          {{ ($saveur->emoji ?? '🍪') . ' ' . __(ucfirst($saveur->nom_saveur)) }}
         </option>
       @endforeach
     </select>

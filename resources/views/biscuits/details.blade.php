@@ -49,7 +49,7 @@
 
       <div class="saveur-chip mb-4">
         <span class="emoji">{{ $emojiMap[strtolower($biscuit->nom_saveur)] ?? '🍪' }}</span>
-        {{ $biscuit->nom_saveur }}
+        {{ __(ucfirst($biscuit->nom_saveur)) }}
       </div>
 
       <p class="lead mb-4">{{ $biscuit->description }}</p>

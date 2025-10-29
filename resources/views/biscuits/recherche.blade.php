@@ -10,7 +10,7 @@
 </head>
 <body>
     <h2>{{ __('Recherche de Biscuits')}}</h2>
-    <input type="text" id="biscuit" placeholder="Nom du biscuit">
+    <input type="text" id="biscuit" placeholder="{{ __('Nom du biscuit') }}">
     <script>
     $(function() {
         $('#biscuit').autocomplete({

@@ -98,7 +98,7 @@
       <option value="">{{ __('Toutes les saveurs') }}</option>
       @foreach($allowedSaveurs as $saveur)
         <option value="{{ strtolower($saveur) }}" {{ request('saveur') == strtolower($saveur) ? 'selected' : '' }}>
-          {{ $emojiMap[strtolower($saveur)] }} {{ ucfirst($saveur) }}
+          {{ $emojiMap[strtolower($saveur)] }} {{ __(ucfirst($saveur)) }}
         </option>
       @endforeach
     </select>
@@ -124,7 +124,7 @@
 
         <div class="biscuit-card">
           {{-- Bulle emoji qui dépasse --}}
-          <div class="flavor-emoji" title="{{ $saveurName ? ucfirst($saveurName) : 'Saveur' }}">
+            <div class="flavor-emoji" title="{{ $saveurName ? __(ucfirst($saveurName)) : __('Saveur') }}">
             {{ $emoji }}
           </div>
 
@@ -144,7 +144,7 @@
             @if($saveurName)
               <div class="saveur-chip">
                 <span class="emoji">{{ $emoji }}</span>
-                {{ ucfirst($saveurName) }}
+                {{ __(ucfirst($saveurName)) }}
               </div>
             @endif
 

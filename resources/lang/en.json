@@ -360,5 +360,11 @@
     "Mot de passe oublié ?": "Forgot Your Password?",
     "Se souvenir de moi": "Remember Me",
     "Pas encore de compte ? S'inscrire": "Don't have an account yet? Sign up",
-    "🔐 Se connecter": "🔐 Log in"
+    "🔐 Se connecter": "🔐 Log in",
+      "Chocolat": "Dark Chocolate",
+    "Vanilla": "Vanilla",
+    "Framboise": "Raspberry",
+    "Citron": "Lemon",
+    "Caramel": "Caramel",
+    "Noix de Coco": "Coconut"
 }

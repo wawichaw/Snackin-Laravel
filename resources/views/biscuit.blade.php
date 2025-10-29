@@ -50,7 +50,7 @@
               <strong>{{ $biscuit->nom_biscuit }}</strong>
               <span class="price">{{ number_format($biscuit->prix, 2) }} $</span>
               @if($biscuit->saveur)
-                <span class="saveur">{{ $biscuit->saveur->nom_saveur }}</span>
+                <span class="saveur">{{ __(ucfirst($biscuit->saveur->nom_saveur)) }}</span>
               @endif
             </span>
           </li>

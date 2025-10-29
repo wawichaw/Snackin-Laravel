@@ -37,7 +37,7 @@
     <div class="container" style="max-width: 800px; margin: 0 auto; padding: 40px 20px;">
       <div class="saveur-detail">
         <span class="saveur-detail-emoji">{{ $saveur->emoji ?? '🍪' }}</span>
-        <h1 class="saveur-detail-name">{{ $saveur->nom_saveur }}</h1>
+  <h1 class="saveur-detail-name">{{ __(ucfirst($saveur->nom_saveur)) }}</h1>
         <p class="saveur-detail-description">
           {{ $saveur->description ?? __('Aucune description disponible pour cette saveur.') }}
         </p>

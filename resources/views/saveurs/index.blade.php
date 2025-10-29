@@ -57,7 +57,7 @@
           @foreach($saveurs as $saveur)
             <div class="saveur-card">
               <span class="saveur-emoji">{{ $saveur->emoji ?? '🍪' }}</span>
-              <h3 class="saveur-name">{{ $saveur->nom_saveur }}</h3>
+              <h3 class="saveur-name">{{ __(ucfirst($saveur->nom_saveur)) }}</h3>
               <p class="saveur-description">{{ $saveur->description ?? __('Aucune description disponible.') }}</p>
               <div class="saveur-actions">
                 <a href="{{ route('saveurs.show', $saveur) }}" class="btn-saveur btn-saveur-secondary">

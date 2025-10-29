@@ -33,7 +33,7 @@
   </div>
 </div>
 
-<h1 class="mb-3">Nouveau biscuit</h1>
+<h1 class="mb-3">{{ __('Nouveau biscuit') }}</h1>
 
 @if ($errors->any())
   <div class="alert alert-danger">
@@ -74,7 +74,7 @@
       <option value="" disabled {{ !old('saveur_id') ? 'selected' : '' }}>{{ __('Choisir une saveur…') }}</option>
       @foreach($saveurs as $saveur)
         <option value="{{ $saveur->id }}" {{ old('saveur_id') == $saveur->id ? 'selected' : '' }}>
-          {{ ($saveur->emoji ?? '🍪') . ' ' . ucfirst($saveur->nom_saveur) }}
+          {{ ($saveur->emoji ?? '🍪') . ' ' . __(ucfirst($saveur->nom_saveur)) }}
         </option>
       @endforeach
     </select>
