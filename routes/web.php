@@ -36,7 +36,8 @@ Route::get('/biscuits/{biscuit}/commentaires/create', [CommentaireController::cl
 Route::post('/biscuits/{biscuit}/commentaires',       [CommentaireController::class, 'store'])->name('biscuits.commentaires.store');
 
 // Gestion admin des commentaires (accès restreint aux administrateurs)
-Route::middleware('auth')->group(function () {
+// Nécessite authentification ET vérification email ET rôle ADMIN
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/commentaires', [CommentaireController::class, 'admin'])->name('commentaires.admin');
     Route::get('/admin/commentaires/{commentaire}', [CommentaireController::class, 'showAdmin'])->name('commentaires.show-admin');
     Route::get('/admin/commentaires/{commentaire}/edit', [CommentaireController::class, 'editAdmin'])->name('commentaires.edit-admin');
@@ -46,13 +47,15 @@ Route::middleware('auth')->group(function () {
 });
 
 // Saveurs (CRUD) - Accès restreint aux administrateurs
-Route::middleware('auth')->group(function () {
+// Nécessite authentification ET vérification email ET rôle ADMIN
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('saveurs', SaveurController::class);
 });
 
 // Commandes (formulaire public + envoi + page admin)
-Route::middleware('auth')->group(function () {
-	// affichage du formulaire (doit être connecté)
+// Nécessite authentification ET vérification email
+Route::middleware(['auth', 'verified'])->group(function () {
+	// affichage du formulaire (doit être connecté et email vérifié)
 	Route::get('/commandes',  [CommandeController::class, 'create'])->name('commandes.create');
 	// soumettre commande
 	Route::post('/commandes', [CommandeController::class, 'store'])->name('commandes.store');
@@ -61,7 +64,8 @@ Route::middleware('auth')->group(function () {
 });
 
 // Routes admin pour les commandes (contrôlées côté controller)
-Route::middleware('auth')->group(function () {
+// Nécessite authentification ET vérification email ET rôle ADMIN (vérifié dans le controller)
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/commandes', [CommandeController::class, 'index'])->name('commandes.index'); // liste admin
     Route::get('/admin/commandes/{commande}', [CommandeController::class, 'show'])->name('commandes.show'); // voir commande
     Route::get('/admin/commandes/{commande}/edit', [CommandeController::class, 'edit'])->name('commandes.edit'); // éditer commande
@@ -69,9 +73,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/commandes/{commande}', [CommandeController::class, 'destroy'])->name('commandes.destroy'); // supprimer
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route home nécessite authentification et vérification email
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
 
 Route::get('/lang/{locale}', [LocalizationController::class, 'index'])->name('lang.switch');
 Route::get('/debug-lang', function () {
