@@ -72,7 +72,7 @@
             </td>
             <td style="padding: 15px; border-bottom: 1px solid #dee2e6;">
               @if($commande->total_prix)
-                {{ number_format($commande->total_prix, 2) }}€
+                {{ number_format($commande->total_prix, 2) }}$
               @else
                 -
               @endif

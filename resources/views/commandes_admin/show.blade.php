@@ -81,7 +81,7 @@
           </span>
         </p>
         @if($commande->total_prix)
-          <p style="margin: 10px 0;"><strong>{{ __('Prix total:') }}</strong> {{ number_format($commande->total_prix, 2) }}€</p>
+          <p style="margin: 10px 0;"><strong>{{ __('Prix total:') }}</strong> {{ number_format($commande->total_prix, 2) }}$</p>
         @endif
       </div>
     </div>

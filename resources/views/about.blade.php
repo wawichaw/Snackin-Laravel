@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@section('title', {{ __('À propos - Snackin') }})
+@section('title', __('À propos - Snackin'))
 
 @section('content')
 {{-- mêmes feuilles que l’accueil pour styliser la nav --}}

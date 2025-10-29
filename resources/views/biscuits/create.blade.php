@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@section('title', {{ __('Nouveau biscuit') }})
+@section('title', __('Nouveau biscuit'))
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('Contenu/css/biscuit-edit.css') }}">

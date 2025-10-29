@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', {{ __('Commander des boîtes') }})
+@section('title', __('Commander des boîtes'))
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('Contenu/css/style.css') }}">
@@ -135,7 +135,7 @@
                   <span class="prix-biscuit">{{ number_format($biscuit->prix, 2) }} $</span>
                 </div>
                 <div class="quantite-control">
-                  <label>{{ __'Quantité'}}</label>
+                  <label>{{ __('Quantité')}}</label>
                   <div class="qty-row">
                     <button type="button" class="qty-btn minus" aria-label="Retirer 1">−</button>
                     <input
