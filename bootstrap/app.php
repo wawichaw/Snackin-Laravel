@@ -14,6 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             \App\Http\Middleware\Localization::class,
         ]);
+        
+        // Enregistrer le middleware personnalisé avec un alias
+        $middleware->alias([
+            'admin.or.verified' => \App\Http\Middleware\EnsureAdminOrVerified::class,
+        ]);
     })
     
     ->withExceptions(function (Exceptions $exceptions): void {
