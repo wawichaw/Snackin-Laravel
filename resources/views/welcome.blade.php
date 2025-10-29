@@ -130,7 +130,7 @@
         <div class="grid">
             <div class="card">
                 <h3>{{ __('Commander en douceur')}}</h3>
-                <p>{{ __('Choisis la taille (4, 6, 12) et compose ta boîte')}}. <br>{{__('Tu récupères au point de ramassage')}}.</p>
+                <p>{{ __('Choisis la taille (4, 6, 12) et compose ta boîte.')}} <br>{{__('Tu récupères au point de ramassage.')}}</p>
                 <p><a class="btn primary" href="{{ route('commandes.create') }}">{{ __('Je commande') }}</a></p>
             </div>
             <div class="card">

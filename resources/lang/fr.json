@@ -13,6 +13,7 @@
     "Se déconnecter": "Se déconnecter",
     "Se connecter": "Se connecter",
     "S'inscrire": "S'inscrire",
+    "✨ S'inscrire": "✨ S'inscrire",
     "Inscription": "Inscription",
     "Nos biscuits": "Nos biscuits",
     "+ Ajouter": "+ Ajouter",
@@ -351,5 +352,14 @@
     "PISTTACHE": "PISTACHE",
     "RED VELVET": "RED VELVET",
     "NOISETTE": "NOISETTE",
-    "FRAMBOISE": "FRAMBOISE"
+    "FRAMBOISE": "FRAMBOISE",
+    "🍪 Frais du jour": "🍪 Frais du jour",
+    "🧁 Fait maison": "🧁 Fait maison",
+    "🌸 Très cute": "🌸 Très mignon",
+    "Mot de passe": "Mot de passe",
+    "Confirmer le mot de passe": "Confirmer le mot de passe",
+    "Se souvenir de moi": "Se souvenir de moi",
+    "Mot de passe oublié ?": "Mot de passe oublié ?",
+    "Pas encore de compte ? S'inscrire": "Pas encore de compte ? S'inscrire",
+    "🔐 Se connecter": "🔐 Se connecter"
 }

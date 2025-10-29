@@ -80,7 +80,7 @@
 
         <div style="text-align: center;">
                 <button type="submit" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); color: white; padding: 15px 40px; border: none; border-radius: 25px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); transition: all 0.3s ease;">
-                {{ __('✨ S\'inscrire') }}
+                {{ __("✨ S'inscrire") }}
             </button>
             
             <div style="margin-top: 20px;">
