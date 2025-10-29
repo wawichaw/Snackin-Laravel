@@ -8,16 +8,16 @@
   <div class="snk-container">
     <a class="snk-logo" href="{{ route('home') }}">
       <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="Snackin logo" style="width:36px;height:36px;object-fit:contain">
-      <strong>Snackin'</strong>
+  <strong>{{ __("Snackin'") }}</strong>
     </a>
-    <span class="snk-badge">Fait à Montréal</span>
+  <span class="snk-badge">{{ __('Fait à Montréal') }}</span>
 
     <div class="snk-spacer"></div>
-    <a href="{{ route('home') }}">Accueil</a>
-    <a href="{{ route('biscuits.index') }}">Biscuits</a>
-    <a href="{{ route('commandes.create') }}">Commander</a>
-    <a href="{{ route('saveurs.index') }}">Saveurs</a>
-    <a href="{{ route('about') }}">À propos</a>
+  <a href="{{ route('home') }}">{{ __('Accueil') }}</a>
+  <a href="{{ route('biscuits.index') }}">{{ __('Biscuits') }}</a>
+  <a href="{{ route('commandes.create') }}">{{ __('Commander') }}</a>
+  <a href="{{ route('saveurs.index') }}">{{ __('Saveurs') }}</a>
+  <a href="{{ route('about') }}">{{ __('À propos') }}</a>
   </div>
 </div>
 
@@ -39,8 +39,8 @@
     <div class="col-md-6">
       <nav aria-label="breadcrumb" class="mb-3">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-          <li class="breadcrumb-item"><a href="{{ route('biscuits.index') }}">Biscuits</a></li>
+          <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Accueil') }}</a></li>
+          <li class="breadcrumb-item"><a href="{{ route('biscuits.index') }}">{{ __('Biscuits') }}</a></li>
           <li class="breadcrumb-item active">{{ $biscuit->nom_biscuit }}</li>
         </ol>
       </nav>
@@ -60,10 +60,10 @@
 
       <div class="d-grid gap-2">
         <a href="{{ route('commandes.create') }}" class="btn btn-primary btn-lg">
-          Commander
+          {{ __('Commander') }}
         </a>
         <a href="{{ route('biscuits.index') }}" class="btn btn-outline-secondary">
-          Retour aux biscuits
+          {{ __('Retour aux biscuits') }}
         </a>
       </div>
     </div>
@@ -71,6 +71,6 @@
 </div>
 
 <footer class="mt-5">
-  <small>© {{ date('Y') }} Snackin — Fait avec Laravel & beaucoup d'amour.</small>
+  <small>© {{ date('Y') }} {{ __("Snackin'") }} — {{ __("Fait avec Laravel & beaucoup d'amour.") }}</small>
 </footer>
 @endsection

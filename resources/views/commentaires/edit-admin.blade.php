@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@section('title', 'Modifier le commentaire - Snackin')
+@section('title', __('Modifier le commentaire - Snackin'))
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('Contenu/css/style.css') }}">
@@ -9,25 +9,25 @@
 <div class="snk-nav">
   <div class="snk-container">
     <a class="snk-logo" href="{{ route('home') }}">
-      <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="Snackin logo" style="width:36px;height:36px;object-fit:contain">
-      <strong>Snackin'</strong>
+      <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="{{ __('Snackin logo') }}" style="width:36px;height:36px;object-fit:contain">
+      <strong>{{ __('Snackin\'') }}</strong>
     </a>
-    <span class="snk-badge">Fait à Montréal</span>
+    <span class="snk-badge">{{ __('Fait à Montréal') }}</span>
 
     <div class="snk-spacer"></div>
-    <a href="{{ route('home') }}">Accueil</a>
-    <a href="{{ route('biscuits.index') }}">Biscuits</a>
-    <a href="{{ route('commandes.index') }}">Gestion de commandes</a>
-    <a href="{{ route('saveurs.index') }}">Saveurs</a>
-    <a href="{{ route('commentaires.admin') }}">Gestion commentaires</a>
-    <a href="{{ route('about') }}">À propos</a>
+    <a href="{{ route('home') }}">{{ __('Accueil') }}</a>
+    <a href="{{ route('biscuits.index') }}">{{ __('Biscuits') }}</a>
+    <a href="{{ route('commandes.index') }}">{{ __('Gestion de commandes') }}</a>
+    <a href="{{ route('saveurs.index') }}">{{ __('Saveurs') }}</a>
+    <a href="{{ route('commentaires.admin') }}">{{ __('Gestion commentaires') }}</a>
+    <a href="{{ route('about') }}">{{ __('À propos') }}</a>
 
     <div class="snk-spacer"></div>
     @auth
-      <span class="snk-greeting" style="color: #000; font-weight: bold; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">Bonjour Admin, {{ Auth::user()->name }}</span>
+      <span class="snk-greeting" style="color: #000; font-weight: bold; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">{{ __('Bonjour Admin,') }} {{ Auth::user()->name }}</span>
       <form method="POST" action="{{ route('logout') }}" style="display:inline;">
         @csrf
-        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="margin-left: 10px;">Se déconnecter</a>
+        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="margin-left: 10px;">{{ __('Se déconnecter') }}</a>
       </form>
     @endauth
   </div>
@@ -37,7 +37,7 @@
   <div class="commentaires-content">
     <div class="container" style="max-width: 800px; margin: 0 auto; padding: 40px 20px;">
       <div class="comment-form-cute">
-        <h2 style="color: #2a1620; margin-bottom: 25px; font-size: 28px; font-weight: 800;">✏️ Modifier le Commentaire</h2>
+        <h2 style="color: #2a1620; margin-bottom: 25px; font-size: 28px; font-weight: 800;">✏️ {{ __('Modifier le Commentaire') }}</h2>
         
         @if($errors->any())
           <div class="alert-saveur alert-saveur-danger">
@@ -54,7 +54,7 @@
           @method('PUT')
           
           <div class="form-group-cute">
-            <label for="biscuit_id">🍪 Biscuit</label>
+            <label for="biscuit_id">🍪 {{ __('Biscuit') }}</label>
             <select id="biscuit_id" name="biscuit_id" required>
               @foreach($biscuits as $biscuit)
                 <option value="{{ $biscuit->id }}" {{ old('biscuit_id', $commentaire->biscuit_id) == $biscuit->id ? 'selected' : '' }}>
@@ -65,57 +65,57 @@
           </div>
 
           <div class="form-group-cute">
-            <label for="texte">💭 Commentaire</label>
-            <textarea id="texte" name="texte" rows="4" required placeholder="Modifiez le contenu du commentaire...">{{ old('texte', $commentaire->texte) }}</textarea>
+            <label for="texte">💭 {{ __('Commentaire') }}</label>
+            <textarea id="texte" name="texte" rows="4" required placeholder="{{ __('Modifiez le contenu du commentaire...') }}">{{ old('texte', $commentaire->texte) }}</textarea>
           </div>
 
           <div class="form-group-cute">
-            <label for="note">⭐ Note (1-5 étoiles)</label>
+            <label for="note">⭐ {{ __('Note (1-5 étoiles)') }}</label>
             <select id="note" name="note">
-              <option value="">Choisissez une note</option>
-              <option value="1" {{ old('note', $commentaire->note) == 1 ? 'selected' : '' }}>⭐ (1 étoile)</option>
-              <option value="2" {{ old('note', $commentaire->note) == 2 ? 'selected' : '' }}>⭐⭐ (2 étoiles)</option>
-              <option value="3" {{ old('note', $commentaire->note) == 3 ? 'selected' : '' }}>⭐⭐⭐ (3 étoiles)</option>
-              <option value="4" {{ old('note', $commentaire->note) == 4 ? 'selected' : '' }}>⭐⭐⭐⭐ (4 étoiles)</option>
-              <option value="5" {{ old('note', $commentaire->note) == 5 ? 'selected' : '' }}>⭐⭐⭐⭐⭐ (5 étoiles)</option>
+              <option value="">{{ __('Choisissez une note') }}</option>
+              <option value="1" {{ old('note', $commentaire->note) == 1 ? 'selected' : '' }}>⭐ {{ __('(1 étoile)') }}</option>
+              <option value="2" {{ old('note', $commentaire->note) == 2 ? 'selected' : '' }}>⭐⭐ {{ __('(2 étoiles)') }}</option>
+              <option value="3" {{ old('note', $commentaire->note) == 3 ? 'selected' : '' }}>⭐⭐⭐ {{ __('(3 étoiles)') }}</option>
+              <option value="4" {{ old('note', $commentaire->note) == 4 ? 'selected' : '' }}>⭐⭐⭐⭐ {{ __('(4 étoiles)') }}</option>
+              <option value="5" {{ old('note', $commentaire->note) == 5 ? 'selected' : '' }}>⭐⭐⭐⭐⭐ {{ __('(5 étoiles)') }}</option>
             </select>
           </div>
 
           @if(!$commentaire->utilisateur_id)
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
               <div class="form-group-cute">
-                <label for="nom_visiteur">👤 Nom du visiteur</label>
+                <label for="nom_visiteur">👤 {{ __('Nom du visiteur') }}</label>
                 <input type="text" id="nom_visiteur" name="nom_visiteur" value="{{ old('nom_visiteur', $commentaire->nom_visiteur) }}">
               </div>
               <div class="form-group-cute">
-                <label for="email_visiteur">📧 Email du visiteur</label>
+                <label for="email_visiteur">📧 {{ __('Email du visiteur') }}</label>
                 <input type="email" id="email_visiteur" name="email_visiteur" value="{{ old('email_visiteur', $commentaire->email_visiteur) }}">
               </div>
             </div>
           @endif
 
           <div class="form-group-cute">
-            <label for="auteur_affiche">👤 Nom affiché</label>
-            <input type="text" id="auteur_affiche" name="auteur_affiche" value="{{ old('auteur_affiche', $commentaire->auteur_affiche) }}" placeholder="Nom à afficher pour ce commentaire">
-            <small style="color: #6c757d; font-size: 0.9em;">Le nom qui apparaîtra publiquement pour ce commentaire</small>
+            <label for="auteur_affiche">👤 {{ __('Nom affiché') }}</label>
+            <input type="text" id="auteur_affiche" name="auteur_affiche" value="{{ old('auteur_affiche', $commentaire->auteur_affiche) }}" placeholder="{{ __('Nom à afficher pour ce commentaire') }}">
+            <small style="color: #6c757d; font-size: 0.9em;">{{ __('Le nom qui apparaîtra publiquement pour ce commentaire') }}</small>
           </div>
 
           <div class="form-group-cute">
             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
               <input type="checkbox" name="modere" value="1" {{ old('modere', $commentaire->modere) ? 'checked' : '' }}>
-              <span>✅ Commentaire approuvé (visible publiquement)</span>
+              <span>✅ {{ __('Commentaire approuvé (visible publiquement)') }}</span>
             </label>
           </div>
 
           <div class="page-actions">
             <button type="submit" class="btn-saveur btn-saveur-primary">
-              ✨ Mettre à jour
+              ✨ {{ __('Mettre à jour') }}
             </button>
             <a href="{{ route('commentaires.show-admin', $commentaire) }}" class="btn-saveur btn-saveur-secondary">
-              📄 Voir le détail
+              📄 {{ __('Voir le détail') }}
             </a>
             <a href="{{ route('commentaires.admin') }}" class="btn-saveur btn-saveur-secondary">
-              ↩️ Retour à la liste
+              ↩️ {{ __('Retour à la liste') }}
             </a>
           </div>
         </form>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>🧪 Debug Langue</title>
+    <title>{{ __('🧪 Debug Langue')}}</title>
     <style>
         body { font-family: Arial; padding: 20px; background: #f8f9fa; }
         .debug-card { background: white; padding: 20px; margin: 10px 0; border-radius: 8px; border-left: 4px solid #007bff; }
@@ -12,17 +12,17 @@
     </style>
 </head>
 <body>
-    <h1>🧪 Debug du Système de Langue</h1>
+    <h1>{{ __('🧪 Debug du Système de Langue')}}</h1>
     
     <div class="debug-card">
-        <h3>📊 État Actuel</h3>
-        <p><strong>App Locale:</strong> {{ app()->getLocale() }}</p>
-        <p><strong>Session Locale:</strong> {{ session('locale', 'NON DÉFINIE') }}</p>
-        <p><strong>Config App Locale:</strong> {{ config('app.locale') }}</p>
-        <p><strong>Session Driver:</strong> {{ config('session.driver') }}</p>
-        <p><strong>Session ID:</strong> {{ session()->getId() }}</p>
+        <h3>{{ __('📊 État Actuel')}}</h3>
+        <p><strong>{{ __('App Locale:')}}</strong> {{ app()->getLocale() }}</p>
+        <p><strong>{{ __('Session Locale:')}}</strong> {{ session('locale', 'NON DÉFINIE') }}</p>
+        <p><strong>{{ __('Config App Locale:')}}</strong> {{ config('app.locale') }}</p>
+        <p><strong>{{ __('Session Driver:')}}</strong> {{ config('session.driver') }}</p>
+        <p><strong>{{ __('Session ID:')}}</strong> {{ session()->getId() }}</p>
         <hr>
-        <h4>🧪 Test Traduction:</h4>
+        <h4>{{ __('🧪 Test Traduction:')}}</h4>
         <p><strong>"Fait à Montréal":</strong> {{ __('Fait à Montréal') }}</p>
         <p><strong>"Commander":</strong> {{ __('Commander') }}</p>
         <p><strong>"Croquants dehors, fondants dedans.":</strong> {{ __('Croquants dehors, fondants dedans.') }}</p>

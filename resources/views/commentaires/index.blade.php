@@ -1,16 +1,16 @@
 <div class="container">
-  <h1>Commentaires</h1>
+  <h1>{{ __('Commentaires') }}</h1>
 
   @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
   @endif
 
-  <p><a class="btn btn-success" href="{{ route('commentaires.create') }}">+ Nouveau commentaire</a></p>
+  <p><a class="btn btn-success" href="{{ route('commentaires.create') }}">+ {{ __('Nouveau commentaire') }}</a></p>
 
   <table class="table">
     <thead>
       <tr>
-        <th>#</th><th>Biscuit</th><th>Texte</th><th>Note</th><th>Utilisateur</th><th>Actions</th>
+        <th>#</th><th>{{ __('Biscuit') }}</th><th>{{ __('Texte') }}</th><th>{{ __('Note') }}</th><th>{{ __('Utilisateur') }}</th><th>{{ __('Actions') }}</th>
       </tr>
     </thead>
     <tbody>
@@ -22,16 +22,16 @@
           <td>{{ $c->note }}</td>
           <td>{{ $c->utilisateur_id }}</td>
           <td>
-            <a class="btn btn-sm btn-secondary" href="{{ route('commentaires.show', $c) }}">Voir</a>
-            <a class="btn btn-sm btn-primary" href="{{ route('commentaires.edit', $c) }}">Modifier</a>
+            <a class="btn btn-sm btn-secondary" href="{{ route('commentaires.show', $c) }}">{{ __('Voir') }}</a>
+            <a class="btn btn-sm btn-primary" href="{{ route('commentaires.edit', $c) }}">{{ __('Modifier') }}</a>
             <form action="{{ route('commentaires.destroy', $c) }}" method="post" style="display:inline-block">
               @csrf @method('DELETE')
-              <button class="btn btn-sm btn-danger" onclick="return confirm('Supprimer ?')">Supprimer</button>
+              <button class="btn btn-sm btn-danger" onclick="return confirm('{{ __('Supprimer ?') }}')">{{ __('Supprimer') }}</button>
             </form>
           </td>
         </tr>
       @empty
-        <tr><td colspan="6">Aucun commentaire.</td></tr>
+        <tr><td colspan="6">{{ __('Aucun commentaire.') }}</td></tr>
       @endforelse
     </tbody>
   </table>

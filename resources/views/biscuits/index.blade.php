@@ -36,38 +36,38 @@
 <div class="snk-nav">
   <div class="snk-container">
     <a class="snk-logo" href="{{ route('home') }}">
-      <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="Snackin logo" style="width:36px;height:36px;object-fit:contain">
-      <strong>Snackin'</strong>
+      <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="{{ __('Snackin logo') }}" style="width:36px;height:36px;object-fit:contain">
+      <strong>{{ __('Snackin\'') }}</strong>
     </a>
     <span class="snk-badge">{{ __('Fait à Montréal') }}</span>
 
     <div class="snk-spacer"></div>
-    <a href="{{ route('home') }}">Accueil</a>
-    <a href="{{ route('biscuits.index') }}" aria-current="page">Biscuits</a>
+    <a href="{{ route('home') }}">{{ __('Accueil') }}</a>
+    <a href="{{ route('biscuits.index') }}" aria-current="page">{{ __('Biscuits') }}</a>
 
     @auth
       @if(Auth::user()->is_admin || (isset(Auth::user()->role) && strtoupper(Auth::user()->role) === 'ADMIN'))
-        <a href="{{ route('saveurs.index') }}">Saveurs</a>
-        <a href="{{ route('commandes.index') }}">Commandes (admin)</a>
+        <a href="{{ route('saveurs.index') }}">{{ __('Saveurs') }}</a>
+        <a href="{{ route('commandes.index') }}">{{ __('Commandes (admin)') }}</a>
       @else
-        <a href="{{ route('commandes.create') }}">Commander</a>
-        <a href="{{ route('mes.commandes') }}">Mes commandes</a>
+        <a href="{{ route('commandes.create') }}">{{ __('Commander') }}</a>
+        <a href="{{ route('mes.commandes') }}">{{ __('Mes commandes') }}</a>
       @endif
     @endauth
 
-    <a href="{{ route('about') }}">À propos</a>
+    <a href="{{ route('about') }}">{{ __('À propos') }}</a>
 
 
     <div class="snk-spacer"></div>
     @auth
-      <span class="snk-greeting">Bonjour, {{ Auth::user()->name }}</span>
+      <span class="snk-greeting">{{ __('Bonjour,') }} {{ Auth::user()->name }}</span>
       <form method="POST" action="{{ route('logout') }}" style="display:inline;">
         @csrf
-        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">Se déconnecter</a>
+        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Se déconnecter') }}</a>
       </form>
     @else
-      <a href="{{ route('login') }}" style="margin-right:10px;">Se connecter</a>
-      @if (Route::has('register')) <a href="{{ route('register') }}">S’inscrire</a> @endif
+      <a href="{{ route('login') }}" style="margin-right:10px;">{{ __('Se connecter') }}</a>
+      @if (Route::has('register')) <a href="{{ route('register') }}">{{ __('S\'inscrire') }}</a> @endif
     @endauth
   </div>
 </div>
@@ -75,9 +75,9 @@
 {{-- CONTENU PRINCIPAL --}}
 <div class="container">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Nos Biscuits</h1>
+    <h1>{{ __('Nos Biscuits') }}</h1>
     @if($showAdmin)
-      <a href="{{ route('biscuits.create') }}" class="btn btn-primary">+ Ajouter</a>
+      <a href="{{ route('biscuits.create') }}" class="btn btn-primary">{{ __('+ Ajouter') }}</a>
     @endif
   </div>
 
@@ -87,7 +87,7 @@
       <input type="text" 
              id="searchBiscuit"
              name="search"
-             placeholder="Rechercher un biscuit..."
+             placeholder="{{ __('Rechercher un biscuit...') }}"
              value="{{ request('search') }}"
              autocomplete="off"
              data-search-url="{{ route('biscuits.search') }}">
@@ -95,7 +95,7 @@
     </div>
 
     <select name="saveur" class="filter-select" onchange="this.form.submit()">
-      <option value="">Toutes les saveurs</option>
+      <option value="">{{ __('Toutes les saveurs') }}</option>
       @foreach($allowedSaveurs as $saveur)
         <option value="{{ strtolower($saveur) }}" {{ request('saveur') == strtolower($saveur) ? 'selected' : '' }}>
           {{ $emojiMap[strtolower($saveur)] }} {{ ucfirst($saveur) }}
@@ -104,15 +104,15 @@
     </select>
 
     <select name="prix" class="filter-select" onchange="this.form.submit()">
-      <option value="">Trier par prix</option>
-      <option value="asc" {{ request('prix') == 'asc' ? 'selected' : '' }}>Prix croissant 💰</option>
-      <option value="desc" {{ request('prix') == 'desc' ? 'selected' : '' }}>Prix décroissant 💰</option>
+      <option value="">{{ __('Trier par prix') }}</option>
+      <option value="asc" {{ request('prix') == 'asc' ? 'selected' : '' }}>{{ __('Prix croissant 💰') }}</option>
+      <option value="desc" {{ request('prix') == 'desc' ? 'selected' : '' }}>{{ __('Prix décroissant 💰') }}</option>
     </select>
   </form>
 
   @if($biscuits->isEmpty())
     <div class="alert alert-info">
-      Aucun biscuit pour l'instant. Revenez bientôt — nouvelle fournée en préparation!
+      {{ __('Aucun biscuit pour l\'instant. Revenez bientôt — nouvelle fournée en préparation!') }}
     </div>
   @else
     <div class="biscuits-grid">
@@ -133,7 +133,7 @@
             @if(!empty($biscuit->image))
               <img src="{{ asset('Contenu/img/'.$biscuit->image) }}" alt="{{ $biscuit->nom_biscuit ?? $biscuit->nom }}">
             @else
-              <span class="no-image">Aucune image</span>
+              <span class="no-image">{{ __('Aucune image') }}</span>
             @endif
           </div>
 
@@ -158,11 +158,11 @@
           {{-- Actions admin --}}
           @if($showAdmin)
             <div class="card-actions">
-              <a href="{{ route('biscuits.edit', $biscuit) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
-              <form action="{{ route('biscuits.destroy', $biscuit) }}" method="POST" class="d-inline" onsubmit="return confirm('Supprimer ce biscuit ?')">
+              <a href="{{ route('biscuits.edit', $biscuit) }}" class="btn btn-sm btn-outline-secondary">{{ __('Modifier') }}</a>
+              <form action="{{ route('biscuits.destroy', $biscuit) }}" method="POST" class="d-inline" onsubmit="return confirm('{{ __('Supprimer ce biscuit ?') }}')">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-sm btn-outline-danger">Supprimer</button>
+                <button class="btn btn-sm btn-outline-danger">{{ __('Supprimer') }}</button>
               </form>
             </div>
           @endif
@@ -173,7 +173,7 @@
 </div>
 
 <footer>
-  <small>© {{ date('Y') }} Snackin — Fait avec Laravel & beaucoup d’amour.</small>
+  <small>{{ __('© :year Snackin — Fait avec Laravel & beaucoup d\'amour.', ['year' => date('Y')]) }}</small>
 </footer>
 
 <script>
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         `).join('');
                         suggestions.classList.add('visible');
                     } else {
-                        suggestions.innerHTML = '<div class="suggestion-item" style="color: var(--ink-soft);">Aucun résultat trouvé</div>';
+                        suggestions.innerHTML = '<div class="suggestion-item" style="color: var(--ink-soft);">{{ __('Aucun résultat trouvé') }}</div>';
                         suggestions.classList.add('visible');
                     }
                 })

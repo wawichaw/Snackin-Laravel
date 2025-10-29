@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recherche de Biscuits</title>
+    <title>{{ __('Recherche de Biscuits')}}</title>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 </head>
 <body>
-    <h2>Recherche de Biscuits</h2>
+    <h2>{{ __('Recherche de Biscuits')}}</h2>
     <input type="text" id="biscuit" placeholder="Nom du biscuit">
     <script>
     $(function() {

@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@section('title', 'Détail du commentaire - Snackin')
+@section('title', __('Détail du commentaire - Snackin'))
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('Contenu/css/style.css') }}">
@@ -9,25 +9,25 @@
 <div class="snk-nav">
   <div class="snk-container">
     <a class="snk-logo" href="{{ route('home') }}">
-      <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="Snackin logo" style="width:36px;height:36px;object-fit:contain">
-      <strong>Snackin'</strong>
+      <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="{{ __('Snackin logo') }}" style="width:36px;height:36px;object-fit:contain">
+      <strong>{{ __("Snackin'") }}</strong>
     </a>
-    <span class="snk-badge">Fait à Montréal</span>
+    <span class="snk-badge">{{ __('Fait à Montréal') }}</span>
 
     <div class="snk-spacer"></div>
-    <a href="{{ route('home') }}">Accueil</a>
-    <a href="{{ route('biscuits.index') }}">Biscuits</a>
-    <a href="{{ route('commandes.index') }}">Gestion de commandes</a>
-    <a href="{{ route('saveurs.index') }}">Saveurs</a>
-    <a href="{{ route('commentaires.admin') }}">Gestion commentaires</a>
-    <a href="{{ route('about') }}">À propos</a>
+    <a href="{{ route('home') }}">{{ __('Accueil') }}</a>
+    <a href="{{ route('biscuits.index') }}">{{ __('Biscuits') }}</a>
+    <a href="{{ route('commandes.index') }}">{{ __('Gestion de commandes') }}</a>
+    <a href="{{ route('saveurs.index') }}">{{ __('Saveurs') }}</a>
+    <a href="{{ route('commentaires.admin') }}">{{ __('Gestion commentaires') }}</a>
+    <a href="{{ route('about') }}">{{ __('À propos') }}</a>
 
     <div class="snk-spacer"></div>
     @auth
-      <span class="snk-greeting" style="color: #000; font-weight: bold; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">Bonjour Admin, {{ Auth::user()->name }}</span>
+      <span class="snk-greeting" style="color: #000; font-weight: bold; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">{{ __('Bonjour Admin,') }} {{ Auth::user()->name }}</span>
       <form method="POST" action="{{ route('logout') }}" style="display:inline;">
         @csrf
-        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="margin-left: 10px;">Se déconnecter</a>
+        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="margin-left: 10px;">{{ __('Se déconnecter') }}</a>
       </form>
     @endauth
   </div>

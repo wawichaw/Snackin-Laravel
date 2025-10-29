@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="fr">
+<html lang="{{ app()->getLocale() }}">
 <head>
   <meta charset="UTF-8">
-  <title>Snackin — Menu des biscuits</title>
+  <title>{{ __('Snackin — Menu des biscuits') }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{{ asset('Contenu/css/biscuits.css') }}?v={{ @filemtime(public_path('Contenu/css/biscuits.css')) }}">
 </head>
@@ -14,14 +14,14 @@
     <section class="biscuits-hero">
       <div class="hero-inner">
         <div class="hero-copy">
-          <span class="badge">Menu</span>
-          <h1>Nos biscuits, tout doux ✨</h1>
-          <p class="subtitle">Croquants dehors, fondants dedans — choisis ton coup de cœur.</p>
-          <p class="count">Nombre de biscuits : {{ $biscuits->count() }}</p>
+          <span class="badge">{{ __('Menu') }}</span>
+          <h1>{{ __('Nos biscuits, tout doux ✨') }}</h1>
+          <p class="subtitle">{{ __('Croquants dehors, fondants dedans — choisis ton coup de cœur.') }}</p>
+          <p class="count">{{ __('Nombre de biscuits :') }} {{ $biscuits->count() }}</p>
         </div>
         <div class="hero-visual">
           <div class="arch"></div>
-          <img src="{{ asset('Contenu/img/stack-cookies.png') }}" alt="Stack de cookies Snackin" class="stack-float">
+          <img src="{{ asset('Contenu/img/stack-cookies.png') }}" alt="{{ __('Stack de cookies Snackin') }}" class="stack-float">
         </div>
       </div>
       <div class="sprinkles"></div>
@@ -32,7 +32,7 @@
     {{-- ALERTES --}}
     @if (isset($error))
       <div class="alert alert-danger">
-        <strong>Erreur :</strong> {{ $error }}
+        <strong>{{ __('Erreur :') }}</strong> {{ $error }}
       </div>
     @endif
     @if (session('success'))
@@ -58,14 +58,14 @@
       </ul>
     @else
       <div class="empty">
-        <p>Aucun biscuit trouvé.</p>
+        <p>{{ __('Aucun biscuit trouvé.') }}</p>
       </div>
     @endif
 
   </div>
 
   <footer class="page-footer">
-    <small>© {{ date('Y') }} Snackin — Fait avec Laravel & beaucoup d’amour.</small>
+    <small>© {{ date('Y') }} {{ __("Snackin — Fait avec Laravel & beaucoup d'amour.") }}</small>
   </footer>
 
 </body>

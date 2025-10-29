@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Commander des boîtes')
+@section('title', {{ __('Commander des boîtes') }})
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('Contenu/css/style.css') }}">
@@ -9,36 +9,36 @@
 <div class="snk-nav">
   <div class="snk-container">
     <a class="snk-logo" href="{{ route('home') }}">
-      <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="Snackin logo" style="width:36px;height:36px;object-fit:contain">
-      <strong>Snackin'</strong>
+      <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="{{ __('Snackin logo') }}" style="width:36px;height:36px;object-fit:contain">
+      <strong>{{ __('Snackin\'') }}</strong>
     </a>
-    <span class="snk-badge">Fait à Montréal</span>
+    <span class="snk-badge">{{ __('Fait à Montréal')}}</span>
 
     <div class="snk-spacer"></div>
-    <a href="{{ route('home') }}">Accueil</a>
-    <a href="{{ route('biscuits.index') }}">Biscuits</a>
-    <a href="{{ route('commandes.create') }}" aria-current="page">Commander</a>
+    <a href="{{ route('home') }}">{{ __('Accueil')}}</a>
+    <a href="{{ route('biscuits.index') }}">{{ __('Biscuits')}}</a>
+    <a href="{{ route('commandes.create') }}" aria-current="page">{{ __('Commander')}}</a>
     @auth
       @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
-        <a href="{{ route('saveurs.index') }}">Saveurs</a>
+        <a href="{{ route('saveurs.index') }}">{{ __('Saveurs')}}</a>
       @endif
     @endauth
-    <a href="{{ route('about') }}">À propos</a>
+    <a href="{{ route('about') }}">{{ __('À propos')}}</a>
 
     <div class="snk-spacer"></div>
     @auth
       @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
-        <span class="snk-greeting" style="color: #000; font-weight: bold; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">Bonjour Admin, {{ Auth::user()->name }}</span>
+        <span class="snk-greeting" style="color: #000; font-weight: bold; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">{{ __('Bonjour Admin,') }} {{ Auth::user()->name }}</span>
       @else
-        <span class="snk-greeting" style="color: #000; font-weight: bold; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">Bonjour, {{ Auth::user()->name }}</span>
+        <span class="snk-greeting" style="color: #000; font-weight: bold; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">{{ __('Bonjour,') }} {{ Auth::user()->name }}</span>
       @endif
       <form method="POST" action="{{ route('logout') }}" style="display:inline;">
         @csrf
-        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">Se déconnecter</a>
+        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Se déconnecter')}}</a>
       </form>
     @else
-      <a href="{{ route('login') }}" style="margin-right:10px;">Se connecter</a>
-      @if (Route::has('register')) <a href="{{ route('register') }}">S’inscrire</a> @endif
+      <a href="{{ route('login') }}" style="margin-right:10px;">{{ __('Se connecter')}}</a>
+      @if (Route::has('register')) <a href="{{ route('register') }}">{{ __('S’inscrire')}}</a> @endif
     @endauth
   </div>
 </div>
@@ -46,26 +46,26 @@
 {{-- HERO avec tes photos + bonshommes sourire rouges qui flottent --}}
 <section class="commande-hero">
   <div class="hero-grid">
-    <img src="{{ asset('Contenu/img/commande-1.png') }}" alt="Boîte de biscuits 1">
-    <img src="{{ asset('Contenu/img/commande-2.png') }}" alt="Boîte de biscuits 2">
-    <img src="{{ asset('Contenu/img/commande-3.png') }}" alt="Boîte de biscuits 3">
-    <img src="{{ asset('Contenu/img/commande-4.png') }}" alt="Préparation de biscuits">
+    <img src="{{ asset('Contenu/img/commande-1.png') }}" alt="{{ __('Boîte de biscuits 1') }}">
+    <img src="{{ asset('Contenu/img/commande-2.png') }}" alt="{{ __('Boîte de biscuits 2') }}">
+    <img src="{{ asset('Contenu/img/commande-3.png') }}" alt="{{ __('Boîte de biscuits 3') }}">
+    <img src="{{ asset('Contenu/img/commande-4.png') }}" alt="{{ __('Préparation de biscuits') }}">
   </div>
 
   <!-- Smiles flottants -->
-  <div class="smile s1">😊</div>
-  <div class="smile s2">😊</div>
-  <div class="smile s3">😊</div>
+  <div class="smile s1">{{ __('😊') }}</div>
+  <div class="smile s2">{{ __('😊') }}</div>
+  <div class="smile s3">{{ __('😊') }}</div>
 </section>
 
 <div class="commande-container container">
-  <h1>Commander des boîtes de biscuits</h1>
+  <h1>{{ __('Commander des boîtes de biscuits')}}</h1>
 
   @if (session('message_succes'))
     <div class="alert alert-success">{{ session('message_succes') }}</div>
   @endif
   @if (session('ok'))
-    <div class="alert alert-success">Votre commande a été enregistrée. Merci !</div>
+    <div class="alert alert-success">{{ __('Votre commande a été enregistrée. Merci !')}}</div>
   @endif
 
   @if ($errors->any())
@@ -84,35 +84,35 @@
 
       {{-- TAILLE DE BOÎTE --}}
       <div class="form-section">
-        <h2>Choisissez la taille de votre boîte</h2>
+        <h2>{{ __('Choisissez la taille de votre boîte')}}</h2>
         <div class="boite-options">
           <label class="boite-option">
             <input type="radio" name="taille_boite" value="4" required>
-            <div class="boite-card">
-              <div class="boite-icon">🧁</div>
-              <h3>Boîte de 4</h3>
-              <p>Parfait pour une dégustation</p>
-              <span class="prix">15 $</span>
+          <div class="boite-card">
+              <div class="boite-icon">{{ __('🧁') }}</div>
+              <h3>{{ __('Boîte de 4') }}</h3>
+              <p>{{ __('Parfait pour une dégustation') }}</p>
+              <span class="prix">15 {{ __('$') }}</span>
             </div>
           </label>
 
           <label class="boite-option">
             <input type="radio" name="taille_boite" value="6" required>
-            <div class="boite-card">
-              <div class="boite-icon">🍪</div>
-              <h3>Boîte de 6</h3>
-              <p>Idéal pour partager</p>
-              <span class="prix">20 $</span>
+          <div class="boite-card">
+              <div class="boite-icon">{{ __('🍪') }}</div>
+              <h3>{{ __('Boîte de 6') }}</h3>
+              <p>{{ __('Idéal pour partager') }}</p>
+              <span class="prix">20 {{ __('$') }}</span>
             </div>
           </label>
 
           <label class="boite-option">
             <input type="radio" name="taille_boite" value="12" required>
-            <div class="boite-card">
-              <div class="boite-icon">🎁</div>
-              <h3>Boîte de 12</h3>
-              <p>Pour les gourmands</p>
-              <span class="prix">35 $</span>
+          <div class="boite-card">
+              <div class="boite-icon">{{ __('🎁') }}</div>
+              <h3>{{ __('Boîte de 12') }}</h3>
+              <p>{{ __('Pour les gourmands') }}</p>
+              <span class="prix">35 {{ __('$') }}</span>
             </div>
           </label>
         </div>
@@ -120,10 +120,10 @@
 
       {{-- SAVEURS + QUANTITÉS --}}
       <div class="form-section">
-        <h2>Choisissez vos saveurs et quantités</h2>
+        <h2>{{ __('Choisissez vos saveurs et quantités')}}</h2>
         <p class="info-text">
-          Sélectionnez les saveurs et indiquez la quantité pour chaque biscuit.
-          Le total doit correspondre à la taille de boîte choisie.
+          {{ __('Sélectionnez les saveurs et indiquez la quantité pour chaque biscuit.
+          Le total doit correspondre à la taille de boîte choisie.')}}
         </p>
 
         <div class="saveurs-grid">
@@ -135,7 +135,7 @@
                   <span class="prix-biscuit">{{ number_format($biscuit->prix, 2) }} $</span>
                 </div>
                 <div class="quantite-control">
-                  <label>Quantité</label>
+                  <label>{{ __'Quantité'}}</label>
                   <div class="qty-row">
                     <button type="button" class="qty-btn minus" aria-label="Retirer 1">−</button>
                     <input
@@ -146,7 +146,7 @@
                       data-biscuit-id="{{ $biscuit->id }}"
                       data-biscuit-nom="{{ $biscuit->nom_biscuit ?? $biscuit->nom }}"
                     >
-                    <button type="button" class="qty-btn plus" aria-label="Ajouter 1">+</button>
+                    <button type="button" class="qty-btn plus" aria-label="{{ __('Ajouter 1') }}">+</button>
                   </div>
                 </div>
               </div>
@@ -155,27 +155,27 @@
         </div>
 
         <div class="total-info">
-          <p>Total sélectionné :
+          <p>{{ __('Total sélectionné') }} :
             <span id="total-selectionne">0</span> /
-            <span id="taille-max">0</span> biscuits
+            <span id="taille-max">0</span> {{ __('biscuits') }}
           </p>
           <p style="font-size: 18px; font-weight: bold; color: #2a1620; margin-top: 10px;">
-            Prix total : <span id="prix-total">0$</span>
+            {{ __('Prix total') }} : <span id="prix-total">0$</span>
           </p>
         </div>
       </div>
 
       {{-- INFOS CLIENT --}}
       <div class="form-section">
-        <h2>Vos informations</h2>
+        <h2>{{ __('Vos informations') }}</h2>
         <div class="form-row">
           <label>
-            Nom complet
+            {{ __('Nom complet') }}
             <input type="text" name="nom_client" required value="{{ old('nom_client') }}">
           </label>
 
           <label>
-            Email
+            {{ __('Email') }}
             <input type="email" name="email_client" required value="{{ old('email_client') }}">
           </label>
         </div>
@@ -184,7 +184,7 @@
       {{-- CTA --}}
       <div class="form-actions">
         <button type="submit" class="btn btn-success btn-large">
-          Passer la commande
+          {{ __('Passer la commande') }}
         </button>
       </div>
     </form>

@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@section('title', 'Commentaires - Snackin')
+@section('title', __('Commentaires - Snackin'))
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('Contenu/css/style.css') }}">
@@ -11,57 +11,57 @@
 <div class="snk-nav">
   <div class="snk-container">
     <a class="snk-logo" href="{{ route('home') }}">
-      <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="Snackin logo" style="width:36px;height:36px;object-fit:contain">
-      <strong>Snackin'</strong>
+      <img src="{{ asset('Contenu/img/snackin-logo.png') }}" alt="{{ __('Snackin logo') }}" style="width:36px;height:36px;object-fit:contain">
+      <strong>{{ __('Snackin\'') }}</strong>
     </a>
     <span class="snk-badge">{{ __('Fait à Montréal') }}</span>
 
     <div class="snk-spacer"></div>
-    <a href="{{ route('home') }}">Accueil</a>
-    <a href="{{ route('biscuits.index') }}">Biscuits</a>
+    <a href="{{ route('home') }}">{{ __('Accueil') }}</a>
+    <a href="{{ route('biscuits.index') }}">{{ __('Biscuits') }}</a>
     @auth
       @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
-        <a href="{{ route('commandes.index') }}">Gestion de commandes</a>
-        <a href="{{ route('saveurs.index') }}">Saveurs</a>
+        <a href="{{ route('commandes.index') }}">{{ __('Gestion de commandes') }}</a>
+        <a href="{{ route('saveurs.index') }}">{{ __('Saveurs') }}</a>
       @else
-        <a href="{{ route('commandes.create') }}">Commander</a>
-        <a href="{{ route('mes.commandes') }}">Mes commandes</a>
+        <a href="{{ route('commandes.create') }}">{{ __('Commander') }}</a>
+        <a href="{{ route('mes.commandes') }}">{{ __('Mes commandes') }}</a>
       @endif
     @else
-      <a href="{{ route('commandes.create') }}">Commander</a>
+      <a href="{{ route('commandes.create') }}">{{ __('Commander') }}</a>
     @endauth
     @auth
       @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
-        <a href="{{ route('commentaires.admin') }}">Gestion commentaires</a>
+        <a href="{{ route('commentaires.admin') }}">{{ __('Gestion commentaires') }}</a>
       @else
-        <a href="{{ route('commentaires.public') }}" aria-current="page">Commentaires</a>
+        <a href="{{ route('commentaires.public') }}" aria-current="page">{{ __('Commentaires') }}</a>
       @endif
     @else
-      <a href="{{ route('commentaires.public') }}" aria-current="page">Commentaires</a>
+      <a href="{{ route('commentaires.public') }}" aria-current="page">{{ __('Commentaires') }}</a>
     @endauth
-    <a href="{{ route('about') }}">À propos</a>
+    <a href="{{ route('about') }}">{{ __('À propos') }}</a>
 
 
     <div class="snk-spacer"></div>
     @auth
       @if(Auth::user()->is_admin || Auth::user()->role === 'ADMIN')
-        <span class="snk-greeting" style="color: #000; font-weight: bold; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">Bonjour Admin, {{ Auth::user()->name }}</span>
+        <span class="snk-greeting" style="color: #000; font-weight: bold; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">{{ __('Bonjour Admin,') }} {{ Auth::user()->name }}</span>
       @else
-        <span class="snk-greeting" style="color: #000; font-weight: bold; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">Bonjour, {{ Auth::user()->name }}</span>
+        <span class="snk-greeting" style="color: #000; font-weight: bold; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px;">{{ __('Bonjour,') }} {{ Auth::user()->name }}</span>
       @endif
       <form method="POST" action="{{ route('logout') }}" style="display:inline;">
         @csrf
-        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">Se déconnecter</a>
+        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Se déconnecter') }}</a>
       </form>
     @else
-      <a href="{{ route('login') }}" style="margin-right:10px;">Se connecter</a>
-      @if (Route::has('register')) <a href="{{ route('register') }}">S'inscrire</a> @endif
+      <a href="{{ route('login') }}" style="margin-right:10px;">{{ __('Se connecter') }}</a>
+      @if (Route::has('register')) <a href="{{ route('register') }}">{{ __("S'inscrire") }}</a> @endif
     @endauth
   </div>
 </div>
 
 <div class="container" style="max-width: 1000px; margin: 40px auto; padding: 0 20px;">
-  <h1 style="color: #2a1620; margin-bottom: 30px;">Commentaires des clients</h1>
+  <h1 style="color: #2a1620; margin-bottom: 30px;">{{ __('Commentaires des clients') }}</h1>
 
   @if(session('success'))
     <div class="alert alert-success" style="background: #d4edda; color: #155724; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
@@ -81,15 +81,15 @@
 
   <!-- Formulaire d'ajout de commentaire -->
   <div class="comment-form-cute">
-    <h2 style="color: #2a1620; margin-bottom: 25px; font-size: 28px; font-weight: 800;">💬 Ajouter un commentaire</h2>
+    <h2 style="color: #2a1620; margin-bottom: 25px; font-size: 28px; font-weight: 800;">💬 {{ __('Ajouter un commentaire') }}</h2>
     
     <form method="POST" action="{{ route('commentaires.store') }}">
       @csrf
       
       <div class="form-group-cute">
-        <label for="biscuit_id">🍪 Biscuit</label>
+        <label for="biscuit_id">🍪 {{ __('Biscuit') }}</label>
         <select id="biscuit_id" name="biscuit_id" required>
-          <option value="">Choisissez un biscuit</option>
+          <option value="">{{ __('Choisissez un biscuit') }}</option>
           @foreach($biscuits as $biscuit)
             <option value="{{ $biscuit->id }}">{{ $biscuit->nom_biscuit }}</option>
           @endforeach
@@ -99,42 +99,42 @@
       @guest
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
           <div class="form-group-cute">
-            <label for="nom_visiteur">👤 Votre nom</label>
+            <label for="nom_visiteur">👤 {{ __('Votre nom') }}</label>
             <input type="text" id="nom_visiteur" name="nom_visiteur" required>
           </div>
           <div class="form-group-cute">
-            <label for="email_visiteur">📧 Votre email</label>
+            <label for="email_visiteur">📧 {{ __('Votre email') }}</label>
             <input type="email" id="email_visiteur" name="email_visiteur">
           </div>
         </div>
       @endguest
 
       <div class="form-group-cute">
-        <label for="note">⭐ Note (1-5 étoiles)</label>
+        <label for="note">⭐ {{ __('Note (1-5 étoiles)') }}</label>
         <select id="note" name="note">
-          <option value="">Choisissez une note</option>
-          <option value="1">⭐ (1 étoile)</option>
-          <option value="2">⭐⭐ (2 étoiles)</option>
-          <option value="3">⭐⭐⭐ (3 étoiles)</option>
-          <option value="4">⭐⭐⭐⭐ (4 étoiles)</option>
-          <option value="5">⭐⭐⭐⭐⭐ (5 étoiles)</option>
+          <option value="">{{ __('Choisissez une note') }}</option>
+          <option value="1">⭐ {{ __('(1 étoile)') }}</option>
+          <option value="2">⭐⭐ {{ __('(2 étoiles)') }}</option>
+          <option value="3">⭐⭐⭐ {{ __('(3 étoiles)') }}</option>
+          <option value="4">⭐⭐⭐⭐ {{ __('(4 étoiles)') }}</option>
+          <option value="5">⭐⭐⭐⭐⭐ {{ __('(5 étoiles)') }}</option>
         </select>
       </div>
 
       <div class="form-group-cute">
-        <label for="texte">💭 Votre commentaire</label>
-        <textarea id="texte" name="texte" rows="4" required placeholder="Partagez votre expérience avec ce biscuit..."></textarea>
+        <label for="texte">💭 {{ __('Votre commentaire') }}</label>
+        <textarea id="texte" name="texte" rows="4" required placeholder="{{ __('Partagez votre expérience avec ce biscuit...') }}"></textarea>
       </div>
 
       <button type="submit" class="btn-cute">
-        ✨ Publier le commentaire
+        ✨ {{ __('Publier le commentaire') }}
       </button>
     </form>
   </div>
 
   <!-- Liste des commentaires -->
   <div>
-    <h2 style="color: #2a1620; margin-bottom: 20px;">Commentaires récents</h2>
+    <h2 style="color: #2a1620; margin-bottom: 20px;">{{ __('Commentaires récents') }}</h2>
     
     @forelse($commentaires as $commentaire)
       <div class="comment-card-cute">
@@ -145,7 +145,7 @@
             </div>
             <div class="author-info-cute">
               <h3>{{ $commentaire->nom_affiche }}</h3>
-              <p>sur <strong>{{ $commentaire->biscuit->nom_biscuit }}</strong></p>
+              <p>{{ __('sur') }} <strong>{{ $commentaire->biscuit->nom_biscuit }}</strong></p>
             </div>
           </div>
           @if($commentaire->note)
@@ -164,13 +164,13 @@
         <p class="comment-content-cute">{{ $commentaire->texte }}</p>
         
         <div class="comment-meta-cute">
-          <span class="comment-date-cute">{{ $commentaire->created_at->format('d/m/Y à H:i') }}</span>
+          <span class="comment-date-cute">{{ $commentaire->created_at->format('d/m/Y') }} {{ __('à') }} {{ $commentaire->created_at->format('H:i') }}</span>
           <span class="comment-biscuit-cute">🍪 {{ $commentaire->biscuit->nom_biscuit }}</span>
         </div>
       </div>
     @empty
       <div style="text-align: center; padding: 40px; color: #6c757d;">
-        <p>Aucun commentaire pour le moment. Soyez le premier à commenter !</p>
+        <p>{{ __('Aucun commentaire pour le moment. Soyez le premier à commenter !') }}</p>
       </div>
     @endforelse
 

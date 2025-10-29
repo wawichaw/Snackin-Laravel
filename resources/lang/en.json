@@ -344,5 +344,11 @@
     "Partager son avis": "Share your opinion",
     "Découvrez ce que pensent nos clients et partagez votre expérience.": "Discover what our customers think and share your experience.",
     "Saveurs du moment": "Current flavors",
-    "Ajoute/édite les saveurs (admin) ou inspire-toi pour ta commande.": "Add/edit flavors (admin) or get inspired for your order."
+    "Ajoute/édite les saveurs (admin) ou inspire-toi pour ta commande.": "Add/edit flavors (admin) or get inspired for your order.",
+    "CHOCOLAT": "CHOCOLATE",
+    "OREO": "OREO",
+    "PISTTACHE": "PISTACHIO",
+    "RED VELVET": "RED VELVET",
+    "NOISETTE": "HAZELNUT",
+    "FRAMBOISE": "RASPBERRY"
 }

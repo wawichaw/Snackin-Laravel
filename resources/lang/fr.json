@@ -224,7 +224,7 @@
     "✏️ Modifier": "✏️ Modifier",
     "Commentaire #{{id}}": "Commentaire #{{id}}",
     "← Retour": "← Retour",
-     "Snackin": "Snackin",
+    "Snackin": "Snackin",
     "S’inscrire": "S’inscrire",
     "Toggle navigation": "Basculer la navigation",
     "Français": "Français",
@@ -244,7 +244,7 @@
     "Bonjour Admin, {{name}}": "Bonjour Admin, {{name}}",
     "✏️ Modifier la Saveur": "✏️ Modifier la Saveur",
     "Modifiez les informations de cette saveur": "Modifiez les informations de cette saveur",
-    
+
     "🍪 Nos Saveurs": "🍪 Nos Saveurs",
     "Découvrez et gérez toutes les saveurs disponibles pour créer des biscuits exceptionnels": "Découvrez et gérez toutes les saveurs disponibles pour créer des biscuits exceptionnels",
     "✨ Ajouter une saveur": "✨ Ajouter une saveur",
@@ -332,8 +332,8 @@
     "✅ Check console for details": "✅ Check console for details",
     "🏠 Navigation": "🏠 Navigation",
     "← Retour à l'accueil": "← Retour à l'accueil",
-  "Dashboard": "Dashboard",
-  "You are logged in!": "Vous êtes connecté !",
+    "Dashboard": "Dashboard",
+    "You are logged in!": "Vous êtes connecté !",
     "Best-seller ✨": "Best-seller ✨",
     "Commander en douceur": "Commander en douceur",
     "Choisis la taille (4, 6, 12) et compose ta boîte.": "Choisis la taille (4, 6, 12) et compose ta boîte.",
@@ -345,50 +345,11 @@
     "Partager son avis": "Partager son avis",
     "Découvrez ce que pensent nos clients et partagez votre expérience.": "Découvrez ce que pensent nos clients et partagez votre expérience.",
     "Saveurs du moment": "Saveurs du moment",
-    "Ajoute/édite les saveurs (admin) ou inspire-toi pour ta commande.": "Ajoute/édite les saveurs (admin) ou inspire-toi pour ta commande."
-     
-
+    "Ajoute/édite les saveurs (admin) ou inspire-toi pour ta commande.": "Ajoute/édite les saveurs (admin) ou inspire-toi pour ta commande.",
+    "CHOCOLAT": "CHOCOLAT",
+    "OREO": "OREO",
+    "PISTTACHE": "PISTACHE",
+    "RED VELVET": "RED VELVET",
+    "NOISETTE": "NOISETTE",
+    "FRAMBOISE": "FRAMBOISE"
 }
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

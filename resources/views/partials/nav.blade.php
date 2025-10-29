@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand fw-bold text-danger" href="{{ url('/') }}">
-            Snackin
+            {{ __('Snackin') }}
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -12,19 +12,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Liens à gauche -->
             <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ route('biscuits.index') }}">Biscuits</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Commander</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">À propos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('biscuits.index') }}">{{ __('Biscuits') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">{{ __('Commander') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">{{ __('À propos') }}</a></li>
             </ul>
 
             <!-- Liens à droite -->
             <ul class="navbar-nav ms-auto">
-                @guest
+                                @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Se connecter</a>
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Se connecter') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">S’inscrire</a>
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('S\'inscrire') }}</a>
                     </li>
                 @else
                     <li class="nav-item dropdown">
@@ -35,7 +35,7 @@
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Se déconnecter
+                                {{ __('Se déconnecter') }}
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
